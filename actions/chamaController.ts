@@ -1,12 +1,15 @@
-import prisma from '@/prisma/prisma'
+'use server'
 
-export const createChama = async (data: any) => {
+import prisma from '@/prisma/prisma'
+import { CreateChamaSchema } from '@/prisma/schemas'
+import z from 'zod'
+
+export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
     try {
         const chama = await prisma.chama.create({ data })
         return chama
-    } catch (error) {
-        console.log(error)
-        return undefined
+    } catch (error: any) {
+        throw new Error(error)
     }
 }
 
@@ -14,8 +17,7 @@ export const getChamas = async () => {
     try {
         const chamas = await prisma.chama.findMany()
         return chamas
-    } catch (error) {
-        console.log(error)
-        return []
+    } catch (error: any) {
+        throw new Error(error)
     }
 }

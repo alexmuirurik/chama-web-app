@@ -8,18 +8,31 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
 import CustomDialog from '../ui/customDialog'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { LoadingButton } from '../ui/loadingButton'
+import { createChama } from '@/actions/chamaController'
+import { useRouter } from 'next/navigation'
 
 const CreateChama = () => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
+    const router = useRouter()
     const form = useForm<z.infer<typeof CreateChamaSchema>>({
-        resolver: zodResolver(CreateChamaSchema),
+        resolver: zodResolver(CreateChamaSchema)
     })
 
     const handleSubmit = async (data: z.infer<typeof CreateChamaSchema>) => {
         setLoading(true)
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        try {
+            const chama = await createChama(data)
+            if (chama) {
+                router.refresh()
+                setOpen(false)
+                toast.success('Chama created successfully')
+            }
+        } catch (error: any) {
+            toast.error(`${error}`)
+        }
         setLoading(false)
     }
 
@@ -66,7 +79,7 @@ const CreateChama = () => {
                             <FormItem>
                                 <FormLabel>Minimum Savings</FormLabel>
                                 <FormControl>
-                                    <Input {...field} type='number' />
+                                    <Input type="number" {...field} />
                                 </FormControl>
                             </FormItem>
                         )}
