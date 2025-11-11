@@ -1,203 +1,25 @@
-'use client'
-
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    SortingState,
-    useReactTable,
-    VisibilityState,
-} from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
-
-import { Button } from '@/src/components/ui/button'
-import { Checkbox } from '@/src/components/ui/checkbox'
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/src/components/ui/table'
-import { useState } from 'react'
 import { Chama } from '@/src/generated/prisma/client'
 
-export const columns: ColumnDef<Chama>[] = [
-    {
-        id: 'select',
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && 'indeterminate')
-                }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <div className="">
-                <Checkbox
-                    className="border-e border-gray-300"
-                    checked={row.getIsSelected()}
-                    onCheckedChange={(value) => row.toggleSelected(!!value)}
-                    aria-label="Select row"
-                />
-            </div>
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: 'name',
-        header: 'Status',
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue('status')}</div>
-        ),
-    },
-    {
-        accessorKey: 'email',
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === 'asc')
-                    }
-                >
-                    Email
-                    <ArrowUpDown />
-                </Button>
-            )
-        },
-        cell: ({ row }) => (
-            <div className="lowercase">{row.getValue('email')}</div>
-        ),
-    },
-    {
-        accessorKey: 'createdAt',
-        header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue('amount'))
-
-            // Format the amount as a dollar amount
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
-]
-
 const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
-    const [sorting, setSorting] = useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-        {}
-    )
-    const [rowSelection, setRowSelection] = useState({})
-
-    const table = useReactTable({
-        chamas,
-        columns,
-        onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-        state: {
-            sorting,
-            columnFilters,
-            columnVisibility,
-            rowSelection,
-        },
-    })
-
     return (
-        <div className="w-full space-y-4">
-            <div className="overflow-hidden rounded-md border">
-                <Table>
-                    <TableHeader className="bg-neutral-200">
-                        {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                      header.column.columnDef
-                                                          .header,
-                                                      header.getContext()
-                                                  )}
-                                        </TableHead>
-                                    )
-                                })}
-                            </TableRow>
-                        ))}
-                    </TableHeader>
-                    <TableBody>
-                        {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={
-                                        row.getIsSelected() && 'selected'
-                                    }
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell
-                                    colSpan={columns.length}
-                                    className="h-24 text-center"
-                                >
-                                    No results.
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+        <div className="space-y-4 border rounded-md p-2">
+            <div className="flex items-center justify-between text-sm p-2">
+                <div>Name</div>
+                <div>Location</div>
+                <div>Minimum Savings</div>
+                <div>Registration ID</div>
             </div>
-            <div className="flex items-center justify-between space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
+            {chamas.map((chama) => (
+                <div
+                    key={chama.id}
+                    className="flex items-center justify-between p-2"
                 >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
-            </div>
+                    <div>{chama.name}</div>
+                    <div>{chama.location}</div>
+                    <div>{chama.minimumSavings}</div>
+                    <div>{chama.registrationId}</div>
+                </div>
+            ))}
         </div>
     )
 }
