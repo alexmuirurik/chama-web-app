@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react'
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -12,10 +13,20 @@ import {
     useReactTable,
     VisibilityState,
 } from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
 
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/src/components/ui/dropdown-menu'
+import { Input } from '@/src/components/ui/input'
 import {
     Table,
     TableBody,
@@ -24,10 +35,48 @@ import {
     TableHeader,
     TableRow,
 } from '@/src/components/ui/table'
-import { useState } from 'react'
-import { Chama } from '@/src/generated/prisma/client'
 
-export const columns: ColumnDef<Chama>[] = [
+const data: Payment[] = [
+    {
+        id: 'm5gr84i9',
+        amount: 316,
+        status: 'success',
+        email: 'ken99@example.com',
+    },
+    {
+        id: '3u1reuv4',
+        amount: 242,
+        status: 'success',
+        email: 'Abe45@example.com',
+    },
+    {
+        id: 'derv1ws0',
+        amount: 837,
+        status: 'processing',
+        email: 'Monserrat44@example.com',
+    },
+    {
+        id: '5kma53ae',
+        amount: 874,
+        status: 'success',
+        email: 'Silas22@example.com',
+    },
+    {
+        id: 'bhqecj4p',
+        amount: 721,
+        status: 'failed',
+        email: 'carmella@example.com',
+    },
+]
+
+export type Payment = {
+    id: string
+    amount: number
+    status: 'pending' | 'processing' | 'success' | 'failed'
+    email: string
+}
+
+export const columns: ColumnDef<Payment>[] = [
     {
         id: 'select',
         header: ({ table }) => (
@@ -43,20 +92,17 @@ export const columns: ColumnDef<Chama>[] = [
             />
         ),
         cell: ({ row }) => (
-            <div className="">
-                <Checkbox
-                    className="border-e border-gray-300"
-                    checked={row.getIsSelected()}
-                    onCheckedChange={(value) => row.toggleSelected(!!value)}
-                    aria-label="Select row"
-                />
-            </div>
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
         ),
         enableSorting: false,
         enableHiding: false,
     },
     {
-        accessorKey: 'name',
+        accessorKey: 'status',
         header: 'Status',
         cell: ({ row }) => (
             <div className="capitalize">{row.getValue('status')}</div>
@@ -82,7 +128,7 @@ export const columns: ColumnDef<Chama>[] = [
         ),
     },
     {
-        accessorKey: 'createdAt',
+        accessorKey: 'amount',
         header: () => <div className="text-right">Amount</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue('amount'))
@@ -96,18 +142,51 @@ export const columns: ColumnDef<Chama>[] = [
             return <div className="text-right font-medium">{formatted}</div>
         },
     },
+    {
+        id: 'actions',
+        enableHiding: false,
+        cell: ({ row }) => {
+            const payment = row.original
+
+            return (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem
+                            onClick={() =>
+                                navigator.clipboard.writeText(payment.id)
+                            }
+                        >
+                            Copy payment ID
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>View customer</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            View payment details
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )
+        },
+    },
 ]
 
-const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
-    const [sorting, setSorting] = useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-        {}
-    )
-    const [rowSelection, setRowSelection] = useState({})
+const TableTemplate = () => {
+    const [sorting, setSorting] = React.useState<SortingState>([])
+    const [columnFilters, setColumnFilters] =
+        React.useState<ColumnFiltersState>([])
+    const [columnVisibility, setColumnVisibility] =
+        React.useState<VisibilityState>({})
+    const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
-        chamas,
+        data,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -126,10 +205,10 @@ const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
     })
 
     return (
-        <div className="w-full space-y-4">
+        <div className="w-full">
             <div className="overflow-hidden rounded-md border">
                 <Table>
-                    <TableHeader className="bg-neutral-200">
+                    <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
@@ -180,26 +259,32 @@ const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-between space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
+            <div className="flex items-center justify-end space-x-2 py-4">
+                <div className="text-muted-foreground flex-1 text-sm">
+                    {table.getFilteredSelectedRowModel().rows.length} of{' '}
+                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                </div>
+                <div className="space-x-2">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        Previous
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        Next
+                    </Button>
+                </div>
             </div>
         </div>
     )
 }
 
-export default ChamasTable
+export default TableTemplate
