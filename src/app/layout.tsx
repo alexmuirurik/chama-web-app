@@ -7,11 +7,8 @@ import {
     Russo_One,
 } from 'next/font/google'
 import './globals.css'
-import { SidebarProvider } from '../components/ui/sidebar'
-import AppSidebar from '../components/layouts/appSidebar'
-import Navbar from '../components/layouts/navbar'
 import { ReactNode } from 'react'
-import { Toaster } from '../components/ui/sonner'
+import { Toaster } from '@/src/components/ui/sonner'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -50,14 +47,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} ${nunitoSans.variable} ${rusoOne.variable} antialiased`}
             >
-                <Toaster richColors theme='light' />
-                <SidebarProvider className="w-full">
-                    <AppSidebar />
-                    <main className="space-y-4 w-full mt-2 px-5 font-nunito">
-                        <Navbar />
-                        {children}
-                    </main>
-                </SidebarProvider>
+                <Toaster richColors theme="light" />
+                {children}
             </body>
         </html>
     )

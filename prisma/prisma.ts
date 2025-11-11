@@ -1,3 +1,4 @@
+export const runtime = 'nodejs'
 import { PrismaClient } from '../src/generated/prisma/client'
 
 const globalForPrisma = global as unknown as {

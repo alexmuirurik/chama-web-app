@@ -17,5 +17,9 @@ export const CreateMemberSchema = z.object({
     phoneNumber: z.string(),
     role: z.string<Role>(),
     chamaId: z.string(),
+})
 
+export const LoginSchema = z.object({
+    email: z.string().email(),
+    password: z.string(),
 })
