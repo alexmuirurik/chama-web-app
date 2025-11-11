@@ -29,6 +29,7 @@ const CreateChama = () => {
                 router.refresh()
                 setOpen(false)
                 toast.success('Chama created successfully')
+                form.reset()
             }
         } catch (error: any) {
             toast.error(`${error}`)
