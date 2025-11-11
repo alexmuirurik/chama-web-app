@@ -1,6 +1,6 @@
 'use client'
 
-import { navItems } from '@/src/lib/lists'
+import { sidebarItems } from '@/src/lib/lists'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -8,7 +8,7 @@ const AppSidebarList = () => {
     const pathname = usePathname()
     return (
         <ul className="flex flex-col gap-2 mt-2">
-            {navItems.map((item) => {
+            {sidebarItems.map((item) => {
                 const active = item.url === pathname
                 return (
                     <li

@@ -3,14 +3,21 @@ import {
     FaFunnelDollar,
     FaHandHoldingUsd,
     FaHeartbeat,
+    FaPeopleCarry,
     FaStackExchange,
+    FaUsers,
 } from 'react-icons/fa'
 
-export const navItems = [
+export const sidebarItems = [
     {
         title: 'Dashboard',
         url: '/',
         icon: FaHeartbeat,
+    },
+    {
+        title: 'Members',
+        url: '/members',
+        icon: FaUsers,
     },
     {
         title: 'Savings',
@@ -26,6 +33,11 @@ export const navItems = [
         title: 'Meetings',
         url: '/meetings',
         icon: FaCalendarPlus,
+    },
+    {
+        title: 'Chamas',
+        url: '/chamas',
+        icon: FaPeopleCarry,
     },
     {
         title: 'Transactions',
