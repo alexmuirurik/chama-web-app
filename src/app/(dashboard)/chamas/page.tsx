@@ -1,18 +1,19 @@
 import { getChamas } from '@/actions/chamaController'
+import { auth } from '@/auth'
 import CreateChama from '@/src/components/forms/createChama'
 import SearchForm from '@/src/components/forms/searchForm'
 import PageTitle from '@/src/components/sections/pageTitle'
 import ChamasTable from '@/src/components/tables/chamasTable'
-import { Button } from '@/src/components/ui/button'
 
 const ChamasPage = async () => {
+    const session = await auth()
     const chamas = await getChamas()
-    return (
+    return session?.user && (
         <div className="space-y-4">
             <PageTitle title="Chamas">
                 <div className="flex items-center gap-2">
                     <SearchForm />
-                    <CreateChama />
+                    <CreateChama user={session?.user} />
                 </div>
             </PageTitle>
             <div className="space-y-4">

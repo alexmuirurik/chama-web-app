@@ -5,15 +5,24 @@ import { CreateChamaSchema } from '@/prisma/schemas'
 import z from 'zod'
 import { createMember } from './memberController'
 import { Role } from '@/src/generated/prisma/enums'
+import { getUserById } from './userController'
 
 export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
     try {
-        const chama = await prisma.chama.create({ data })
+        const user = await getUserById(data.userId)
+        const chama = await prisma.chama.create({
+            data: {
+                name: data.name,
+                location: data.location,
+                minimumSavings: data.minimumSavings,
+                adminId: data.userId
+            },
+        })
         const member = await createMember({
             chamaId: chama.id,
             name: data.name,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
+            email: user?.email ?? '',
+            phoneNumber: user?.role ?? '',
             role: Role.ADMIN,
         })
         return chama

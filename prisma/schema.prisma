@@ -29,6 +29,7 @@ model User {
     sessions      Session[]
     Authenticator Authenticator[]
     chama         Chama[]
+    members       Member[]
     createdAt     DateTime        @default(now())
     updatedAt     DateTime        @updatedAt
 }
@@ -48,8 +49,7 @@ model Account {
     session_state     String?
     createdAt         DateTime @default(now())
     updatedAt         DateTime @updatedAt
-
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
 }
@@ -73,7 +73,6 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-// Optional for WebAuthn support
 model Authenticator {
     credentialID         String  @id @map("_id")
     userId               String  @db.ObjectId
@@ -100,29 +99,127 @@ model Images {
 }
 
 model Chama {
-    id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+    id                    String           @id @default(auto()) @map("_id") @db.ObjectId
     name                  String
     location              String
-    minimumSavings        Float?    @default(0)
+    minimumSavings        Float?           @default(0)
     nextMeeting           DateTime?
     registrationId        String?
-    adminId               String    @db.ObjectId
-    admin                 User      @relation(fields: [adminId], references: [id], onDelete: Cascade)
+    adminId               String           @db.ObjectId
+    admin                 User             @relation(fields: [adminId], references: [id], onDelete: Cascade)
     registrationDocuments Images[]
     members               Member[]
-    createdAt             DateTime  @default(now())
-    updatedAt             DateTime  @updatedAt
+    dividends             Dividend[]
+    loans                 Loan[]
+    penalties             Penalty[]
+    createdAt             DateTime         @default(now())
+    updatedAt             DateTime         @updatedAt   
 }
 
 model Member {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    chamaId     String   @db.ObjectId
-    name        String
-    email       String   @unique
-    phoneNumber String
-    role        Role     @default(MEMBER)
-    chama       Chama    @relation(fields: [chamaId], references: [id], onDelete: Cascade)
-    images      Images[]
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id              String           @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId         String           @db.ObjectId
+    userId          String?          @db.ObjectId
+    name            String
+    email           String           @unique
+    phoneNumber     String
+    role            Role             @default(MEMBER)
+    user            User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+    chama           Chama            @relation(fields: [chamaId], references: [id], onDelete: Cascade)
+    images          Images[]
+    loans           Loan[]
+    dividends       Dividend[]
+    penalties       Penalty[]
+    lastSeen        DateTime?
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+}
+
+model Transaction {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId   String   @db.ObjectId
+    memberId  String   @db.ObjectId
+    amount    Float
+    mPesaRef  String?
+    savings   Saving[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Saving {
+    id                     String      @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId                String      @db.ObjectId
+    memberId               String      @db.ObjectId
+    savingsAmount          Float       @default(0)
+    longTermLoanRepayment  Float       @default(0)
+    ShortTermLoanRepayment Float       @default(0)
+    penalties              Float       @default(0)
+    interest               Float       @default(0)
+    transactionId          String      @db.ObjectId
+    transaction            Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+    loadId                 String      @db.ObjectId
+    loan                   Loan        @relation(fields: [loadId], references: [id], onDelete: Cascade)
+    createdAt              DateTime    @default(now())
+    updatedAt              DateTime    @updatedAt
+}
+
+enum LoanType {
+    SHORT_TERM_LOAN
+    LONG_TERM_LOAN
+}
+
+model Loan {
+    id          String    @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId     String    @db.ObjectId
+    memberId    String    @db.ObjectId
+    loanType    LoanType  @default(SHORT_TERM_LOAN)
+    principle   Float     @default(0)
+    loanAmount  Float     @default(0)
+    interest    Float     @default(0)
+    termMonths  Int       @default(0)
+    dueDate     DateTime  @default(now())
+    paymentDate DateTime  @default(now())
+    chama       Chama     @relation(fields: [chamaId], references: [id], onDelete: Cascade)
+    member      Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    repayments  Saving[]
+    penalties   Penalty[]
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
+
+model Penalty {
+    id            String   @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId       String   @db.ObjectId
+    memberId      String   @db.ObjectId
+    loanId        String   @db.ObjectId
+    loan          Loan     @relation(fields: [loanId], references: [id], onDelete: Cascade)
+    penaltyAmount Float    @default(0)
+    chama         Chama    @relation(fields: [chamaId], references: [id], onDelete: Cascade)
+    member        Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
+model Dividend {
+    id              String           @id @default(auto()) @map("_id") @db.ObjectId
+    chamaId         String           @db.ObjectId
+    memberId        String           @db.ObjectId
+    dividendAmount  Float            @default(0)
+    dueDate         DateTime?
+    chama           Chama            @relation(fields: [chamaId], references: [id], onDelete: Cascade)
+    member          Member           @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+    dividendPayouts DividendPayout[]
+}
+
+model DividendPayout {
+    id           String    @id @default(auto()) @map("_id") @db.ObjectId
+    dividendId   String    @db.ObjectId
+    memberShare  Float
+    amountEarned Float
+    paidAt       DateTime?
+    dividend     Dividend  @relation(fields: [dividendId], references: [id])
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
 }

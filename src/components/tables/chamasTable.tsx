@@ -12,7 +12,7 @@ const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
             {chamas.map((chama) => (
                 <div
                     key={chama.id}
-                    className="grid grid-cols-4 gap-2 border-t py-3 px-4"
+                    className="grid grid-cols-4 gap-2 border-t py-3 px-4 text-sm"
                 >
                     <div>{chama.name}</div>
                     <div>{chama.location}</div>

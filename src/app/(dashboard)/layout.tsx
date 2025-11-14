@@ -5,12 +5,13 @@ import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-    const session = await auth() 
-    if(!session?.user) redirect('/login')
+    const session = await auth()
+    if (!session?.user) redirect('/login')
     return (
         <SidebarProvider className="w-full">
             <AppSidebar />
             <main className="space-y-4 w-full mt-2 px-5 font-nunito">
+                {session.user.name}
                 <Navbar />
                 {children}
             </main>
