@@ -14,14 +14,21 @@ export type ButtonVariants =
 export const LoadingButton = ({
     loading,
     variant,
+    onClick,
     children,
 }: {
     loading: boolean
     variant: ButtonVariants
+    onClick?: () => void
     children: React.ReactNode
 }) => {
     return (
-        <Button variant={variant} disabled={loading}>
+        <Button
+            className="cursor-pointer"
+            variant={variant}
+            disabled={loading}
+            onClick={onClick}
+        >
             {loading && <FaSpinner className="animate-spin" />}
             {children}
         </Button>

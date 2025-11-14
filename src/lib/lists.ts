@@ -31,23 +31,13 @@ export const sidebarItems = [
         icon: FaUserShield,
     },
     {
-        title: 'Chamas',
-        url: '/chamas',
-        icon: FaPeopleCarry,
-    },
-    {
         title: 'Members',
         url: '/members',
         icon: FaUsers,
     },
     {
-        title: 'Transactions',
-        url: '/transactions',
-        icon: FaStackExchange,
-    },
-    {
         title: 'Dividends',
-        url: '/transactions',
+        url: '/dividends',
         icon: FaHandHoldingUsd,
     },
 ]

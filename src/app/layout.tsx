@@ -8,6 +8,7 @@ import {
 } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
+import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from '@/src/components/ui/sonner'
 
 const geistSans = Geist({
@@ -47,6 +48,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} ${nunitoSans.variable} ${rusoOne.variable} antialiased`}
             >
+                <NextTopLoader color='purple' height={1} />
                 <Toaster richColors theme="light" />
                 {children}
             </body>

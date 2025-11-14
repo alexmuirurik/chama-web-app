@@ -121,7 +121,7 @@ model Member {
     chamaId         String           @db.ObjectId
     userId          String?          @db.ObjectId
     name            String
-    email           String           @unique
+    email           String           
     phoneNumber     String
     role            Role             @default(MEMBER)
     user            User?            @relation(fields: [userId], references: [id], onDelete: Cascade)

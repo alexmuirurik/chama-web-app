@@ -10,9 +10,6 @@ export const createMember = async (
     try {
         const member = await prisma.member.create({
             data,
-            include: {
-                user: true,
-            },
         })
         return member
     } catch (error) {

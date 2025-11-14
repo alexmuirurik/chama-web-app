@@ -14,7 +14,7 @@ const MembersPage = async () => {
                 <PageTitle title="Members">
                     <div className="flex items-center gap-2">
                         <SearchForm />
-                        <AddMember />
+                        <AddMember chamaId={session.user.chamaId as string} />
                     </div>
                 </PageTitle>
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 space-y-4 ">

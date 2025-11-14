@@ -20,8 +20,9 @@ import { useState } from 'react'
 import { FaSpinner } from 'react-icons/fa'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { User } from 'next-auth'
+import Link from 'next/link'
 
-const MenubarDemo = ({user}: { user: User | undefined }) => {
+const MenubarDemo = ({ user }: { user: User | undefined }) => {
     const [loading, setLoading] = useState(false)
     const onSignOut = async () => {
         setLoading(true)
@@ -110,27 +111,38 @@ const MenubarDemo = ({user}: { user: User | undefined }) => {
                 </MenubarContent>
             </MenubarMenu>
             <MenubarMenu>
-                <MenubarTrigger className='px-4 py-2'>
-                    <Avatar className='h-6 w-6'>
+                <MenubarTrigger className="px-4 py-2">
+                    <Avatar className="h-6 w-6">
                         <AvatarImage src={user?.image ?? ''} />
                     </Avatar>
                 </MenubarTrigger>
                 <MenubarContent align="end">
-                    <MenubarRadioGroup value="benoit">
-                        <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                        <MenubarRadioItem value="benoit">
-                            Benoit
-                        </MenubarRadioItem>
-                        <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-                    </MenubarRadioGroup>
+                    <MenubarItem
+                        className="flex items-center gap-2 py-2 cursor-pointer"
+                        inset
+                        asChild
+                    >
+                        <Link href="/profile">Profile</Link>
+                    </MenubarItem>
+                    <MenubarItem
+                        className="flex items-center gap-2 py-2 cursor-pointer"
+                        inset
+                        asChild
+                    >
+                        <Link href="/chamas">Chamas</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 py-2 cursor-pointer"
                         inset
-                        onClick={onSignOut}
+                        asChild
                     >
-                        {loading && <FaSpinner className="h-8 w-8 animate-spin" />}
-                        Sign Out
+                        <Link href="#" onClick={onSignOut}>
+                            {loading && (
+                                <FaSpinner className="h-8 w-8 animate-spin" />
+                            )}
+                            Sign Out
+                        </Link>
                     </MenubarItem>
                 </MenubarContent>
             </MenubarMenu>

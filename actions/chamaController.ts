@@ -5,7 +5,7 @@ import { CreateChamaSchema } from '@/prisma/schemas'
 import z from 'zod'
 import { createMember } from './memberController'
 import { Role } from '@/src/generated/prisma/enums'
-import { getUserById } from './userController'
+import { getUserById, updateUser } from './userController'
 
 export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
     try {
@@ -15,7 +15,7 @@ export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
                 name: data.name,
                 location: data.location,
                 minimumSavings: data.minimumSavings,
-                adminId: data.userId
+                adminId: data.userId,
             },
         })
         const member = await createMember({
@@ -26,6 +26,13 @@ export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
             userId: user?.id ?? '',
             role: Role.ADMIN,
         })
+
+        const updateChamaId = await updateUser({
+            userId: user?.id ?? '',
+            chamaId: chama.id,
+            role: user?.role ?? Role.ADMIN,
+        })
+
         return chama
     } catch (error: any) {
         throw new Error(error)

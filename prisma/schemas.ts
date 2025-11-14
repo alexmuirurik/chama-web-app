@@ -1,6 +1,15 @@
 import { Role } from '@/src/generated/prisma/enums'
 import z from 'zod'
 
+export const UpdateUserSchema = z.object({
+    userId: z.string(),
+    name: z.string().optional(),
+    email: z.email().optional(),
+    image: z.string().optional(), 
+    chamaId: z.string().optional(),
+    role: z.string<Role>(),
+})
+
 export const CreateChamaSchema = z.object({
     userId: z.string(),
     name: z.string(),
@@ -15,6 +24,7 @@ export const AddMemberSchema = z.object({
     email: z.email(),
     phoneNumber: z.string(),
     role: z.string<Role>(),
+    chamaId: z.string(),
 })
 
 export const CreateMemberSchema = z.object({

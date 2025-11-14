@@ -27,7 +27,6 @@ const CreateChama = ({ userId }: { userId: string }) => {
     const handleSubmit = async (data: z.infer<typeof CreateChamaSchema>) => {
         setLoading(true)
         try {
-            alert(data.userId)
             const chama = await createChama(data)
             if (chama) {
                 router.refresh()
