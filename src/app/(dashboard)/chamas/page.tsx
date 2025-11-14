@@ -8,12 +8,13 @@ import ChamasTable from '@/src/components/tables/chamasTable'
 const ChamasPage = async () => {
     const session = await auth()
     const chamas = await getChamas()
+    const user
     return session?.user && (
         <div className="space-y-4">
             <PageTitle title="Chamas">
                 <div className="flex items-center gap-2">
                     <SearchForm />
-                    <CreateChama user={session?.user} />
+                    <CreateChama userId={session?.user.id ?? 'used'} />
                 </div>
             </PageTitle>
             <div className="space-y-4">

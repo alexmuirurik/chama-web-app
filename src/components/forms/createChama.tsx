@@ -12,22 +12,22 @@ import { toast } from 'sonner'
 import { LoadingButton } from '../ui/loadingButton'
 import { createChama } from '@/actions/chamaController'
 import { useRouter } from 'next/navigation'
-import { User } from 'next-auth'
 
-const CreateChama = ({user}: { user: User }) => {
+const CreateChama = ({ userId }: { userId: string }) => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const router = useRouter()
     const form = useForm<z.infer<typeof CreateChamaSchema>>({
         resolver: zodResolver(CreateChamaSchema),
         defaultValues: {
-            userId: user.id ?? '',
-        }
+            userId: userId,
+        },
     })
 
     const handleSubmit = async (data: z.infer<typeof CreateChamaSchema>) => {
         setLoading(true)
         try {
+            alert(data.userId)
             const chama = await createChama(data)
             if (chama) {
                 router.refresh()

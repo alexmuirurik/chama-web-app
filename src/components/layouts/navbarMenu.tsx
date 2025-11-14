@@ -1,3 +1,6 @@
+'use client'
+
+import { signOut } from 'next-auth/react'
 import {
     Menubar,
     MenubarCheckboxItem,
@@ -13,12 +16,28 @@ import {
     MenubarSubTrigger,
     MenubarTrigger,
 } from '@/src/components/ui/menubar'
+import { useState } from 'react'
+import { FaSpinner } from 'react-icons/fa'
+import { Avatar, AvatarImage } from '../ui/avatar'
+import { User } from 'next-auth'
 
-const MenubarDemo = () => {
+const MenubarDemo = ({user}: { user: User | undefined }) => {
+    const [loading, setLoading] = useState(false)
+    const onSignOut = async () => {
+        setLoading(true)
+        signOut({
+            callbackUrl: '/',
+        })
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }
     return (
-        <Menubar className='border-0 shadow-none'>
+        <Menubar className="border-0 shadow-none">
             <MenubarMenu>
-                <MenubarTrigger className='hover:bg-neutral-300 px-4'>File</MenubarTrigger>
+                <MenubarTrigger className="hover:bg-neutral-300 px-4">
+                    File
+                </MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
                         New Tab <MenubarShortcut>⌘T</MenubarShortcut>
@@ -91,8 +110,12 @@ const MenubarDemo = () => {
                 </MenubarContent>
             </MenubarMenu>
             <MenubarMenu>
-                <MenubarTrigger>Profiles</MenubarTrigger>
-                <MenubarContent align='end'>
+                <MenubarTrigger className='px-4 py-2'>
+                    <Avatar className='h-6 w-6'>
+                        <AvatarImage src={user?.image ?? ''} />
+                    </Avatar>
+                </MenubarTrigger>
+                <MenubarContent align="end">
                     <MenubarRadioGroup value="benoit">
                         <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
                         <MenubarRadioItem value="benoit">
@@ -101,9 +124,14 @@ const MenubarDemo = () => {
                         <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
                     </MenubarRadioGroup>
                     <MenubarSeparator />
-                    <MenubarItem inset>Edit...</MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem inset>Add Profile...</MenubarItem>
+                    <MenubarItem
+                        className="flex items-center gap-2"
+                        inset
+                        onClick={onSignOut}
+                    >
+                        {loading && <FaSpinner className="h-8 w-8 animate-spin" />}
+                        Sign Out
+                    </MenubarItem>
                 </MenubarContent>
             </MenubarMenu>
         </Menubar>

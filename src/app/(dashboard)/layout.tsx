@@ -11,7 +11,6 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
         <SidebarProvider className="w-full">
             <AppSidebar />
             <main className="space-y-4 w-full mt-2 px-5 font-nunito">
-                {session.user.name}
                 <Navbar />
                 {children}
             </main>
