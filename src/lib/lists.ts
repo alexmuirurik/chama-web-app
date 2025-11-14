@@ -6,6 +6,7 @@ import {
     FaPeopleCarry,
     FaStackExchange,
     FaUsers,
+    FaUserShield,
 } from 'react-icons/fa'
 
 export const sidebarItems = [
@@ -15,9 +16,9 @@ export const sidebarItems = [
         icon: FaHeartbeat,
     },
     {
-        title: 'Members',
-        url: '/members',
-        icon: FaUsers,
+        title: 'Meetings',
+        url: '/meetings',
+        icon: FaCalendarPlus,
     },
     {
         title: 'Savings',
@@ -27,12 +28,7 @@ export const sidebarItems = [
     {
         title: 'Loans',
         url: '/loans',
-        icon: FaHandHoldingUsd,
-    },
-    {
-        title: 'Meetings',
-        url: '/meetings',
-        icon: FaCalendarPlus,
+        icon: FaUserShield,
     },
     {
         title: 'Chamas',
@@ -40,8 +36,18 @@ export const sidebarItems = [
         icon: FaPeopleCarry,
     },
     {
+        title: 'Members',
+        url: '/members',
+        icon: FaUsers,
+    },
+    {
         title: 'Transactions',
         url: '/transactions',
         icon: FaStackExchange,
+    },
+    {
+        title: 'Dividends',
+        url: '/transactions',
+        icon: FaHandHoldingUsd,
     },
 ]

@@ -1,7 +1,7 @@
 import { getMembers } from '@/actions/memberController'
 import { auth } from '@/auth'
 import MembersCard from '@/src/components/cards/memberCards'
-import CreateChama from '@/src/components/forms/createChama'
+import AddMember from '@/src/components/forms/addMember'
 import SearchForm from '@/src/components/forms/searchForm'
 import PageTitle from '@/src/components/sections/pageTitle'
 
@@ -14,7 +14,7 @@ const MembersPage = async () => {
                 <PageTitle title="Members">
                     <div className="flex items-center gap-2">
                         <SearchForm />
-                        <CreateChama user={session?.user} />
+                        <AddMember />
                     </div>
                 </PageTitle>
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 space-y-4 ">

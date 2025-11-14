@@ -10,12 +10,20 @@ export const CreateChamaSchema = z.object({
         .pipe(z.number().min(1, 'Please enter your price.')),
 })
 
+export const AddMemberSchema = z.object({
+    name: z.string(),
+    email: z.email(),
+    phoneNumber: z.string(),
+    role: z.string<Role>(),
+})
+
 export const CreateMemberSchema = z.object({
     name: z.string(),
     email: z.string().email(),
     phoneNumber: z.string(),
     role: z.string<Role>(),
     chamaId: z.string(),
+    userId: z.string().optional(),
 })
 
 export const LoginSchema = z.object({

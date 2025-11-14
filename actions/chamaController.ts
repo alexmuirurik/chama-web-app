@@ -20,9 +20,10 @@ export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
         })
         const member = await createMember({
             chamaId: chama.id,
-            name: data.name,
+            name: user?.name ?? '',
             email: user?.email ?? '',
             phoneNumber: user?.role ?? '',
+            userId: user?.id ?? '',
             role: Role.ADMIN,
         })
         return chama
