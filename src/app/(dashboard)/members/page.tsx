@@ -7,7 +7,7 @@ import PageTitle from '@/src/components/sections/pageTitle'
 
 const MembersPage = async () => {
     const session = await auth()
-    const members = await getMembers()
+    const members = await getMembers(session?.user?.chamaId as string)
     return (
         session?.user && (
             <div className="space-y-4">

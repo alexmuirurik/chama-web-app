@@ -19,11 +19,12 @@ export const getUserById = async (userId: string) => {
 
 export const updateUser = async (data: z.infer<typeof UpdateUserSchema>) => {
     try {
+        const {userId, ...newData} = data
         const user = await prisma.user.update({
             where: {
                 id: data.userId,
             },
-            data,
+            data: newData,
         })
         return user
     } catch (error) {

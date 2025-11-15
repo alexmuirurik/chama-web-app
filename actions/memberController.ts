@@ -17,9 +17,25 @@ export const createMember = async (
     }
 }
 
-export const getMembers = async () => {
+export const getMemberByEmail = async (email: string) => {
+    try {
+        const member = await prisma.member.findFirst({
+            where: {
+                email: email,
+            },
+        })
+        return member
+    } catch (error) {
+        throw new Error(error as any)
+    }
+}
+
+export const getMembers = async (chamaId: string) => {
     try {
         const members = await prisma.member.findMany({
+            where: {
+                chamaId: chamaId,
+            },
             include: {
                 user: true,
             },

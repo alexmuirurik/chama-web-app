@@ -10,6 +10,9 @@ import { getUserById, updateUser } from './userController'
 export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
     try {
         const user = await getUserById(data.userId)
+        if (!user) {
+            throw new Error('User not found')
+        }
         const chama = await prisma.chama.create({
             data: {
                 name: data.name,
@@ -20,19 +23,32 @@ export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
         })
         const member = await createMember({
             chamaId: chama.id,
-            name: user?.name ?? '',
-            email: user?.email ?? '',
-            phoneNumber: user?.role ?? '',
-            userId: user?.id ?? '',
+            name: user.name as string,
+            email: user?.email as string,
+            phoneNumber: user?.role as string,
+            userId: user?.id ?? data.userId,
             role: Role.ADMIN,
         })
 
         const updateChamaId = await updateUser({
-            userId: user?.id ?? '',
+            userId: user?.id ?? data.userId,
             chamaId: chama.id,
             role: user?.role ?? Role.ADMIN,
         })
 
+        return chama
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export const getChamaById = async (chamaId: string) => {
+    try {
+        const chama = await prisma.chama.findUnique({
+            where: {
+                id: chamaId,
+            },
+        })
         return chama
     } catch (error: any) {
         throw new Error(error)
