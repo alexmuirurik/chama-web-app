@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AddMemberSchema } from '@/prisma/schemas'
 import { Input } from '../ui/input'
 import { LoadingButton } from '../ui/loadingButton'
-import { createMember } from '@/actions/memberController'
+import { createMember } from '@/src/actions/memberController'
 import { toast } from 'sonner'
 
 const AddMember = ({ chamaId }: { chamaId: string }) => {

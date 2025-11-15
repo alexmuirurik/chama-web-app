@@ -1,13 +1,12 @@
 import { auth } from '@/auth'
 import NavbarMenu from './navbarMenu'
-import { getChamaById } from '@/actions/chamaController'
+import { getChamaById } from '@/src/actions/chamaController'
 import { Avatar, AvatarImage } from '../ui/avatar'
 
 const Navbar = async () => {
     const session = await auth()
     const user = session?.user
     const chama = user?.chamaId ? await getChamaById(user.chamaId) : null
-    console.log(user)
     return (
         <nav className="border w-full h-12 rounded-md ps-2 py-3">
             <div className="flex justify-between items-center w-full h-full">

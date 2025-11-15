@@ -4,7 +4,7 @@ import prisma from './prisma/prisma'
 import Google from 'next-auth/providers/google'
 import Github from 'next-auth/providers/github'
 import { Role } from './src/generated/prisma/enums'
-import { getMemberByEmail } from './actions/memberController'
+import { getMemberByEmail } from './src/actions/memberController'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -22,9 +22,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         async session({ session, token, user }) {
             if (session.user) {
-                session.user.id = token.sub as string
-                session.user.role = token.role
-                session.user.chamaId = token.chamaId as string
+                session.user.id = user.id as string
+                session.user.role = user.role
+                session.user.chamaId = user.chamaId as string
             }
 
             if (!session.user.chamaId && user.chamaId) {
@@ -33,8 +33,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             return session
         },
+
+        async jwt({ token, user }) {
+            if (user) {
+                token.role = user.role
+            }
+            return token
+        },
     },
     session: {
-        strategy: 'jwt',
-    },
+        strategy: 'database',
+    }
 })

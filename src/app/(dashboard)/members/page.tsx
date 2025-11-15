@@ -1,4 +1,4 @@
-import { getMembers } from '@/actions/memberController'
+import { getMembers } from '@/src/actions/memberController'
 import { auth } from '@/auth'
 import MembersCard from '@/src/components/cards/memberCards'
 import AddMember from '@/src/components/forms/addMember'

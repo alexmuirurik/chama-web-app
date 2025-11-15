@@ -184,10 +184,10 @@ model Deduction {
     shortTermLoanRepayment Float         @default(0)
     penaltiesRepayment     Float         @default(0)
     interest               Float         @default(0)
-    longTermLoanId         String        @db.ObjectId
-    shortTermLoanId        String        @db.ObjectId
-    longTermLoan           LongTermLoan  @relation(fields: [longTermLoanId], references: [id], onDelete: Cascade)
-    shortTermLoan          ShortTermLoan @relation(fields: [shortTermLoanId], references: [id], onDelete: Cascade)
+    longTermLoanId         String?        @db.ObjectId
+    shortTermLoanId        String?        @db.ObjectId
+    longTermLoan           LongTermLoan?  @relation(fields: [longTermLoanId], references: [id], onDelete: Cascade)
+    shortTermLoan          ShortTermLoan? @relation(fields: [shortTermLoanId], references: [id], onDelete: Cascade)
     member                 Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
     transactions           Transaction[]
     penalties              Penalty[]

@@ -10,7 +10,7 @@ import CustomDialog from '../ui/customDialog'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { LoadingButton } from '../ui/loadingButton'
-import { createChama } from '@/actions/chamaController'
+import { createChama } from '@/src/actions/chamaController'
 import { useRouter } from 'next/navigation'
 
 const CreateChama = ({ userId }: { userId: string }) => {

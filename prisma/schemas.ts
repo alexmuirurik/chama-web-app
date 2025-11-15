@@ -5,7 +5,7 @@ export const UpdateUserSchema = z.object({
     userId: z.string(),
     name: z.string().optional(),
     email: z.email().optional(),
-    image: z.string().optional(), 
+    image: z.string().optional(),
     chamaId: z.string().optional(),
     role: z.string<Role>(),
 })
@@ -39,4 +39,23 @@ export const CreateMemberSchema = z.object({
 export const LoginSchema = z.object({
     email: z.string().email(),
     password: z.string(),
+})
+
+export const AddFundsSchema = z.object({
+    amount: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
+    memberId: z.string(),
+    loanAmount: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
+    ngumbatoAmount: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
+    penaltiesAmount: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
+    interestAmount: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
 })

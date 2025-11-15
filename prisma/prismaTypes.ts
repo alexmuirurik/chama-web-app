@@ -11,3 +11,9 @@ export type ChamawithMembers = Prisma.ChamaGetPayload<{
         members: true
     }
 }>
+
+export type DeductionWithMember = Prisma.DeductionGetPayload<{
+    include: {
+        member: true
+    }
+}>

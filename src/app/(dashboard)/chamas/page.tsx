@@ -1,4 +1,4 @@
-import { getChamas } from '@/actions/chamaController'
+import { getChamas } from '@/src/actions/chamaController'
 import { auth } from '@/auth'
 import CreateChama from '@/src/components/forms/createChama'
 import SearchForm from '@/src/components/forms/searchForm'

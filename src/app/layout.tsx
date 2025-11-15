@@ -48,7 +48,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} ${nunitoSans.variable} ${rusoOne.variable} antialiased`}
             >
-                <NextTopLoader color='purple' height={1} />
+                <NextTopLoader color="purple" height={1} />
                 <Toaster richColors theme="light" />
                 {children}
             </body>
