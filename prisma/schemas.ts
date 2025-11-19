@@ -44,18 +44,18 @@ export const LoginSchema = z.object({
 export const AddFundsSchema = z.object({
     amount: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(10, 'Please enter your price.')),
     memberId: z.string(),
     loanAmount: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(0, 'Please enter your price.')),
     ngumbatoAmount: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(0, 'Please enter your price.')),
     penaltiesAmount: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(0, 'Please enter your price.')),
     interestAmount: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(0, 'Please enter your price.')),
 })

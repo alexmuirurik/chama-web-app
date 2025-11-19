@@ -59,7 +59,7 @@ const AddFunds = ({
         try {
             const member = await addTransaction(data)
             if (member) {
-                toast.success('Member added successfully')
+                toast.success('Savings added successfully')
                 setOpen(false)
             }
         } catch (error) {

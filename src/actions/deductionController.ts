@@ -1,31 +1,55 @@
 'use server'
 
 import prisma from '@/prisma/prisma'
+import { AddFundsSchema } from '@/prisma/schemas'
+import z from 'zod'
 
-export const getDeductionByMemberId = async (memberId: string) => {
+export const getDeductionByMemberId = async (
+    data: z.infer<typeof AddFundsSchema>
+) => {
     try {
+        const savings =
+            data.amount -
+            data.loanAmount -
+            data.ngumbatoAmount -
+            data.penaltiesAmount -
+            data.interestAmount
         const deduction = await prisma.deduction.findFirst({
             where: {
-                memberId: memberId,
+                memberId: data.memberId,
             },
         })
         if (!deduction) {
             const newDeduction = await prisma.deduction.create({
                 data: {
-                    memberId: memberId,
+                    memberId: data.memberId,
                     memberMonth: new Date().toLocaleDateString('default', {
                         month: 'long',
                     }),
-                    longTermLoanRepayment: 0,
-                    shortTermLoanRepayment: 0,
-                    penaltiesRepayment: 0,
-                    interest: 0,
+                    savingsAmount: savings,
+                    longTermLoanRepayment: data.loanAmount,
+                    shortTermLoanRepayment: data.ngumbatoAmount,
+                    penaltiesRepayment: data.penaltiesAmount,
+                    interest: data.interestAmount,
                 },
             })
             return newDeduction
         }
 
-        return deduction
+        const newDeduction = await prisma.deduction.update({
+            where: {
+                id: deduction.id,
+            },
+            data: {
+                savingsAmount: savings,
+                longTermLoanRepayment: data.loanAmount,
+                shortTermLoanRepayment: data.ngumbatoAmount,
+                penaltiesRepayment: data.penaltiesAmount,
+                interest: data.interestAmount,
+            },
+        })
+
+        return newDeduction
     } catch (error) {
         throw new Error(error as any)
     }
