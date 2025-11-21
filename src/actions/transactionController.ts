@@ -8,7 +8,7 @@ import { getDeductionByMemberId } from './deductionController'
 export const addTransaction = async (data: z.infer<typeof AddFundsSchema>) => {
     try {
         const deduction = await getDeductionByMemberId(data)
-        const transaction = await prisma.transaction.create({
+        const transaction = await prisma.saving.create({
             data: {
                 amount: data.amount,
                 memberId: data.memberId,

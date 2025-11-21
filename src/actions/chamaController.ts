@@ -4,8 +4,8 @@ import prisma from '@/prisma/prisma'
 import { CreateChamaSchema } from '@/prisma/schemas'
 import z from 'zod'
 import { createMember } from './memberController'
-import { Role } from '@/src/generated/prisma/enums'
 import { getUserById, updateUser } from './userController'
+import { Role } from '../generate/prisma/enums'
 
 export const createChama = async (data: z.infer<typeof CreateChamaSchema>) => {
     try {

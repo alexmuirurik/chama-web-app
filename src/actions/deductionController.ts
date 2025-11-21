@@ -23,14 +23,6 @@ export const getDeductionByMemberId = async (
             const newDeduction = await prisma.deduction.create({
                 data: {
                     memberId: data.memberId,
-                    memberMonth: new Date().toLocaleDateString('default', {
-                        month: 'long',
-                    }),
-                    savingsAmount: savings,
-                    longTermLoanRepayment: data.loanAmount,
-                    shortTermLoanRepayment: data.ngumbatoAmount,
-                    penaltiesRepayment: data.penaltiesAmount,
-                    interest: data.interestAmount,
                 },
             })
             return newDeduction
@@ -41,11 +33,6 @@ export const getDeductionByMemberId = async (
                 id: deduction.id,
             },
             data: {
-                savingsAmount: savings,
-                longTermLoanRepayment: data.loanAmount,
-                shortTermLoanRepayment: data.ngumbatoAmount,
-                penaltiesRepayment: data.penaltiesAmount,
-                interest: data.interestAmount,
             },
         })
 
