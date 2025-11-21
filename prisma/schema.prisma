@@ -1,10 +1,10 @@
 datasource db {
-    provider = "mongodb"
+    provider = "postgresql"
 }
 
 generator client {
     provider = "prisma-client"
-    output   = "./node_modules/@prisma/client"
+    output   = "../src/app/generate/prisma"
 }
 
 enum Role {
@@ -17,7 +17,7 @@ enum Role {
 }
 
 model User {
-    id            String          @id @default(auto()) @map("_id") @db.ObjectId
+    id            String          @id @default(uuid()) @map("_id")
     name          String?
     email         String?         @unique
     emailVerified DateTime?
@@ -34,17 +34,17 @@ model User {
 }
 
 model Account {
-    id                String   @id @default(auto()) @map("_id") @db.ObjectId
-    userId            String   @db.ObjectId
+    id                String   @id @default(uuid()) @map("_id")
+    userId            String
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String?  @db.String
-    access_token      String?  @db.String
+    refresh_token     String?
+    access_token      String?
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String?  @db.String
+    id_token          String?
     session_state     String?
     createdAt         DateTime @default(now())
     updatedAt         DateTime @updatedAt
@@ -54,9 +54,9 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    id           String   @id @default(uuid()) @map("_id")
     sessionToken String   @unique
-    userId       String   @db.ObjectId
+    userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     createdAt    DateTime @default(now())
@@ -64,7 +64,7 @@ model Session {
 }
 
 model VerificationToken {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    id         String   @id @default(uuid()) @map("_id")
     identifier String
     token      String
     expires    DateTime
@@ -74,7 +74,7 @@ model VerificationToken {
 
 model Authenticator {
     credentialID         String  @id @map("_id")
-    userId               String  @db.ObjectId
+    userId               String
     providerAccountId    String
     credentialPublicKey  String
     counter              Int
@@ -87,7 +87,7 @@ model Authenticator {
 }
 
 model Chama {
-    id                   String      @id @default(auto()) @map("_id") @db.ObjectId
+    id                   String      @id @default(uuid()) @map("_id")
     name                 String
     location             String
     profilePic           String?
@@ -95,7 +95,7 @@ model Chama {
     minimumSavings       Float?      @default(0)
     nextMeeting          DateTime?
     registrationId       String?
-    adminId              String      @db.ObjectId
+    adminId              String
     admin                User        @relation(fields: [adminId], references: [id], onDelete: Cascade)
     members              Member[]
     loans                ChamaLoan[]
@@ -105,8 +105,8 @@ model Chama {
 }
 
 model ChamaLoan {
-    id          String    @id @default(auto()) @map("_id") @db.ObjectId
-    chamaId     String    @db.ObjectId
+    id          String    @id @default(uuid()) @map("_id")
+    chamaId     String
     lender      String
     loanAmount  Float     @default(0)
     interest    Float     @default(0)
@@ -119,8 +119,8 @@ model ChamaLoan {
 }
 
 model Projects {
-    id            String   @id @default(auto()) @map("_id") @db.ObjectId
-    chamaId       String   @db.ObjectId
+    id            String   @id @default(uuid()) @map("_id")
+    chamaId       String
     projectName   String
     estimatedCost Float    @default(0)
     actualCost    Float    @default(0)
@@ -131,9 +131,9 @@ model Projects {
 }
 
 model Member {
-    id             String          @id @default(auto()) @map("_id") @db.ObjectId
-    chamaId        String          @db.ObjectId
-    userId         String?         @db.ObjectId
+    id             String          @id @default(uuid()) @map("_id")
+    chamaId        String
+    userId         String?
     name           String
     email          String
     phoneNumber    String
@@ -153,8 +153,8 @@ model Member {
 }
 
 model BalanceSheet {
-    id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-    memberId           String   @unique @db.ObjectId
+    id                 String   @id @default(uuid()) @map("_id")
+    memberId           String   @unique
     totalSavings       Float    @default(0)
     totalLongTermLoan  Float    @default(0)
     totalShortTermLoan Float    @default(0)
@@ -175,12 +175,12 @@ enum TransactionStatus {
 }
 
 model Saving {
-    id           String            @id @default(auto()) @map("_id") @db.ObjectId
+    id           String            @id @default(uuid()) @map("_id")
     amount       Float
     mPesaRef     String?
-    authorizedBy String?           @db.ObjectId
-    memberId     String            @db.ObjectId
-    deductionId  String?           @db.ObjectId
+    authorizedBy String?
+    memberId     String
+    deductionId  String?
     savings      Float             @default(0)
     welfare      Float             @default(0)
     status       TransactionStatus @default(PENDING)
@@ -191,11 +191,11 @@ model Saving {
 }
 
 model Deduction {
-    id              String            @id @default(auto()) @map("_id") @db.ObjectId
-    memberId        String            @db.ObjectId
-    longTermLoanId  String?           @db.ObjectId
-    shortTermLoanId String?           @db.ObjectId
-    penaltyId       String?           @db.ObjectId
+    id              String            @id @default(uuid()) @map("_id")
+    memberId        String
+    longTermLoanId  String?
+    shortTermLoanId String?
+    penaltyId       String?
     status          TransactionStatus @default(PENDING)
     member          Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
     longTermLoan    LongTermLoan?     @relation(fields: [longTermLoanId], references: [id], onDelete: Cascade)
@@ -207,9 +207,9 @@ model Deduction {
 }
 
 model LongTermLoan {
-    id                     String                  @id @default(auto()) @map("_id") @db.ObjectId
-    memberId               String                  @db.ObjectId
-    penaltyId              String?                 @db.ObjectId
+    id                     String                  @id @default(uuid()) @map("_id")
+    memberId               String
+    penaltyId              String?
     principle              Float                   @default(0)
     loanAmount             Float                   @default(0)
     interest               Float                   @default(0)
@@ -226,8 +226,8 @@ model LongTermLoan {
 }
 
 model LongTermLoanRepayment {
-    id             String            @id @default(auto()) @map("_id") @db.ObjectId
-    longTermLoanId String            @db.ObjectId
+    id             String            @id @default(uuid()) @map("_id")
+    longTermLoanId String
     dueDate        DateTime          @default(now())
     paymentDate    DateTime?
     status         TransactionStatus @default(PENDING)
@@ -237,9 +237,9 @@ model LongTermLoanRepayment {
 }
 
 model ShortTermLoan {
-    id          String            @id @default(auto()) @map("_id") @db.ObjectId
-    memberId    String            @db.ObjectId
-    penaltyId   String?           @db.ObjectId
+    id          String            @id @default(uuid()) @map("_id")
+    memberId    String
+    penaltyId   String?
     principle   Float             @default(0)
     loanAmount  Float             @default(0)
     interest    Float             @default(0)
@@ -255,8 +255,8 @@ model ShortTermLoan {
 }
 
 model Penalty {
-    id             String            @id @default(auto()) @map("_id") @db.ObjectId
-    memberId       String            @db.ObjectId
+    id             String            @id @default(uuid()) @map("_id")
+    memberId       String
     penaltyAmount  Float             @default(0)
     status         TransactionStatus @default(PENDING)
     member         Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -268,8 +268,8 @@ model Penalty {
 }
 
 model Dividend {
-    id             String            @id @default(auto()) @map("_id") @db.ObjectId
-    memberId       String            @db.ObjectId
+    id             String            @id @default(uuid()) @map("_id")
+    memberId       String
     dividendAmount Float             @default(0)
     dueDate        DateTime?
     paidAt         DateTime?
