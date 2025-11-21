@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
-import { getDeductions } from '@/src/actions/deductionController'
+import { getChamas } from '@/src/actions/chamaController'
 import { getMembers } from '@/src/actions/memberController'
+import { getSavings } from '@/src/actions/savingController'
 import AddFunds from '@/src/components/forms/addFunds'
 import SearchForm from '@/src/components/forms/searchForm'
 import PageTitle from '@/src/components/sections/pageTitle'
@@ -11,17 +12,17 @@ const SavingsPage = async () => {
     const session = await auth()
     if (!session?.user) redirect('/login')
     const members = await getMembers(session?.user?.chamaId as string)
-    const deductions = await getDeductions(session?.user?.chamaId as string)
+    const savings = await getSavings(session.user.chamaId as string)
     return (
         <div className="space-y-4">
             <PageTitle title="Savings">
                 <div className="flex items-center gap-2">
                     <SearchForm />
-                    <AddFunds members={members} deductions={deductions} />
+                    <AddFunds members={members} />
                 </div>
             </PageTitle>
             <div className="space-y-4">
-                <SavingsTable deductions={deductions} />
+                <SavingsTable savings={savings} />
             </div>
         </div>
     )

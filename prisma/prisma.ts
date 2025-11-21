@@ -1,3 +1,4 @@
+export const runtime = 'nodejs'
 
 import { PrismaClient } from "@/src/generate/prisma/client"
 

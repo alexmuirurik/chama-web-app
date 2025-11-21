@@ -1,6 +1,6 @@
-import { DeductionWithMember } from "@/prisma/prismaTypes"
+import { SavingWithMember } from "@/prisma/prismaTypes"
 
-const SavingsTable = ({ deductions }: { deductions: DeductionWithMember[] }) => {
+const SavingsTable = ({ savings }: { savings: SavingWithMember[] }) => {
     return (
         <div className="border rounded-md">
             <div className="grid grid-cols-5 gap-2 text-sm py-3 px-4">
@@ -10,16 +10,16 @@ const SavingsTable = ({ deductions }: { deductions: DeductionWithMember[] }) => 
                 <div>Penalties Amount</div>
                 <div>Interest Amount</div>
             </div>
-            {deductions.map((deduction) => (
+            {savings.map((saving) => (
                 <div
-                    key={deduction.id}
+                    key={saving.id}
                     className="grid grid-cols-5 gap-2 border-t py-3 px-4 text-sm"
                 >
-                    <div>{deduction.member.name}</div>
-                    <div>{deduction.savingsAmount}</div>
-                    <div>{deduction.shortTermLoanRepayment}</div>
-                    <div>{deduction.penaltiesRepayment}</div>
-                    <div>{deduction.interest}</div>
+                    <div>{saving.member.name}</div>
+                    <div>{saving.amount}</div>
+                    <div>{saving.savings}</div>
+                    <div>{saving.welfare}</div>
+                    <div>{saving.status}</div>
                 </div>
             ))}
         </div>

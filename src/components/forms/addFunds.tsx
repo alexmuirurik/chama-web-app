@@ -1,5 +1,6 @@
 'use client'
-import { FormEvent, useState } from 'react'
+
+import { ChangeEvent, useState } from 'react'
 import CustomDialog from '../ui/customDialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { useForm } from 'react-hook-form'
@@ -7,7 +8,6 @@ import { Input } from '../ui/input'
 import { LoadingButton } from '../ui/loadingButton'
 import z from 'zod'
 import { toast } from 'sonner'
-import { AddFundsSchema } from '@/prisma/schemas'
 import {
     Select,
     SelectContent,
@@ -15,49 +15,46 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
-import { Member } from '@/src/generated/prisma/client'
-import { addTransaction } from '@/src/actions/transactionController'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DeductionWithMember } from '@/prisma/prismaTypes'
+import { createSaving } from '@/src/actions/savingController'
+import { CreateSavingSchema } from '@/prisma/schemas/savingSchemas'
+import { Member, TransactionStatus } from '@/src/generate/prisma/browser'
 
 const AddFunds = ({
     members,
-    deductions,
 }: {
     members: Member[]
-    deductions: DeductionWithMember[]
 }) => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const [selectedMember, setSelectedMember] = useState<string>()
-    const form = useForm<z.infer<typeof AddFundsSchema>>({
-        resolver: zodResolver(AddFundsSchema),
+    const form = useForm<z.infer<typeof CreateSavingSchema>>({
+        resolver: zodResolver(CreateSavingSchema),
+        defaultValues: {
+            welfare: 100,
+            status: TransactionStatus.COMPLETED,
+        }
     })
+
+    const updateSavings = (event: ChangeEvent<HTMLInputElement>) => {
+        const amount = Number(event.target.value ?? 0)
+        form.setValue("savings", amount - 100)
+        form.setValue("amount", amount)
+    }
 
     const selectMember = async (memberId: string) => {
         try {
             setSelectedMember(memberId)
             form.setValue('memberId', memberId)
-            const deduction = deductions.find(
-                (deduction) => deduction.memberId === memberId
-            )
-
-            form.setValue('loanAmount', deduction?.longTermLoanRepayment ?? 0)
-            form.setValue(
-                'ngumbatoAmount',
-                deduction?.shortTermLoanRepayment ?? 0
-            )
-            form.setValue('penaltiesAmount', deduction?.penaltiesRepayment ?? 0)
-            form.setValue('interestAmount', deduction?.interest ?? 0)
         } catch (error) {
             toast.error(`${error}`)
         }
     }
 
-    const onSubmit = async (data: z.infer<typeof AddFundsSchema>) => {
+    const onSubmit = async (data: z.infer<typeof CreateSavingSchema>) => {
         setLoading(true)
         try {
-            const member = await addTransaction(data)
+            const member = await createSaving(data)
             if (member) {
                 toast.success('Savings added successfully')
                 setOpen(false)
@@ -119,14 +116,14 @@ const AddFunds = ({
                                             Amount
                                         </FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input onChange={updateSavings} {...Input} />
                                         </FormControl>
                                     </FormItem>
                                 )}
                             />
                             <div className="grid grid-cols-2 gap-2">
                                 <FormField
-                                    name="loanAmount"
+                                    name='savings'
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
@@ -134,13 +131,13 @@ const AddFunds = ({
                                                 Loan
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} disabled />
+                                                <Input {...field} defaultValue={0} disabled />
                                             </FormControl>
                                         </FormItem>
                                     )}
                                 />
                                 <FormField
-                                    name="ngumbatoAmount"
+                                    name='welfare'
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
@@ -148,7 +145,7 @@ const AddFunds = ({
                                                 Ngumbato
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} disabled />
+                                                <Input {...field} defaultValue={0} disabled />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -156,29 +153,29 @@ const AddFunds = ({
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                                 <FormField
-                                    name="penaltiesAmount"
+                                    name='savings'
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel className="text-neutral-600">
-                                                Penalties
+                                                Savings
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} />
+                                                <Input {...field} disabled />
                                             </FormControl>
                                         </FormItem>
                                     )}
                                 />
                                 <FormField
-                                    name="interestAmount"
+                                    name='welfare'
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel className="text-neutral-600">
-                                                Interest
+                                                Welfare
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} />
+                                                <Input {...field} defaultValue={100} disabled />
                                             </FormControl>
                                         </FormItem>
                                     )}

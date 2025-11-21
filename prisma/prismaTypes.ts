@@ -1,4 +1,4 @@
-import { Prisma } from "@/src/generated/prisma/client"
+import { Prisma } from "@/src/generate/prisma/client"
 
 export type MemberwithUser = Prisma.MemberGetPayload<{
     include: {
@@ -17,3 +17,9 @@ export type DeductionWithMember = Prisma.DeductionGetPayload<{
         member: true
     }
 }> 
+
+export type SavingWithMember = Prisma.SavingGetPayload<{
+    include: {
+        member: true
+    }
+}>
