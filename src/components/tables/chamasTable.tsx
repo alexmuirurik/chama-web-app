@@ -1,4 +1,4 @@
-import { Chama } from '@/src/generated/prisma/client'
+import { Chama } from '@/src/generate/prisma/client'
 
 const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
     return (
