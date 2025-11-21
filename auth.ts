@@ -5,6 +5,7 @@ import Google from 'next-auth/providers/google'
 import Github from 'next-auth/providers/github'
 import { Role } from './src/generated/prisma/enums'
 import { getMemberByEmail } from './src/actions/memberController'
+import { User } from './src/generated/prisma/client'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
