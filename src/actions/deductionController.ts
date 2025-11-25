@@ -16,27 +16,14 @@ export const getDeductionByMemberId = async (
             data.interestAmount
         const deduction = await prisma.deduction.findFirst({
             where: {
-                memberId: data.memberId,
-            },
-        })
-        if (!deduction) {
-            const newDeduction = await prisma.deduction.create({
-                data: {
+                saving: {
                     memberId: data.memberId,
-                },
-            })
-            return newDeduction
-        }
-
-        const newDeduction = await prisma.deduction.update({
-            where: {
-                id: deduction.id,
-            },
-            data: {
+                }
             },
         })
+    
 
-        return newDeduction
+        return deduction
     } catch (error) {
         throw new Error(error as any)
     }
@@ -46,12 +33,18 @@ export const getDeductions = async (chamaId: string) => {
     try {
         const deductions = await prisma.deduction.findMany({
             where: {
-                member: {
-                    chamaId: chamaId,
-                },
+                saving:{
+                    member:{
+                        chamaId: chamaId
+                    }
+                }
             },
             include: {
-                member: true,
+                saving: {
+                    include: {
+                        member: true,
+                    }
+                }
             },
         })
         return deductions
