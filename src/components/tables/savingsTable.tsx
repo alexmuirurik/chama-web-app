@@ -1,4 +1,4 @@
-import { SavingWithMember } from "@/prisma/prismaTypes"
+import { SavingWithMember } from "@/prisma/types/prismaTypes"
 
 const SavingsTable = ({ savings }: { savings: SavingWithMember[] }) => {
     return (

@@ -224,12 +224,10 @@ export type MemberWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   chama?: Prisma.XOR<Prisma.ChamaScalarRelationFilter, Prisma.ChamaWhereInput>
-  LongTermLoans?: Prisma.LongTermLoanListRelationFilter
-  ShortTermLoans?: Prisma.ShortTermLoanListRelationFilter
   dividends?: Prisma.DividendListRelationFilter
   penalties?: Prisma.PenaltyListRelationFilter
   savings?: Prisma.SavingListRelationFilter
-  deductions?: Prisma.DeductionListRelationFilter
+  loans?: Prisma.LoanListRelationFilter
   balanceSheet?: Prisma.XOR<Prisma.BalanceSheetNullableScalarRelationFilter, Prisma.BalanceSheetWhereInput> | null
 }
 
@@ -246,12 +244,10 @@ export type MemberOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   chama?: Prisma.ChamaOrderByWithRelationInput
-  LongTermLoans?: Prisma.LongTermLoanOrderByRelationAggregateInput
-  ShortTermLoans?: Prisma.ShortTermLoanOrderByRelationAggregateInput
   dividends?: Prisma.DividendOrderByRelationAggregateInput
   penalties?: Prisma.PenaltyOrderByRelationAggregateInput
   savings?: Prisma.SavingOrderByRelationAggregateInput
-  deductions?: Prisma.DeductionOrderByRelationAggregateInput
+  loans?: Prisma.LoanOrderByRelationAggregateInput
   balanceSheet?: Prisma.BalanceSheetOrderByWithRelationInput
 }
 
@@ -271,12 +267,10 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   chama?: Prisma.XOR<Prisma.ChamaScalarRelationFilter, Prisma.ChamaWhereInput>
-  LongTermLoans?: Prisma.LongTermLoanListRelationFilter
-  ShortTermLoans?: Prisma.ShortTermLoanListRelationFilter
   dividends?: Prisma.DividendListRelationFilter
   penalties?: Prisma.PenaltyListRelationFilter
   savings?: Prisma.SavingListRelationFilter
-  deductions?: Prisma.DeductionListRelationFilter
+  loans?: Prisma.LoanListRelationFilter
   balanceSheet?: Prisma.XOR<Prisma.BalanceSheetNullableScalarRelationFilter, Prisma.BalanceSheetWhereInput> | null
 }, "id">
 
@@ -323,12 +317,10 @@ export type MemberCreateInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -343,12 +335,10 @@ export type MemberUncheckedCreateInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -363,12 +353,10 @@ export type MemberUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -383,12 +371,10 @@ export type MemberUncheckedUpdateInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -599,46 +585,18 @@ export type MemberUpdateOneRequiredWithoutSavingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutSavingsInput, Prisma.MemberUpdateWithoutSavingsInput>, Prisma.MemberUncheckedUpdateWithoutSavingsInput>
 }
 
-export type MemberCreateNestedOneWithoutDeductionsInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutDeductionsInput, Prisma.MemberUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutDeductionsInput
+export type MemberCreateNestedOneWithoutLoansInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutLoansInput, Prisma.MemberUncheckedCreateWithoutLoansInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutLoansInput
   connect?: Prisma.MemberWhereUniqueInput
 }
 
-export type MemberUpdateOneRequiredWithoutDeductionsNestedInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutDeductionsInput, Prisma.MemberUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutDeductionsInput
-  upsert?: Prisma.MemberUpsertWithoutDeductionsInput
+export type MemberUpdateOneRequiredWithoutLoansNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutLoansInput, Prisma.MemberUncheckedCreateWithoutLoansInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutLoansInput
+  upsert?: Prisma.MemberUpsertWithoutLoansInput
   connect?: Prisma.MemberWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutDeductionsInput, Prisma.MemberUpdateWithoutDeductionsInput>, Prisma.MemberUncheckedUpdateWithoutDeductionsInput>
-}
-
-export type MemberCreateNestedOneWithoutLongTermLoansInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutLongTermLoansInput, Prisma.MemberUncheckedCreateWithoutLongTermLoansInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutLongTermLoansInput
-  connect?: Prisma.MemberWhereUniqueInput
-}
-
-export type MemberUpdateOneRequiredWithoutLongTermLoansNestedInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutLongTermLoansInput, Prisma.MemberUncheckedCreateWithoutLongTermLoansInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutLongTermLoansInput
-  upsert?: Prisma.MemberUpsertWithoutLongTermLoansInput
-  connect?: Prisma.MemberWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutLongTermLoansInput, Prisma.MemberUpdateWithoutLongTermLoansInput>, Prisma.MemberUncheckedUpdateWithoutLongTermLoansInput>
-}
-
-export type MemberCreateNestedOneWithoutShortTermLoansInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutShortTermLoansInput, Prisma.MemberUncheckedCreateWithoutShortTermLoansInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutShortTermLoansInput
-  connect?: Prisma.MemberWhereUniqueInput
-}
-
-export type MemberUpdateOneRequiredWithoutShortTermLoansNestedInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutShortTermLoansInput, Prisma.MemberUncheckedCreateWithoutShortTermLoansInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutShortTermLoansInput
-  upsert?: Prisma.MemberUpsertWithoutShortTermLoansInput
-  connect?: Prisma.MemberWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutShortTermLoansInput, Prisma.MemberUpdateWithoutShortTermLoansInput>, Prisma.MemberUncheckedUpdateWithoutShortTermLoansInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutLoansInput, Prisma.MemberUpdateWithoutLoansInput>, Prisma.MemberUncheckedUpdateWithoutLoansInput>
 }
 
 export type MemberCreateNestedOneWithoutPenaltiesInput = {
@@ -679,12 +637,10 @@ export type MemberCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -698,12 +654,10 @@ export type MemberUncheckedCreateWithoutUserInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -759,12 +713,10 @@ export type MemberCreateWithoutChamaInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -778,12 +730,10 @@ export type MemberUncheckedCreateWithoutChamaInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -824,12 +774,10 @@ export type MemberCreateWithoutBalanceSheetInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutBalanceSheetInput = {
@@ -843,12 +791,10 @@ export type MemberUncheckedCreateWithoutBalanceSheetInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutBalanceSheetInput = {
@@ -878,12 +824,10 @@ export type MemberUpdateWithoutBalanceSheetInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutBalanceSheetInput = {
@@ -897,12 +841,10 @@ export type MemberUncheckedUpdateWithoutBalanceSheetInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSavingsInput = {
@@ -916,11 +858,9 @@ export type MemberCreateWithoutSavingsInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -935,11 +875,9 @@ export type MemberUncheckedCreateWithoutSavingsInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -970,11 +908,9 @@ export type MemberUpdateWithoutSavingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -989,15 +925,13 @@ export type MemberUncheckedUpdateWithoutSavingsInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
-export type MemberCreateWithoutDeductionsInput = {
+export type MemberCreateWithoutLoansInput = {
   id?: string
   name: string
   email: string
@@ -1008,15 +942,13 @@ export type MemberCreateWithoutDeductionsInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
-export type MemberUncheckedCreateWithoutDeductionsInput = {
+export type MemberUncheckedCreateWithoutLoansInput = {
   id?: string
   chamaId: string
   userId?: string | null
@@ -1027,31 +959,29 @@ export type MemberUncheckedCreateWithoutDeductionsInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
-export type MemberCreateOrConnectWithoutDeductionsInput = {
+export type MemberCreateOrConnectWithoutLoansInput = {
   where: Prisma.MemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.MemberCreateWithoutDeductionsInput, Prisma.MemberUncheckedCreateWithoutDeductionsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutLoansInput, Prisma.MemberUncheckedCreateWithoutLoansInput>
 }
 
-export type MemberUpsertWithoutDeductionsInput = {
-  update: Prisma.XOR<Prisma.MemberUpdateWithoutDeductionsInput, Prisma.MemberUncheckedUpdateWithoutDeductionsInput>
-  create: Prisma.XOR<Prisma.MemberCreateWithoutDeductionsInput, Prisma.MemberUncheckedCreateWithoutDeductionsInput>
+export type MemberUpsertWithoutLoansInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutLoansInput, Prisma.MemberUncheckedUpdateWithoutLoansInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutLoansInput, Prisma.MemberUncheckedCreateWithoutLoansInput>
   where?: Prisma.MemberWhereInput
 }
 
-export type MemberUpdateToOneWithWhereWithoutDeductionsInput = {
+export type MemberUpdateToOneWithWhereWithoutLoansInput = {
   where?: Prisma.MemberWhereInput
-  data: Prisma.XOR<Prisma.MemberUpdateWithoutDeductionsInput, Prisma.MemberUncheckedUpdateWithoutDeductionsInput>
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutLoansInput, Prisma.MemberUncheckedUpdateWithoutLoansInput>
 }
 
-export type MemberUpdateWithoutDeductionsInput = {
+export type MemberUpdateWithoutLoansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1062,15 +992,13 @@ export type MemberUpdateWithoutDeductionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
-export type MemberUncheckedUpdateWithoutDeductionsInput = {
+export type MemberUncheckedUpdateWithoutLoansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   chamaId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1081,195 +1009,9 @@ export type MemberUncheckedUpdateWithoutDeductionsInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
-}
-
-export type MemberCreateWithoutLongTermLoansInput = {
-  id?: string
-  name: string
-  email: string
-  phoneNumber: string
-  role?: $Enums.Role
-  lastSeen?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutMembersInput
-  chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
-  dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
-  penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
-  savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
-  balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
-}
-
-export type MemberUncheckedCreateWithoutLongTermLoansInput = {
-  id?: string
-  chamaId: string
-  userId?: string | null
-  name: string
-  email: string
-  phoneNumber: string
-  role?: $Enums.Role
-  lastSeen?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
-  penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
-  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
-  balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
-}
-
-export type MemberCreateOrConnectWithoutLongTermLoansInput = {
-  where: Prisma.MemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.MemberCreateWithoutLongTermLoansInput, Prisma.MemberUncheckedCreateWithoutLongTermLoansInput>
-}
-
-export type MemberUpsertWithoutLongTermLoansInput = {
-  update: Prisma.XOR<Prisma.MemberUpdateWithoutLongTermLoansInput, Prisma.MemberUncheckedUpdateWithoutLongTermLoansInput>
-  create: Prisma.XOR<Prisma.MemberCreateWithoutLongTermLoansInput, Prisma.MemberUncheckedCreateWithoutLongTermLoansInput>
-  where?: Prisma.MemberWhereInput
-}
-
-export type MemberUpdateToOneWithWhereWithoutLongTermLoansInput = {
-  where?: Prisma.MemberWhereInput
-  data: Prisma.XOR<Prisma.MemberUpdateWithoutLongTermLoansInput, Prisma.MemberUncheckedUpdateWithoutLongTermLoansInput>
-}
-
-export type MemberUpdateWithoutLongTermLoansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
-  chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
-  dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
-  penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
-  savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
-  balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
-}
-
-export type MemberUncheckedUpdateWithoutLongTermLoansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  chamaId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
-  penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
-  savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
-  balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
-}
-
-export type MemberCreateWithoutShortTermLoansInput = {
-  id?: string
-  name: string
-  email: string
-  phoneNumber: string
-  role?: $Enums.Role
-  lastSeen?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutMembersInput
-  chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
-  penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
-  savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
-  balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
-}
-
-export type MemberUncheckedCreateWithoutShortTermLoansInput = {
-  id?: string
-  chamaId: string
-  userId?: string | null
-  name: string
-  email: string
-  phoneNumber: string
-  role?: $Enums.Role
-  lastSeen?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
-  penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
-  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
-  balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
-}
-
-export type MemberCreateOrConnectWithoutShortTermLoansInput = {
-  where: Prisma.MemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.MemberCreateWithoutShortTermLoansInput, Prisma.MemberUncheckedCreateWithoutShortTermLoansInput>
-}
-
-export type MemberUpsertWithoutShortTermLoansInput = {
-  update: Prisma.XOR<Prisma.MemberUpdateWithoutShortTermLoansInput, Prisma.MemberUncheckedUpdateWithoutShortTermLoansInput>
-  create: Prisma.XOR<Prisma.MemberCreateWithoutShortTermLoansInput, Prisma.MemberUncheckedCreateWithoutShortTermLoansInput>
-  where?: Prisma.MemberWhereInput
-}
-
-export type MemberUpdateToOneWithWhereWithoutShortTermLoansInput = {
-  where?: Prisma.MemberWhereInput
-  data: Prisma.XOR<Prisma.MemberUpdateWithoutShortTermLoansInput, Prisma.MemberUncheckedUpdateWithoutShortTermLoansInput>
-}
-
-export type MemberUpdateWithoutShortTermLoansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
-  chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
-  penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
-  savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
-  balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
-}
-
-export type MemberUncheckedUpdateWithoutShortTermLoansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  chamaId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
-  penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
-  savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -1284,11 +1026,9 @@ export type MemberCreateWithoutPenaltiesInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -1303,11 +1043,9 @@ export type MemberUncheckedCreateWithoutPenaltiesInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -1338,11 +1076,9 @@ export type MemberUpdateWithoutPenaltiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -1357,11 +1093,9 @@ export type MemberUncheckedUpdateWithoutPenaltiesInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -1376,11 +1110,9 @@ export type MemberCreateWithoutDividendsInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutMembersInput
   chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
-  LongTermLoans?: Prisma.LongTermLoanCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
 }
 
@@ -1395,11 +1127,9 @@ export type MemberUncheckedCreateWithoutDividendsInput = {
   lastSeen?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedCreateNestedManyWithoutMemberInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedCreateNestedManyWithoutMemberInput
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
 }
 
@@ -1430,11 +1160,9 @@ export type MemberUpdateWithoutDividendsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -1449,11 +1177,9 @@ export type MemberUncheckedUpdateWithoutDividendsInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -1479,12 +1205,10 @@ export type MemberUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -1498,12 +1222,10 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -1541,12 +1263,10 @@ export type MemberUpdateWithoutChamaInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutMembersNestedInput
-  LongTermLoans?: Prisma.LongTermLoanUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
 }
 
@@ -1560,12 +1280,10 @@ export type MemberUncheckedUpdateWithoutChamaInput = {
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  LongTermLoans?: Prisma.LongTermLoanUncheckedUpdateManyWithoutMemberNestedInput
-  ShortTermLoans?: Prisma.ShortTermLoanUncheckedUpdateManyWithoutMemberNestedInput
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
 }
 
@@ -1587,21 +1305,17 @@ export type MemberUncheckedUpdateManyWithoutChamaInput = {
  */
 
 export type MemberCountOutputType = {
-  LongTermLoans: number
-  ShortTermLoans: number
   dividends: number
   penalties: number
   savings: number
-  deductions: number
+  loans: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  LongTermLoans?: boolean | MemberCountOutputTypeCountLongTermLoansArgs
-  ShortTermLoans?: boolean | MemberCountOutputTypeCountShortTermLoansArgs
   dividends?: boolean | MemberCountOutputTypeCountDividendsArgs
   penalties?: boolean | MemberCountOutputTypeCountPenaltiesArgs
   savings?: boolean | MemberCountOutputTypeCountSavingsArgs
-  deductions?: boolean | MemberCountOutputTypeCountDeductionsArgs
+  loans?: boolean | MemberCountOutputTypeCountLoansArgs
 }
 
 /**
@@ -1612,20 +1326,6 @@ export type MemberCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the MemberCountOutputType
    */
   select?: Prisma.MemberCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * MemberCountOutputType without action
- */
-export type MemberCountOutputTypeCountLongTermLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LongTermLoanWhereInput
-}
-
-/**
- * MemberCountOutputType without action
- */
-export type MemberCountOutputTypeCountShortTermLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ShortTermLoanWhereInput
 }
 
 /**
@@ -1652,8 +1352,8 @@ export type MemberCountOutputTypeCountSavingsArgs<ExtArgs extends runtime.Types.
 /**
  * MemberCountOutputType without action
  */
-export type MemberCountOutputTypeCountDeductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeductionWhereInput
+export type MemberCountOutputTypeCountLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LoanWhereInput
 }
 
 
@@ -1670,12 +1370,10 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   user?: boolean | Prisma.Member$userArgs<ExtArgs>
   chama?: boolean | Prisma.ChamaDefaultArgs<ExtArgs>
-  LongTermLoans?: boolean | Prisma.Member$LongTermLoansArgs<ExtArgs>
-  ShortTermLoans?: boolean | Prisma.Member$ShortTermLoansArgs<ExtArgs>
   dividends?: boolean | Prisma.Member$dividendsArgs<ExtArgs>
   penalties?: boolean | Prisma.Member$penaltiesArgs<ExtArgs>
   savings?: boolean | Prisma.Member$savingsArgs<ExtArgs>
-  deductions?: boolean | Prisma.Member$deductionsArgs<ExtArgs>
+  loans?: boolean | Prisma.Member$loansArgs<ExtArgs>
   balanceSheet?: boolean | Prisma.Member$balanceSheetArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
@@ -1727,12 +1425,10 @@ export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Member$userArgs<ExtArgs>
   chama?: boolean | Prisma.ChamaDefaultArgs<ExtArgs>
-  LongTermLoans?: boolean | Prisma.Member$LongTermLoansArgs<ExtArgs>
-  ShortTermLoans?: boolean | Prisma.Member$ShortTermLoansArgs<ExtArgs>
   dividends?: boolean | Prisma.Member$dividendsArgs<ExtArgs>
   penalties?: boolean | Prisma.Member$penaltiesArgs<ExtArgs>
   savings?: boolean | Prisma.Member$savingsArgs<ExtArgs>
-  deductions?: boolean | Prisma.Member$deductionsArgs<ExtArgs>
+  loans?: boolean | Prisma.Member$loansArgs<ExtArgs>
   balanceSheet?: boolean | Prisma.Member$balanceSheetArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1750,12 +1446,10 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     user: Prisma.$UserPayload<ExtArgs> | null
     chama: Prisma.$ChamaPayload<ExtArgs>
-    LongTermLoans: Prisma.$LongTermLoanPayload<ExtArgs>[]
-    ShortTermLoans: Prisma.$ShortTermLoanPayload<ExtArgs>[]
     dividends: Prisma.$DividendPayload<ExtArgs>[]
     penalties: Prisma.$PenaltyPayload<ExtArgs>[]
     savings: Prisma.$SavingPayload<ExtArgs>[]
-    deductions: Prisma.$DeductionPayload<ExtArgs>[]
+    loans: Prisma.$LoanPayload<ExtArgs>[]
     balanceSheet: Prisma.$BalanceSheetPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2165,12 +1859,10 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.Member$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   chama<T extends Prisma.ChamaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChamaDefaultArgs<ExtArgs>>): Prisma.Prisma__ChamaClient<runtime.Types.Result.GetResult<Prisma.$ChamaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  LongTermLoans<T extends Prisma.Member$LongTermLoansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$LongTermLoansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LongTermLoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ShortTermLoans<T extends Prisma.Member$ShortTermLoansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$ShortTermLoansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShortTermLoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dividends<T extends Prisma.Member$dividendsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$dividendsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DividendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   penalties<T extends Prisma.Member$penaltiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$penaltiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savings<T extends Prisma.Member$savingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$savingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deductions<T extends Prisma.Member$deductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$deductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  loans<T extends Prisma.Member$loansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$loansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   balanceSheet<T extends Prisma.Member$balanceSheetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$balanceSheetArgs<ExtArgs>>): Prisma.Prisma__BalanceSheetClient<runtime.Types.Result.GetResult<Prisma.$BalanceSheetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2626,54 +2318,6 @@ export type Member$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 /**
- * Member.LongTermLoans
- */
-export type Member$LongTermLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LongTermLoan
-   */
-  select?: Prisma.LongTermLoanSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LongTermLoan
-   */
-  omit?: Prisma.LongTermLoanOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LongTermLoanInclude<ExtArgs> | null
-  where?: Prisma.LongTermLoanWhereInput
-  orderBy?: Prisma.LongTermLoanOrderByWithRelationInput | Prisma.LongTermLoanOrderByWithRelationInput[]
-  cursor?: Prisma.LongTermLoanWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LongTermLoanScalarFieldEnum | Prisma.LongTermLoanScalarFieldEnum[]
-}
-
-/**
- * Member.ShortTermLoans
- */
-export type Member$ShortTermLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ShortTermLoan
-   */
-  select?: Prisma.ShortTermLoanSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ShortTermLoan
-   */
-  omit?: Prisma.ShortTermLoanOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ShortTermLoanInclude<ExtArgs> | null
-  where?: Prisma.ShortTermLoanWhereInput
-  orderBy?: Prisma.ShortTermLoanOrderByWithRelationInput | Prisma.ShortTermLoanOrderByWithRelationInput[]
-  cursor?: Prisma.ShortTermLoanWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ShortTermLoanScalarFieldEnum | Prisma.ShortTermLoanScalarFieldEnum[]
-}
-
-/**
  * Member.dividends
  */
 export type Member$dividendsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2746,27 +2390,27 @@ export type Member$savingsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Member.deductions
+ * Member.loans
  */
-export type Member$deductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Member$loansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Deduction
+   * Select specific fields to fetch from the Loan
    */
-  select?: Prisma.DeductionSelect<ExtArgs> | null
+  select?: Prisma.LoanSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Deduction
+   * Omit specific fields from the Loan
    */
-  omit?: Prisma.DeductionOmit<ExtArgs> | null
+  omit?: Prisma.LoanOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DeductionInclude<ExtArgs> | null
-  where?: Prisma.DeductionWhereInput
-  orderBy?: Prisma.DeductionOrderByWithRelationInput | Prisma.DeductionOrderByWithRelationInput[]
-  cursor?: Prisma.DeductionWhereUniqueInput
+  include?: Prisma.LoanInclude<ExtArgs> | null
+  where?: Prisma.LoanWhereInput
+  orderBy?: Prisma.LoanOrderByWithRelationInput | Prisma.LoanOrderByWithRelationInput[]
+  cursor?: Prisma.LoanWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.DeductionScalarFieldEnum | Prisma.DeductionScalarFieldEnum[]
+  distinct?: Prisma.LoanScalarFieldEnum | Prisma.LoanScalarFieldEnum[]
 }
 
 /**

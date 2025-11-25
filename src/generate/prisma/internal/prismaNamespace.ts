@@ -396,9 +396,7 @@ export const ModelName = {
   BalanceSheet: 'BalanceSheet',
   Saving: 'Saving',
   Deduction: 'Deduction',
-  LongTermLoan: 'LongTermLoan',
-  LongTermLoanRepayment: 'LongTermLoanRepayment',
-  ShortTermLoan: 'ShortTermLoan',
+  Loan: 'Loan',
   Penalty: 'Penalty',
   Dividend: 'Dividend'
 } as const
@@ -416,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "chama" | "chamaLoan" | "projects" | "member" | "balanceSheet" | "saving" | "deduction" | "longTermLoan" | "longTermLoanRepayment" | "shortTermLoan" | "penalty" | "dividend"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "chama" | "chamaLoan" | "projects" | "member" | "balanceSheet" | "saving" | "deduction" | "loan" | "penalty" | "dividend"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1308,225 +1306,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    LongTermLoan: {
-      payload: Prisma.$LongTermLoanPayload<ExtArgs>
-      fields: Prisma.LongTermLoanFieldRefs
+    Loan: {
+      payload: Prisma.$LoanPayload<ExtArgs>
+      fields: Prisma.LoanFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.LongTermLoanFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload> | null
+          args: Prisma.LoanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.LongTermLoanFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         findFirst: {
-          args: Prisma.LongTermLoanFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload> | null
+          args: Prisma.LoanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.LongTermLoanFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         findMany: {
-          args: Prisma.LongTermLoanFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>[]
+          args: Prisma.LoanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>[]
         }
         create: {
-          args: Prisma.LongTermLoanCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         createMany: {
-          args: Prisma.LongTermLoanCreateManyArgs<ExtArgs>
+          args: Prisma.LoanCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.LongTermLoanCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>[]
+          args: Prisma.LoanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>[]
         }
         delete: {
-          args: Prisma.LongTermLoanDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         update: {
-          args: Prisma.LongTermLoanUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         deleteMany: {
-          args: Prisma.LongTermLoanDeleteManyArgs<ExtArgs>
+          args: Prisma.LoanDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.LongTermLoanUpdateManyArgs<ExtArgs>
+          args: Prisma.LoanUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.LongTermLoanUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>[]
+          args: Prisma.LoanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>[]
         }
         upsert: {
-          args: Prisma.LongTermLoanUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanPayload>
+          args: Prisma.LoanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LoanPayload>
         }
         aggregate: {
-          args: Prisma.LongTermLoanAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLongTermLoan>
+          args: Prisma.LoanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLoan>
         }
         groupBy: {
-          args: Prisma.LongTermLoanGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LongTermLoanGroupByOutputType>[]
+          args: Prisma.LoanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LoanGroupByOutputType>[]
         }
         count: {
-          args: Prisma.LongTermLoanCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LongTermLoanCountAggregateOutputType> | number
-        }
-      }
-    }
-    LongTermLoanRepayment: {
-      payload: Prisma.$LongTermLoanRepaymentPayload<ExtArgs>
-      fields: Prisma.LongTermLoanRepaymentFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.LongTermLoanRepaymentFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.LongTermLoanRepaymentFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        findFirst: {
-          args: Prisma.LongTermLoanRepaymentFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.LongTermLoanRepaymentFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        findMany: {
-          args: Prisma.LongTermLoanRepaymentFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>[]
-        }
-        create: {
-          args: Prisma.LongTermLoanRepaymentCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        createMany: {
-          args: Prisma.LongTermLoanRepaymentCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.LongTermLoanRepaymentCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>[]
-        }
-        delete: {
-          args: Prisma.LongTermLoanRepaymentDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        update: {
-          args: Prisma.LongTermLoanRepaymentUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        deleteMany: {
-          args: Prisma.LongTermLoanRepaymentDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.LongTermLoanRepaymentUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.LongTermLoanRepaymentUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>[]
-        }
-        upsert: {
-          args: Prisma.LongTermLoanRepaymentUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LongTermLoanRepaymentPayload>
-        }
-        aggregate: {
-          args: Prisma.LongTermLoanRepaymentAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLongTermLoanRepayment>
-        }
-        groupBy: {
-          args: Prisma.LongTermLoanRepaymentGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LongTermLoanRepaymentGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.LongTermLoanRepaymentCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LongTermLoanRepaymentCountAggregateOutputType> | number
-        }
-      }
-    }
-    ShortTermLoan: {
-      payload: Prisma.$ShortTermLoanPayload<ExtArgs>
-      fields: Prisma.ShortTermLoanFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ShortTermLoanFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ShortTermLoanFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        findFirst: {
-          args: Prisma.ShortTermLoanFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ShortTermLoanFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        findMany: {
-          args: Prisma.ShortTermLoanFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>[]
-        }
-        create: {
-          args: Prisma.ShortTermLoanCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        createMany: {
-          args: Prisma.ShortTermLoanCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ShortTermLoanCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>[]
-        }
-        delete: {
-          args: Prisma.ShortTermLoanDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        update: {
-          args: Prisma.ShortTermLoanUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        deleteMany: {
-          args: Prisma.ShortTermLoanDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ShortTermLoanUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ShortTermLoanUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>[]
-        }
-        upsert: {
-          args: Prisma.ShortTermLoanUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortTermLoanPayload>
-        }
-        aggregate: {
-          args: Prisma.ShortTermLoanAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateShortTermLoan>
-        }
-        groupBy: {
-          args: Prisma.ShortTermLoanGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShortTermLoanGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ShortTermLoanCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShortTermLoanCountAggregateOutputType> | number
+          args: Prisma.LoanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LoanCountAggregateOutputType> | number
         }
       }
     }
@@ -1875,7 +1725,6 @@ export const SavingScalarFieldEnum = {
   mPesaRef: 'mPesaRef',
   authorizedBy: 'authorizedBy',
   memberId: 'memberId',
-  deductionId: 'deductionId',
   savings: 'savings',
   welfare: 'welfare',
   status: 'status',
@@ -1888,10 +1737,11 @@ export type SavingScalarFieldEnum = (typeof SavingScalarFieldEnum)[keyof typeof 
 
 export const DeductionScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  longTermLoanId: 'longTermLoanId',
-  shortTermLoanId: 'shortTermLoanId',
+  savingId: 'savingId',
+  loanId: 'loanId',
+  loanType: 'loanType',
   penaltyId: 'penaltyId',
+  amount: 'amount',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1900,8 +1750,9 @@ export const DeductionScalarFieldEnum = {
 export type DeductionScalarFieldEnum = (typeof DeductionScalarFieldEnum)[keyof typeof DeductionScalarFieldEnum]
 
 
-export const LongTermLoanScalarFieldEnum = {
+export const LoanScalarFieldEnum = {
   id: 'id',
+  loanType: 'loanType',
   memberId: 'memberId',
   penaltyId: 'penaltyId',
   principle: 'principle',
@@ -1915,38 +1766,7 @@ export const LongTermLoanScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type LongTermLoanScalarFieldEnum = (typeof LongTermLoanScalarFieldEnum)[keyof typeof LongTermLoanScalarFieldEnum]
-
-
-export const LongTermLoanRepaymentScalarFieldEnum = {
-  id: 'id',
-  longTermLoanId: 'longTermLoanId',
-  dueDate: 'dueDate',
-  paymentDate: 'paymentDate',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type LongTermLoanRepaymentScalarFieldEnum = (typeof LongTermLoanRepaymentScalarFieldEnum)[keyof typeof LongTermLoanRepaymentScalarFieldEnum]
-
-
-export const ShortTermLoanScalarFieldEnum = {
-  id: 'id',
-  memberId: 'memberId',
-  penaltyId: 'penaltyId',
-  principle: 'principle',
-  loanAmount: 'loanAmount',
-  interest: 'interest',
-  termMonths: 'termMonths',
-  dueDate: 'dueDate',
-  paymentDate: 'paymentDate',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ShortTermLoanScalarFieldEnum = (typeof ShortTermLoanScalarFieldEnum)[keyof typeof ShortTermLoanScalarFieldEnum]
+export type LoanScalarFieldEnum = (typeof LoanScalarFieldEnum)[keyof typeof LoanScalarFieldEnum]
 
 
 export const PenaltyScalarFieldEnum = {
@@ -2095,6 +1915,20 @@ export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'LoanType'
+ */
+export type EnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType'>
+    
+
+
+/**
+ * Reference to a field of type 'LoanType[]'
+ */
+export type ListEnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2186,9 +2020,7 @@ export type GlobalOmitConfig = {
   balanceSheet?: Prisma.BalanceSheetOmit
   saving?: Prisma.SavingOmit
   deduction?: Prisma.DeductionOmit
-  longTermLoan?: Prisma.LongTermLoanOmit
-  longTermLoanRepayment?: Prisma.LongTermLoanRepaymentOmit
-  shortTermLoan?: Prisma.ShortTermLoanOmit
+  loan?: Prisma.LoanOmit
   penalty?: Prisma.PenaltyOmit
   dividend?: Prisma.DividendOmit
 }

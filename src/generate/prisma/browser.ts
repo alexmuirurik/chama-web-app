@@ -78,20 +78,10 @@ export type Saving = Prisma.SavingModel
  */
 export type Deduction = Prisma.DeductionModel
 /**
- * Model LongTermLoan
+ * Model Loan
  * 
  */
-export type LongTermLoan = Prisma.LongTermLoanModel
-/**
- * Model LongTermLoanRepayment
- * 
- */
-export type LongTermLoanRepayment = Prisma.LongTermLoanRepaymentModel
-/**
- * Model ShortTermLoan
- * 
- */
-export type ShortTermLoan = Prisma.ShortTermLoanModel
+export type Loan = Prisma.LoanModel
 /**
  * Model Penalty
  * 

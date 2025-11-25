@@ -12,11 +12,11 @@ export type ChamawithMembers = Prisma.ChamaGetPayload<{
     }
 }>
 
-export type DeductionWithMember = Prisma.DeductionGetPayload<{
+export type LoanWithMember = Prisma.LoanGetPayload<{
     include: {
         member: true
     }
-}> 
+}>
 
 export type SavingWithMember = Prisma.SavingGetPayload<{
     include: {

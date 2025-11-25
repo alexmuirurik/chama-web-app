@@ -1,5 +1,5 @@
 import { Avatar, AvatarImage } from '../ui/avatar'
-import { MemberwithUser } from '@/prisma/prismaTypes'
+import { MemberwithUser } from '@/prisma/types/prismaTypes'
 
 const MembersCard = ({ members }: { members: MemberwithUser[] }) => {
     return members.map((member) => (

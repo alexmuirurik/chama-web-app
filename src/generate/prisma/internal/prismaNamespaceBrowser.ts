@@ -63,9 +63,7 @@ export const ModelName = {
   BalanceSheet: 'BalanceSheet',
   Saving: 'Saving',
   Deduction: 'Deduction',
-  LongTermLoan: 'LongTermLoan',
-  LongTermLoanRepayment: 'LongTermLoanRepayment',
-  ShortTermLoan: 'ShortTermLoan',
+  Loan: 'Loan',
   Penalty: 'Penalty',
   Dividend: 'Dividend'
 } as const
@@ -244,7 +242,6 @@ export const SavingScalarFieldEnum = {
   mPesaRef: 'mPesaRef',
   authorizedBy: 'authorizedBy',
   memberId: 'memberId',
-  deductionId: 'deductionId',
   savings: 'savings',
   welfare: 'welfare',
   status: 'status',
@@ -257,10 +254,11 @@ export type SavingScalarFieldEnum = (typeof SavingScalarFieldEnum)[keyof typeof 
 
 export const DeductionScalarFieldEnum = {
   id: 'id',
-  memberId: 'memberId',
-  longTermLoanId: 'longTermLoanId',
-  shortTermLoanId: 'shortTermLoanId',
+  savingId: 'savingId',
+  loanId: 'loanId',
+  loanType: 'loanType',
   penaltyId: 'penaltyId',
+  amount: 'amount',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -269,8 +267,9 @@ export const DeductionScalarFieldEnum = {
 export type DeductionScalarFieldEnum = (typeof DeductionScalarFieldEnum)[keyof typeof DeductionScalarFieldEnum]
 
 
-export const LongTermLoanScalarFieldEnum = {
+export const LoanScalarFieldEnum = {
   id: 'id',
+  loanType: 'loanType',
   memberId: 'memberId',
   penaltyId: 'penaltyId',
   principle: 'principle',
@@ -284,38 +283,7 @@ export const LongTermLoanScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type LongTermLoanScalarFieldEnum = (typeof LongTermLoanScalarFieldEnum)[keyof typeof LongTermLoanScalarFieldEnum]
-
-
-export const LongTermLoanRepaymentScalarFieldEnum = {
-  id: 'id',
-  longTermLoanId: 'longTermLoanId',
-  dueDate: 'dueDate',
-  paymentDate: 'paymentDate',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type LongTermLoanRepaymentScalarFieldEnum = (typeof LongTermLoanRepaymentScalarFieldEnum)[keyof typeof LongTermLoanRepaymentScalarFieldEnum]
-
-
-export const ShortTermLoanScalarFieldEnum = {
-  id: 'id',
-  memberId: 'memberId',
-  penaltyId: 'penaltyId',
-  principle: 'principle',
-  loanAmount: 'loanAmount',
-  interest: 'interest',
-  termMonths: 'termMonths',
-  dueDate: 'dueDate',
-  paymentDate: 'paymentDate',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ShortTermLoanScalarFieldEnum = (typeof ShortTermLoanScalarFieldEnum)[keyof typeof ShortTermLoanScalarFieldEnum]
+export type LoanScalarFieldEnum = (typeof LoanScalarFieldEnum)[keyof typeof LoanScalarFieldEnum]
 
 
 export const PenaltyScalarFieldEnum = {

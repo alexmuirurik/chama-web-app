@@ -44,7 +44,6 @@ export type SavingMinAggregateOutputType = {
   mPesaRef: string | null
   authorizedBy: string | null
   memberId: string | null
-  deductionId: string | null
   savings: number | null
   welfare: number | null
   status: $Enums.TransactionStatus | null
@@ -58,7 +57,6 @@ export type SavingMaxAggregateOutputType = {
   mPesaRef: string | null
   authorizedBy: string | null
   memberId: string | null
-  deductionId: string | null
   savings: number | null
   welfare: number | null
   status: $Enums.TransactionStatus | null
@@ -72,7 +70,6 @@ export type SavingCountAggregateOutputType = {
   mPesaRef: number
   authorizedBy: number
   memberId: number
-  deductionId: number
   savings: number
   welfare: number
   status: number
@@ -100,7 +97,6 @@ export type SavingMinAggregateInputType = {
   mPesaRef?: true
   authorizedBy?: true
   memberId?: true
-  deductionId?: true
   savings?: true
   welfare?: true
   status?: true
@@ -114,7 +110,6 @@ export type SavingMaxAggregateInputType = {
   mPesaRef?: true
   authorizedBy?: true
   memberId?: true
-  deductionId?: true
   savings?: true
   welfare?: true
   status?: true
@@ -128,7 +123,6 @@ export type SavingCountAggregateInputType = {
   mPesaRef?: true
   authorizedBy?: true
   memberId?: true
-  deductionId?: true
   savings?: true
   welfare?: true
   status?: true
@@ -229,7 +223,6 @@ export type SavingGroupByOutputType = {
   mPesaRef: string | null
   authorizedBy: string | null
   memberId: string
-  deductionId: string | null
   savings: number
   welfare: number
   status: $Enums.TransactionStatus
@@ -266,14 +259,13 @@ export type SavingWhereInput = {
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  deductionId?: Prisma.StringNullableFilter<"Saving"> | string | null
   savings?: Prisma.FloatFilter<"Saving"> | number
   welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
-  deduction?: Prisma.XOR<Prisma.DeductionNullableScalarRelationFilter, Prisma.DeductionWhereInput> | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  deductions?: Prisma.DeductionListRelationFilter
 }
 
 export type SavingOrderByWithRelationInput = {
@@ -282,14 +274,13 @@ export type SavingOrderByWithRelationInput = {
   mPesaRef?: Prisma.SortOrderInput | Prisma.SortOrder
   authorizedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  deductionId?: Prisma.SortOrderInput | Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  deduction?: Prisma.DeductionOrderByWithRelationInput
   member?: Prisma.MemberOrderByWithRelationInput
+  deductions?: Prisma.DeductionOrderByRelationAggregateInput
 }
 
 export type SavingWhereUniqueInput = Prisma.AtLeast<{
@@ -301,14 +292,13 @@ export type SavingWhereUniqueInput = Prisma.AtLeast<{
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  deductionId?: Prisma.StringNullableFilter<"Saving"> | string | null
   savings?: Prisma.FloatFilter<"Saving"> | number
   welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
-  deduction?: Prisma.XOR<Prisma.DeductionNullableScalarRelationFilter, Prisma.DeductionWhereInput> | null
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  deductions?: Prisma.DeductionListRelationFilter
 }, "id">
 
 export type SavingOrderByWithAggregationInput = {
@@ -317,7 +307,6 @@ export type SavingOrderByWithAggregationInput = {
   mPesaRef?: Prisma.SortOrderInput | Prisma.SortOrder
   authorizedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  deductionId?: Prisma.SortOrderInput | Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -339,7 +328,6 @@ export type SavingScalarWhereWithAggregatesInput = {
   mPesaRef?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
   memberId?: Prisma.StringWithAggregatesFilter<"Saving"> | string
-  deductionId?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
   savings?: Prisma.FloatWithAggregatesFilter<"Saving"> | number
   welfare?: Prisma.FloatWithAggregatesFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusWithAggregatesFilter<"Saving"> | $Enums.TransactionStatus
@@ -357,8 +345,8 @@ export type SavingCreateInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingsInput
   member: Prisma.MemberCreateNestedOneWithoutSavingsInput
+  deductions?: Prisma.DeductionCreateNestedManyWithoutSavingInput
 }
 
 export type SavingUncheckedCreateInput = {
@@ -367,12 +355,12 @@ export type SavingUncheckedCreateInput = {
   mPesaRef?: string | null
   authorizedBy?: string | null
   memberId: string
-  deductionId?: string | null
   savings?: number
   welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutSavingInput
 }
 
 export type SavingUpdateInput = {
@@ -385,8 +373,8 @@ export type SavingUpdateInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deduction?: Prisma.DeductionUpdateOneWithoutSavingsNestedInput
   member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+  deductions?: Prisma.DeductionUpdateManyWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateInput = {
@@ -395,12 +383,12 @@ export type SavingUncheckedUpdateInput = {
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  deductionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   savings?: Prisma.FloatFieldUpdateOperationsInput | number
   welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutSavingNestedInput
 }
 
 export type SavingCreateManyInput = {
@@ -409,7 +397,6 @@ export type SavingCreateManyInput = {
   mPesaRef?: string | null
   authorizedBy?: string | null
   memberId: string
-  deductionId?: string | null
   savings?: number
   welfare?: number
   status?: $Enums.TransactionStatus
@@ -435,7 +422,6 @@ export type SavingUncheckedUpdateManyInput = {
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  deductionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   savings?: Prisma.FloatFieldUpdateOperationsInput | number
   welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
@@ -459,7 +445,6 @@ export type SavingCountOrderByAggregateInput = {
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  deductionId?: Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -479,7 +464,6 @@ export type SavingMaxOrderByAggregateInput = {
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  deductionId?: Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -493,7 +477,6 @@ export type SavingMinOrderByAggregateInput = {
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  deductionId?: Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -505,6 +488,11 @@ export type SavingSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   savings?: Prisma.SortOrder
   welfare?: Prisma.SortOrder
+}
+
+export type SavingScalarRelationFilter = {
+  is?: Prisma.SavingWhereInput
+  isNot?: Prisma.SavingWhereInput
 }
 
 export type SavingCreateNestedManyWithoutMemberInput = {
@@ -553,46 +541,18 @@ export type EnumTransactionStatusFieldUpdateOperationsInput = {
   set?: $Enums.TransactionStatus
 }
 
-export type SavingCreateNestedManyWithoutDeductionInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput> | Prisma.SavingCreateWithoutDeductionInput[] | Prisma.SavingUncheckedCreateWithoutDeductionInput[]
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput | Prisma.SavingCreateOrConnectWithoutDeductionInput[]
-  createMany?: Prisma.SavingCreateManyDeductionInputEnvelope
-  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+export type SavingCreateNestedOneWithoutDeductionsInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionsInput
+  connect?: Prisma.SavingWhereUniqueInput
 }
 
-export type SavingUncheckedCreateNestedManyWithoutDeductionInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput> | Prisma.SavingCreateWithoutDeductionInput[] | Prisma.SavingUncheckedCreateWithoutDeductionInput[]
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput | Prisma.SavingCreateOrConnectWithoutDeductionInput[]
-  createMany?: Prisma.SavingCreateManyDeductionInputEnvelope
-  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-}
-
-export type SavingUpdateManyWithoutDeductionNestedInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput> | Prisma.SavingCreateWithoutDeductionInput[] | Prisma.SavingUncheckedCreateWithoutDeductionInput[]
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput | Prisma.SavingCreateOrConnectWithoutDeductionInput[]
-  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutDeductionInput | Prisma.SavingUpsertWithWhereUniqueWithoutDeductionInput[]
-  createMany?: Prisma.SavingCreateManyDeductionInputEnvelope
-  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  update?: Prisma.SavingUpdateWithWhereUniqueWithoutDeductionInput | Prisma.SavingUpdateWithWhereUniqueWithoutDeductionInput[]
-  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutDeductionInput | Prisma.SavingUpdateManyWithWhereWithoutDeductionInput[]
-  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
-}
-
-export type SavingUncheckedUpdateManyWithoutDeductionNestedInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput> | Prisma.SavingCreateWithoutDeductionInput[] | Prisma.SavingUncheckedCreateWithoutDeductionInput[]
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput | Prisma.SavingCreateOrConnectWithoutDeductionInput[]
-  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutDeductionInput | Prisma.SavingUpsertWithWhereUniqueWithoutDeductionInput[]
-  createMany?: Prisma.SavingCreateManyDeductionInputEnvelope
-  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
-  update?: Prisma.SavingUpdateWithWhereUniqueWithoutDeductionInput | Prisma.SavingUpdateWithWhereUniqueWithoutDeductionInput[]
-  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutDeductionInput | Prisma.SavingUpdateManyWithWhereWithoutDeductionInput[]
-  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+export type SavingUpdateOneRequiredWithoutDeductionsNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionsInput
+  upsert?: Prisma.SavingUpsertWithoutDeductionsInput
+  connect?: Prisma.SavingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SavingUpdateToOneWithWhereWithoutDeductionsInput, Prisma.SavingUpdateWithoutDeductionsInput>, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
 }
 
 export type SavingCreateWithoutMemberInput = {
@@ -605,7 +565,7 @@ export type SavingCreateWithoutMemberInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingsInput
+  deductions?: Prisma.DeductionCreateNestedManyWithoutSavingInput
 }
 
 export type SavingUncheckedCreateWithoutMemberInput = {
@@ -613,12 +573,12 @@ export type SavingUncheckedCreateWithoutMemberInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  deductionId?: string | null
   savings?: number
   welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutSavingInput
 }
 
 export type SavingCreateOrConnectWithoutMemberInput = {
@@ -656,7 +616,6 @@ export type SavingScalarWhereInput = {
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  deductionId?: Prisma.StringNullableFilter<"Saving"> | string | null
   savings?: Prisma.FloatFilter<"Saving"> | number
   welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
@@ -664,7 +623,7 @@ export type SavingScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
 }
 
-export type SavingCreateWithoutDeductionInput = {
+export type SavingCreateWithoutDeductionsInput = {
   id?: string
   amount: number
   mPesaRef?: string | null
@@ -677,7 +636,7 @@ export type SavingCreateWithoutDeductionInput = {
   member: Prisma.MemberCreateNestedOneWithoutSavingsInput
 }
 
-export type SavingUncheckedCreateWithoutDeductionInput = {
+export type SavingUncheckedCreateWithoutDeductionsInput = {
   id?: string
   amount: number
   mPesaRef?: string | null
@@ -690,30 +649,46 @@ export type SavingUncheckedCreateWithoutDeductionInput = {
   updatedAt?: Date | string
 }
 
-export type SavingCreateOrConnectWithoutDeductionInput = {
+export type SavingCreateOrConnectWithoutDeductionsInput = {
   where: Prisma.SavingWhereUniqueInput
-  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
 }
 
-export type SavingCreateManyDeductionInputEnvelope = {
-  data: Prisma.SavingCreateManyDeductionInput | Prisma.SavingCreateManyDeductionInput[]
-  skipDuplicates?: boolean
+export type SavingUpsertWithoutDeductionsInput = {
+  update: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionsInput, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
+  where?: Prisma.SavingWhereInput
 }
 
-export type SavingUpsertWithWhereUniqueWithoutDeductionInput = {
-  where: Prisma.SavingWhereUniqueInput
-  update: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionInput, Prisma.SavingUncheckedUpdateWithoutDeductionInput>
-  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
+export type SavingUpdateToOneWithWhereWithoutDeductionsInput = {
+  where?: Prisma.SavingWhereInput
+  data: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionsInput, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
 }
 
-export type SavingUpdateWithWhereUniqueWithoutDeductionInput = {
-  where: Prisma.SavingWhereUniqueInput
-  data: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionInput, Prisma.SavingUncheckedUpdateWithoutDeductionInput>
+export type SavingUpdateWithoutDeductionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savings?: Prisma.FloatFieldUpdateOperationsInput | number
+  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
 }
 
-export type SavingUpdateManyWithWhereWithoutDeductionInput = {
-  where: Prisma.SavingScalarWhereInput
-  data: Prisma.XOR<Prisma.SavingUpdateManyMutationInput, Prisma.SavingUncheckedUpdateManyWithoutDeductionInput>
+export type SavingUncheckedUpdateWithoutDeductionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  savings?: Prisma.FloatFieldUpdateOperationsInput | number
+  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SavingCreateManyMemberInput = {
@@ -721,7 +696,6 @@ export type SavingCreateManyMemberInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  deductionId?: string | null
   savings?: number
   welfare?: number
   status?: $Enums.TransactionStatus
@@ -739,7 +713,7 @@ export type SavingUpdateWithoutMemberInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deduction?: Prisma.DeductionUpdateOneWithoutSavingsNestedInput
+  deductions?: Prisma.DeductionUpdateManyWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateWithoutMemberInput = {
@@ -747,12 +721,12 @@ export type SavingUncheckedUpdateWithoutMemberInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deductionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   savings?: Prisma.FloatFieldUpdateOperationsInput | number
   welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateManyWithoutMemberInput = {
@@ -760,7 +734,6 @@ export type SavingUncheckedUpdateManyWithoutMemberInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deductionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   savings?: Prisma.FloatFieldUpdateOperationsInput | number
   welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
@@ -768,58 +741,35 @@ export type SavingUncheckedUpdateManyWithoutMemberInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type SavingCreateManyDeductionInput = {
-  id?: string
-  amount: number
-  mPesaRef?: string | null
-  authorizedBy?: string | null
-  memberId: string
-  savings?: number
-  welfare?: number
-  status?: $Enums.TransactionStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+
+/**
+ * Count Type SavingCountOutputType
+ */
+
+export type SavingCountOutputType = {
+  deductions: number
 }
 
-export type SavingUpdateWithoutDeductionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+export type SavingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  deductions?: boolean | SavingCountOutputTypeCountDeductionsArgs
 }
 
-export type SavingUncheckedUpdateWithoutDeductionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+/**
+ * SavingCountOutputType without action
+ */
+export type SavingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SavingCountOutputType
+   */
+  select?: Prisma.SavingCountOutputTypeSelect<ExtArgs> | null
 }
 
-export type SavingUncheckedUpdateManyWithoutDeductionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+/**
+ * SavingCountOutputType without action
+ */
+export type SavingCountOutputTypeCountDeductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeductionWhereInput
 }
-
 
 
 export type SavingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -828,14 +778,14 @@ export type SavingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   mPesaRef?: boolean
   authorizedBy?: boolean
   memberId?: boolean
-  deductionId?: boolean
   savings?: boolean
   welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  deductions?: boolean | Prisma.Saving$deductionsArgs<ExtArgs>
+  _count?: boolean | Prisma.SavingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
 export type SavingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -844,13 +794,11 @@ export type SavingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   mPesaRef?: boolean
   authorizedBy?: boolean
   memberId?: boolean
-  deductionId?: boolean
   savings?: boolean
   welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
@@ -860,13 +808,11 @@ export type SavingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   mPesaRef?: boolean
   authorizedBy?: boolean
   memberId?: boolean
-  deductionId?: boolean
   savings?: boolean
   welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
@@ -876,7 +822,6 @@ export type SavingSelectScalar = {
   mPesaRef?: boolean
   authorizedBy?: boolean
   memberId?: boolean
-  deductionId?: boolean
   savings?: boolean
   welfare?: boolean
   status?: boolean
@@ -884,25 +829,24 @@ export type SavingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SavingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "mPesaRef" | "authorizedBy" | "memberId" | "deductionId" | "savings" | "welfare" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["saving"]>
+export type SavingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "mPesaRef" | "authorizedBy" | "memberId" | "savings" | "welfare" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["saving"]>
 export type SavingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  deductions?: boolean | Prisma.Saving$deductionsArgs<ExtArgs>
+  _count?: boolean | Prisma.SavingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SavingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
 export type SavingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
 
 export type $SavingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Saving"
   objects: {
-    deduction: Prisma.$DeductionPayload<ExtArgs> | null
     member: Prisma.$MemberPayload<ExtArgs>
+    deductions: Prisma.$DeductionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -910,7 +854,6 @@ export type $SavingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     mPesaRef: string | null
     authorizedBy: string | null
     memberId: string
-    deductionId: string | null
     savings: number
     welfare: number
     status: $Enums.TransactionStatus
@@ -1310,8 +1253,8 @@ readonly fields: SavingFieldRefs;
  */
 export interface Prisma__SavingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  deduction<T extends Prisma.Saving$deductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$deductionArgs<ExtArgs>>): Prisma.Prisma__DeductionClient<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  deductions<T extends Prisma.Saving$deductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$deductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1346,7 +1289,6 @@ export interface SavingFieldRefs {
   readonly mPesaRef: Prisma.FieldRef<"Saving", 'String'>
   readonly authorizedBy: Prisma.FieldRef<"Saving", 'String'>
   readonly memberId: Prisma.FieldRef<"Saving", 'String'>
-  readonly deductionId: Prisma.FieldRef<"Saving", 'String'>
   readonly savings: Prisma.FieldRef<"Saving", 'Float'>
   readonly welfare: Prisma.FieldRef<"Saving", 'Float'>
   readonly status: Prisma.FieldRef<"Saving", 'TransactionStatus'>
@@ -1748,9 +1690,9 @@ export type SavingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Saving.deduction
+ * Saving.deductions
  */
-export type Saving$deductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Saving$deductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Deduction
    */
@@ -1764,6 +1706,11 @@ export type Saving$deductionArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   include?: Prisma.DeductionInclude<ExtArgs> | null
   where?: Prisma.DeductionWhereInput
+  orderBy?: Prisma.DeductionOrderByWithRelationInput | Prisma.DeductionOrderByWithRelationInput[]
+  cursor?: Prisma.DeductionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeductionScalarFieldEnum | Prisma.DeductionScalarFieldEnum[]
 }
 
 /**

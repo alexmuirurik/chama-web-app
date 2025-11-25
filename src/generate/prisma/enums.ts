@@ -28,3 +28,11 @@ export const TransactionStatus = {
 } as const
 
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
+
+
+export const LoanType = {
+  LONG_TERM: 'LONG_TERM',
+  SHORT_TERM: 'SHORT_TERM'
+} as const
+
+export type LoanType = (typeof LoanType)[keyof typeof LoanType]
