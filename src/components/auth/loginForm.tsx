@@ -6,7 +6,7 @@ import { Form, FormField, FormItem, FormLabel } from '../ui/form'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LoginSchema } from '@/prisma/schemas'
+import { LoginSchema } from '@/prisma/schemas/userschemas'
 import {
     InputOTP,
     InputOTPGroup,

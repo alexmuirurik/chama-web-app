@@ -131,23 +131,24 @@ model Projects {
 }
 
 model Member {
-    id             String          @id @default(uuid()) @map("_id")
-    chamaId        String
-    userId         String?
-    name           String
-    email          String
-    phoneNumber    String
-    role           Role            @default(MEMBER)
-    user           User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
-    chama          Chama           @relation(fields: [chamaId], references: [id], onDelete: Cascade)
-    dividends      Dividend[]
-    penalties      Penalty[]
-    savings        Saving[]
-    loans          Loan[]
-    balanceSheet   BalanceSheet?
-    lastSeen       DateTime?
-    createdAt      DateTime        @default(now())
-    updatedAt      DateTime        @updatedAt
+    id           String        @id @default(uuid()) @map("_id")
+    chamaId      String
+    userId       String?
+    name         String
+    email        String
+    phoneNumber  String
+    role         Role          @default(MEMBER)
+    user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    chama        Chama         @relation(fields: [chamaId], references: [id], onDelete: Cascade)
+    dividends    Dividend[]
+    penalties    Penalty[]
+    savings      Saving[]
+    loans        Loan[]
+    shortLoans   ShortLoan[]
+    balanceSheet BalanceSheet?
+    lastSeen     DateTime?
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
 }
 
 model BalanceSheet {
@@ -188,54 +189,70 @@ model Saving {
 }
 
 model Deduction {
-    id         String            @id @default(uuid()) @map("_id")
-    savingId   String
-    loanId     String?
-    loanType   String?
-    penaltyId  String?
-    amount     Float             @default(0)
-    status     TransactionStatus @default(PENDING)
-    saving     Saving            @relation(fields: [savingId], references: [id], onDelete: Cascade)
-    loan       Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
-    penalty    Penalty?          @relation(fields: [penaltyId], references: [id], onDelete: Cascade)
-    createdAt  DateTime          @default(now())
-    updatedAt  DateTime          @updatedAt
-}
-
-enum LoanType {
-    LONG_TERM
-    SHORT_TERM
+    id          String            @id @default(uuid()) @map("_id")
+    savingId    String
+    loanId      String?
+    shortLoanId String?
+    loanType    String?
+    penaltyId   String?
+    amount      Float             @default(0)
+    status      TransactionStatus @default(PENDING)
+    saving      Saving            @relation(fields: [savingId], references: [id], onDelete: Cascade)
+    loan        Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
+    shortLoan   ShortLoan?        @relation(fields: [shortLoanId], references: [id], onDelete: Cascade)
+    penalty     Penalty?          @relation(fields: [penaltyId], references: [id], onDelete: Cascade)
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
 }
 
 model Loan {
-    id                     String                  @id @default(uuid()) @map("_id")
-    loanType               LoanType
-    memberId               String
-    penaltyId              String?
-    principle              Float                   @default(0)
-    loanAmount             Float                   @default(0)
-    interest               Float                   @default(0)
-    termMonths             Int                     @default(0)
-    dueDate                DateTime                @default(now())
-    paymentDate            DateTime?
-    status                 TransactionStatus       @default(PENDING)
-    member                 Member                  @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    penalty                Penalty?                @relation(fields: [penaltyId], references: [id], onDelete: Cascade)
-    deductions             Deduction[]
-    createdAt              DateTime                @default(now())
-    updatedAt              DateTime                @updatedAt
+    id           String            @id @default(uuid()) @map("_id")
+    memberId     String
+    principle    Float             @default(0)
+    loanAmount   Float             @default(0)
+    interest     Float             @default(0)
+    termMonths   Int               @default(0)
+    paymentDate  DateTime?
+    loanDocument String?
+    guarantors   String[]
+    status       TransactionStatus @default(PENDING)
+    member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    penalties    Penalty[]
+    deductions   Deduction[]
+    createdAt    DateTime          @default(now())
+    updatedAt    DateTime          @updatedAt
+}
+
+model ShortLoan {
+    id           String            @id @default(uuid()) @map("_id")
+    memberId     String
+    principle    Float             @default(0)
+    loanAmount   Float             @default(0)
+    interest     Float             @default(0)
+    paymentDate  DateTime?
+    loanDocument String?
+    guarantors   String[]
+    status       TransactionStatus @default(PENDING)
+    member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    deductions   Deduction[]
+    penalties    Penalty[]
+    createdAt    DateTime          @default(now())
+    updatedAt    DateTime          @updatedAt
 }
 
 model Penalty {
-    id             String            @id @default(uuid()) @map("_id")
-    memberId       String
-    penaltyAmount  Float             @default(0)
-    status         TransactionStatus @default(PENDING)
-    member         Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    deductions     Deduction[]
-    loans          Loan[]
-    createdAt      DateTime          @default(now())
-    updatedAt      DateTime          @updatedAt
+    id            String            @id @default(uuid()) @map("_id")
+    memberId      String
+    loanId        String?
+    shortLoanId   String?
+    penaltyAmount Float             @default(0)
+    status        TransactionStatus @default(PENDING)
+    member        Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    loan          Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
+    shortLoan     ShortLoan?        @relation(fields: [shortLoanId], references: [id], onDelete: Cascade)
+    deductions    Deduction[]
+    createdAt     DateTime          @default(now())
+    updatedAt     DateTime          @updatedAt
 }
 
 model Dividend {

@@ -6,10 +6,15 @@ import { Input } from '../ui/input'
 import CustomDialog from '../ui/customDialog'
 import { useState } from 'react'
 import { LoadingButton } from '../ui/loadingButton'
+import z from 'zod'
+import { LoanSchema } from '@/prisma/schemas/loanSchemas'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const LoanForm = () => {
     const [open, setOpen] = useState(false)
-    const form = useForm()
+    const form = useForm<z.infer<typeof LoanSchema>>({
+        resolver: zodResolver(LoanSchema),
+    })
     return (
         <CustomDialog
             open={open}
@@ -20,7 +25,8 @@ const LoanForm = () => {
             <Form {...form}>
                 <form className="space-y-7">
                     <FormField
-                        name="loanAmount"
+                        name="memberId"
+                        control={form.control}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Member Name</FormLabel>
@@ -35,7 +41,8 @@ const LoanForm = () => {
                     />
                     <div className="grid grid-cols-2 gap-2">
                         <FormField
-                            name="loanAmount"
+                            name="principle"
+                            control={form.control}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Loan Amount</FormLabel>
@@ -50,6 +57,7 @@ const LoanForm = () => {
                         />
                         <FormField
                             name="loanAmount"
+                            control={form.control}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Loan Type</FormLabel>
@@ -65,7 +73,8 @@ const LoanForm = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                         <FormField
-                            name="loanAmount"
+                            name="guarantor1"
+                            control={form.control}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Guarator 1</FormLabel>
@@ -79,7 +88,8 @@ const LoanForm = () => {
                             )}
                         />
                         <FormField
-                            name="loanAmount"
+                            name="guarantor2"
+                            control={form.control}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Guarator 2</FormLabel>
@@ -94,7 +104,8 @@ const LoanForm = () => {
                         />
                     </div>
                     <FormField
-                        name="loanAmount"
+                        name="loanDocument"
+                        control={form.control}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Upload Document</FormLabel>
@@ -109,6 +120,38 @@ const LoanForm = () => {
                             </FormItem>
                         )}
                     />
+                    <div className="grid grid-cols-2 gap-2">
+                        <FormField
+                            name="termMonths"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Term Months</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            placeholder="Enter term months"
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            name="guarantor2"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Guarator 2</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            placeholder="Enter guarantor 2"
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <div className="flex justify-end">
                         <LoadingButton loading={false} variant="default">
                             Request Loan

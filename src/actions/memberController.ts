@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/prisma'
-import { CreateMemberSchema } from '@/prisma/schemas'
+import { CreateMemberSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
 
 export const createMember = async (
