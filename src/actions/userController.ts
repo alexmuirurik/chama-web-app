@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/prisma'
-import { UpdateUserSchema } from '@/prisma/userschemas'
+import { UpdateUserSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
 
 export const getUserById = async (userId: string) => {

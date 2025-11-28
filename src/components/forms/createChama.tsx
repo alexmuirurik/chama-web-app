@@ -1,6 +1,6 @@
 'use client'
 
-import { CreateChamaSchema } from '@/prisma/userschemas'
+import { CreateChamaSchema } from '@/prisma/schemas/userschemas'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'

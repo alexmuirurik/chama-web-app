@@ -64,6 +64,7 @@ export const ModelName = {
   Saving: 'Saving',
   Deduction: 'Deduction',
   Loan: 'Loan',
+  ShortLoan: 'ShortLoan',
   Penalty: 'Penalty',
   Dividend: 'Dividend'
 } as const
@@ -256,6 +257,7 @@ export const DeductionScalarFieldEnum = {
   id: 'id',
   savingId: 'savingId',
   loanId: 'loanId',
+  shortLoanId: 'shortLoanId',
   loanType: 'loanType',
   penaltyId: 'penaltyId',
   amount: 'amount',
@@ -269,15 +271,14 @@ export type DeductionScalarFieldEnum = (typeof DeductionScalarFieldEnum)[keyof t
 
 export const LoanScalarFieldEnum = {
   id: 'id',
-  loanType: 'loanType',
   memberId: 'memberId',
-  penaltyId: 'penaltyId',
   principle: 'principle',
   loanAmount: 'loanAmount',
   interest: 'interest',
   termMonths: 'termMonths',
-  dueDate: 'dueDate',
   paymentDate: 'paymentDate',
+  loanDocument: 'loanDocument',
+  guarantors: 'guarantors',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -286,9 +287,28 @@ export const LoanScalarFieldEnum = {
 export type LoanScalarFieldEnum = (typeof LoanScalarFieldEnum)[keyof typeof LoanScalarFieldEnum]
 
 
+export const ShortLoanScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  principle: 'principle',
+  loanAmount: 'loanAmount',
+  interest: 'interest',
+  paymentDate: 'paymentDate',
+  loanDocument: 'loanDocument',
+  guarantors: 'guarantors',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShortLoanScalarFieldEnum = (typeof ShortLoanScalarFieldEnum)[keyof typeof ShortLoanScalarFieldEnum]
+
+
 export const PenaltyScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
+  loanId: 'loanId',
+  shortLoanId: 'shortLoanId',
   penaltyAmount: 'penaltyAmount',
   status: 'status',
   createdAt: 'createdAt',

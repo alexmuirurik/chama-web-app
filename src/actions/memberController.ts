@@ -3,6 +3,7 @@
 import prisma from '@/prisma/prisma'
 import { CreateMemberSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
+import { TransactionStatus } from '../generate/prisma/enums'
 
 export const createMember = async (
     data: z.infer<typeof CreateMemberSchema>
@@ -42,6 +43,29 @@ export const getMembers = async (chamaId: string) => {
         })
         return members
     } catch (error) {
+        throw new Error(error as any)
+    }
+}
+
+
+export const getMembersWithoutActiveLoans = async (chamaId: string) => {
+    try {
+        const members = await prisma.member.findMany({
+            where: {
+                chamaId: chamaId,
+                loans:{
+                    none: {
+                        status: TransactionStatus.PENDING
+                    }
+                }
+            },
+            include: {
+                user: true,
+            },
+        })
+        return members
+    }
+    catch (error) {
         throw new Error(error as any)
     }
 }

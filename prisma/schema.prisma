@@ -205,6 +205,11 @@ model Deduction {
     updatedAt   DateTime          @updatedAt
 }
 
+enum LoanType {
+    LONG_TERM
+    SHORT_TERM
+}
+
 model Loan {
     id           String            @id @default(uuid()) @map("_id")
     memberId     String
@@ -214,6 +219,7 @@ model Loan {
     termMonths   Int               @default(0)
     paymentDate  DateTime?
     loanDocument String?
+    loanType     LoanType          @default(LONG_TERM)
     guarantors   String[]
     status       TransactionStatus @default(PENDING)
     member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -231,6 +237,7 @@ model ShortLoan {
     interest     Float             @default(0)
     paymentDate  DateTime?
     loanDocument String?
+    loanType     LoanType          @default(SHORT_TERM)
     guarantors   String[]
     status       TransactionStatus @default(PENDING)
     member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)

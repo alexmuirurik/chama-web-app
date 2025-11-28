@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/prisma'
-import { AddFundsSchema } from '@/prisma/userschemas'
+import { AddFundsSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
 
 export const getDeductionByMemberId = async (

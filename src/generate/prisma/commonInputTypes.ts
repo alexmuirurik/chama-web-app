@@ -307,23 +307,6 @@ export type EnumTransactionStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTransactionStatusFilter<$PrismaModel>
 }
 
-export type EnumLoanTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.LoanType | Prisma.EnumLoanTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel> | $Enums.LoanType
-}
-
-export type EnumLoanTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LoanType | Prisma.EnumLoanTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLoanTypeWithAggregatesFilter<$PrismaModel> | $Enums.LoanType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel>
-}
-
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -606,23 +589,6 @@ export type NestedEnumTransactionStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTransactionStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTransactionStatusFilter<$PrismaModel>
-}
-
-export type NestedEnumLoanTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.LoanType | Prisma.EnumLoanTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel> | $Enums.LoanType
-}
-
-export type NestedEnumLoanTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LoanType | Prisma.EnumLoanTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LoanType[] | Prisma.ListEnumLoanTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLoanTypeWithAggregatesFilter<$PrismaModel> | $Enums.LoanType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLoanTypeFilter<$PrismaModel>
 }
 
 

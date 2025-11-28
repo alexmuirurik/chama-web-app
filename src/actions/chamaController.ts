@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/prisma'
-import { CreateChamaSchema } from '@/prisma/userschemas'
+import { CreateChamaSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
 import { createMember } from './memberController'
 import { getUserById, updateUser } from './userController'

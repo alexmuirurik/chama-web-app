@@ -397,6 +397,7 @@ export const ModelName = {
   Saving: 'Saving',
   Deduction: 'Deduction',
   Loan: 'Loan',
+  ShortLoan: 'ShortLoan',
   Penalty: 'Penalty',
   Dividend: 'Dividend'
 } as const
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "chama" | "chamaLoan" | "projects" | "member" | "balanceSheet" | "saving" | "deduction" | "loan" | "penalty" | "dividend"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "chama" | "chamaLoan" | "projects" | "member" | "balanceSheet" | "saving" | "deduction" | "loan" | "shortLoan" | "penalty" | "dividend"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1380,6 +1381,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ShortLoan: {
+      payload: Prisma.$ShortLoanPayload<ExtArgs>
+      fields: Prisma.ShortLoanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShortLoanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShortLoanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        findFirst: {
+          args: Prisma.ShortLoanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShortLoanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        findMany: {
+          args: Prisma.ShortLoanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>[]
+        }
+        create: {
+          args: Prisma.ShortLoanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        createMany: {
+          args: Prisma.ShortLoanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShortLoanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>[]
+        }
+        delete: {
+          args: Prisma.ShortLoanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        update: {
+          args: Prisma.ShortLoanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShortLoanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShortLoanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShortLoanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShortLoanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortLoanPayload>
+        }
+        aggregate: {
+          args: Prisma.ShortLoanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShortLoan>
+        }
+        groupBy: {
+          args: Prisma.ShortLoanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShortLoanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShortLoanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShortLoanCountAggregateOutputType> | number
+        }
+      }
+    }
     Penalty: {
       payload: Prisma.$PenaltyPayload<ExtArgs>
       fields: Prisma.PenaltyFieldRefs
@@ -1739,6 +1814,7 @@ export const DeductionScalarFieldEnum = {
   id: 'id',
   savingId: 'savingId',
   loanId: 'loanId',
+  shortLoanId: 'shortLoanId',
   loanType: 'loanType',
   penaltyId: 'penaltyId',
   amount: 'amount',
@@ -1752,15 +1828,14 @@ export type DeductionScalarFieldEnum = (typeof DeductionScalarFieldEnum)[keyof t
 
 export const LoanScalarFieldEnum = {
   id: 'id',
-  loanType: 'loanType',
   memberId: 'memberId',
-  penaltyId: 'penaltyId',
   principle: 'principle',
   loanAmount: 'loanAmount',
   interest: 'interest',
   termMonths: 'termMonths',
-  dueDate: 'dueDate',
   paymentDate: 'paymentDate',
+  loanDocument: 'loanDocument',
+  guarantors: 'guarantors',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1769,9 +1844,28 @@ export const LoanScalarFieldEnum = {
 export type LoanScalarFieldEnum = (typeof LoanScalarFieldEnum)[keyof typeof LoanScalarFieldEnum]
 
 
+export const ShortLoanScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  principle: 'principle',
+  loanAmount: 'loanAmount',
+  interest: 'interest',
+  paymentDate: 'paymentDate',
+  loanDocument: 'loanDocument',
+  guarantors: 'guarantors',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShortLoanScalarFieldEnum = (typeof ShortLoanScalarFieldEnum)[keyof typeof ShortLoanScalarFieldEnum]
+
+
 export const PenaltyScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
+  loanId: 'loanId',
+  shortLoanId: 'shortLoanId',
   penaltyAmount: 'penaltyAmount',
   status: 'status',
   createdAt: 'createdAt',
@@ -1915,20 +2009,6 @@ export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus[]'>
     
 
-
-/**
- * Reference to a field of type 'LoanType'
- */
-export type EnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType'>
-    
-
-
-/**
- * Reference to a field of type 'LoanType[]'
- */
-export type ListEnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType[]'>
-    
-
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2021,6 +2101,7 @@ export type GlobalOmitConfig = {
   saving?: Prisma.SavingOmit
   deduction?: Prisma.DeductionOmit
   loan?: Prisma.LoanOmit
+  shortLoan?: Prisma.ShortLoanOmit
   penalty?: Prisma.PenaltyOmit
   dividend?: Prisma.DividendOmit
 }

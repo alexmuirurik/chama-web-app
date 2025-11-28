@@ -83,6 +83,11 @@ export type Deduction = Prisma.DeductionModel
  */
 export type Loan = Prisma.LoanModel
 /**
+ * Model ShortLoan
+ * 
+ */
+export type ShortLoan = Prisma.ShortLoanModel
+/**
  * Model Penalty
  * 
  */

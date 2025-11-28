@@ -5,15 +5,24 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AddMemberSchema } from '@/prisma/userschemas'
+import { AddMemberSchema } from '@/prisma/schemas/userschemas'
 import { Input } from '../ui/input'
 import { LoadingButton } from '../ui/loadingButton'
 import { createMember } from '@/src/actions/memberController'
 import { toast } from 'sonner'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '../ui/select'
+import { useRouter } from 'next/navigation'
 
 const AddMember = ({ chamaId }: { chamaId: string }) => {
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const form = useForm<z.infer<typeof AddMemberSchema>>({
         resolver: zodResolver(AddMemberSchema),
         defaultValues: {
@@ -24,10 +33,9 @@ const AddMember = ({ chamaId }: { chamaId: string }) => {
         setLoading(true)
         try {
             const member = await createMember(data)
-            if (member) {
-                toast.success('Member added successfully')
-                setOpen(false)
-            }
+            toast.success('Member added successfully')
+            setOpen(false)
+            router.refresh()
         } catch (error) {
             toast.error(`Error: ${error}`)
         } finally {
@@ -91,9 +99,33 @@ const AddMember = ({ chamaId }: { chamaId: string }) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Role</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
+                                    <Select
+                                        {...field}
+                                        onValueChange={field.onChange}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Role" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="CHAIRMAN">
+                                                Chairman
+                                            </SelectItem>
+                                            <SelectItem value="SECRETARY">
+                                                Secretary
+                                            </SelectItem>
+                                            <SelectItem value="VICE_CHAIRMAN">
+                                                Vice Chairman
+                                            </SelectItem>
+                                            <SelectItem value="TREASURER">
+                                                Treasurer
+                                            </SelectItem>
+                                            <SelectItem value="MEMBER">
+                                                Member
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </FormItem>
                             )}
                         />
