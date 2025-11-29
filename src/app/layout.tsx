@@ -39,7 +39,7 @@ const rusoOne = Russo_One({
 
 export const metadata: Metadata = {
     title: 'Olive Jikuze Chama',
-    description: 'A website to manage your chamas, members, loans, and savings',
+    description: 'A webapp to manage your chamas, members, loans, and savings',
 }
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
