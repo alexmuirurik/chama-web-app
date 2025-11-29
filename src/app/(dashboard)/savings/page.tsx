@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import { getChamas } from '@/src/actions/chamaController'
+import { getChamaById, getChamas } from '@/src/actions/chamaController'
 import { getMembers } from '@/src/actions/memberController'
 import { getSavings } from '@/src/actions/savingController'
 import AddFunds from '@/src/components/forms/addFunds'
@@ -10,15 +10,16 @@ import { redirect } from 'next/navigation'
 
 const SavingsPage = async () => {
     const session = await auth()
-    if (!session?.user.chamaId) redirect('/chamas')
+    const chama = await getChamaById(session?.user.chamaId as string)
+    if (!chama) redirect('/chamas')
     const members = await getMembers(session?.user?.chamaId as string)
-    const savings = await getSavings(session.user.chamaId as string)
+    const savings = await getSavings(session?.user.chamaId as string)
     return (
         <div className="space-y-4">
             <PageTitle title="Savings">
                 <div className="flex items-center gap-2">
                     <SearchForm />
-                    <AddFunds members={members} />
+                    <AddFunds chama={chama} members={members} />
                 </div>
             </PageTitle>
             <div className="space-y-4">

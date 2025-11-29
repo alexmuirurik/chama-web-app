@@ -6,20 +6,59 @@ import z from 'zod'
 
 export const requestLoan = async (data: z.infer<typeof LoanSchema>) => {
     try {
-        const { loanType, ...loanData } = data
         if (data.loanType === 'LONG_TERM') {
-            const loan = await prisma.loan.create({
-                data: loanData,
+            const member = await prisma.member.update({
+                where: {
+                    id: data.memberId,
+                },
+                data: {
+                    loans: {
+                        create: {
+                            principle: data.principle,
+                            loanAmount: data.loanAmount,
+                            interest: data.interest,
+                            termMonths: data.termMonths,
+                            monthlyRepayment: data.monthlyRepayment,
+                            guarantors: data.guarantors,
+                        },
+                    },
+                    balanceSheet: {
+                        update: {
+                            totalLongTermLoan: {
+                                increment: data.loanAmount,
+                            },
+                        },
+                    },
+                },
             })
-            
-            return loan
+
+            return member
         }
 
-        const shortLoan = await prisma.shortLoan.create({
-            data: loanData,
+        const member = await prisma.member.update({
+            where: {
+                id: data.memberId,
+            },
+            data: {
+                shortLoans: {
+                    create: {
+                        principle: data.principle,
+                        loanAmount: data.loanAmount,
+                        interest: data.interest,
+                        guarantors: data.guarantors,
+                    },
+                },
+                balanceSheet: {
+                    update: {
+                        totalShortTermLoan: {
+                            increment: data.loanAmount,
+                        },
+                    },
+                }
+            },
         })
 
-        return shortLoan
+        return member
     } catch (error) {
         throw new Error(error as any)
     }

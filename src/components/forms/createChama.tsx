@@ -76,18 +76,32 @@ const CreateChama = ({ userId }: { userId: string }) => {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        name="minimumSavings"
-                        control={form.control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Minimum Savings</FormLabel>
-                                <FormControl>
-                                    <Input type="number" {...field} />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <FormField
+                            name="minimumSavings"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Minimum Savings</FormLabel>
+                                    <FormControl>
+                                        <Input type="number" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            name="interestRate"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Interest Rate %</FormLabel>
+                                    <FormControl>
+                                        <Input type="number" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <div className="flex items-center justify-end">
                         <LoadingButton loading={loading} variant="default">
                             <span className="text-sm text-nowrap">

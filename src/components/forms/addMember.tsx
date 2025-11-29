@@ -36,6 +36,7 @@ const AddMember = ({ chamaId }: { chamaId: string }) => {
             toast.success('Member added successfully')
             setOpen(false)
             router.refresh()
+            form.reset()
         } catch (error) {
             toast.error(`Error: ${error}`)
         } finally {

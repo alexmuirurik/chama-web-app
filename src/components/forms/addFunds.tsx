@@ -18,37 +18,65 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createSaving } from '@/src/actions/savingController'
 import { CreateSavingSchema } from '@/prisma/schemas/savingSchemas'
-import { Member, TransactionStatus } from '@/src/generate/prisma/browser'
+import { Chama, Member, TransactionStatus } from '@/src/generate/prisma/browser'
+import { getMemberLoansandShortLoans } from '@/src/actions/memberController'
+import { Memberloan } from '@/prisma/types/prismaBrowserTypes'
+import { useRouter } from 'next/navigation'
 
-const AddFunds = ({
-    members,
-}: {
-    members: Member[]
-}) => {
+const AddFunds = ({ chama, members }: { chama: Chama; members: Member[] }) => {
+    const [memberLoans, setMemberLoans] = useState<Memberloan | null>(null)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
-    const [selectedMember, setSelectedMember] = useState<string>()
+    const router = useRouter()
     const form = useForm<z.infer<typeof CreateSavingSchema>>({
         resolver: zodResolver(CreateSavingSchema),
         defaultValues: {
+            savings: chama.minimumSavings,
             welfare: 100,
             status: TransactionStatus.COMPLETED,
-        }
+            loanId: memberLoans?.loans[0]?.id ?? '',
+            shortLoanId: memberLoans?.shortLoans[0]?.id ?? '',
+            penaltyId: memberLoans?.penalties[0]?.id ?? '',
+        },
     })
 
     const updateSavings = (event: ChangeEvent<HTMLInputElement>) => {
+        form.setValue('amount', event.target.value as unknown as number)
         const amount = Number(event.target.value ?? 0)
-        form.setValue("savings", amount - 100)
-        form.setValue("amount", amount)
+        const loanAmount = form.getValues('loanAmount') ?? 0
+        const shortLoanAmount = form.getValues('shortLoanAmount') ?? 0
+        const penaltyAmount = form.getValues('penaltyAmount') ?? 0
+        const welfare = form.getValues('welfare') ?? 0
+        const savings =  amount - loanAmount - shortLoanAmount - penaltyAmount - welfare
+        form.setValue('savings', savings)
     }
 
     const selectMember = async (memberId: string) => {
+        setLoading(true)
         try {
-            setSelectedMember(memberId)
+            const memberLoans = await getMemberLoansandShortLoans(memberId)
+            setMemberLoans(memberLoans)
+            const loan = memberLoans?.loans[0]
+            const shortLoan = memberLoans?.shortLoans[0]
+            const penalty = memberLoans?.penalties[0]
+            const loanAmount = loan?.monthlyRepayment ?? 0
+            const shortLoanAmount = shortLoan?.loanAmount ?? 0
+            const penaltyAmount = penalty?.penaltyAmount ?? 0
+            const transactionAmount = form.getValues('amount') ?? 0
+            const welfare = form.getValues('welfare') ?? 0
+            const savings =  transactionAmount - loanAmount - shortLoanAmount - penaltyAmount - welfare
+            form.setValue('penaltyAmount', penalty?.penaltyAmount ?? 0)
+            form.setValue('loanAmount', loanAmount)
+            form.setValue('shortLoanAmount', shortLoanAmount)
+            form.setValue('loanId', loan ? loan.id : undefined)
+            form.setValue('shortLoanId', shortLoan ? shortLoan.id : undefined)
+            form.setValue('penaltyId', penalty ? penalty.id : undefined)
+            form.setValue('savings', savings)
             form.setValue('memberId', memberId)
         } catch (error) {
             toast.error(`${error}`)
         }
+        setLoading(false)
     }
 
     const onSubmit = async (data: z.infer<typeof CreateSavingSchema>) => {
@@ -58,6 +86,8 @@ const AddFunds = ({
             if (member) {
                 toast.success('Savings added successfully')
                 setOpen(false)
+                form.reset()
+                router.refresh()
             }
         } catch (error) {
             toast.error(`Error: ${error}`)
@@ -105,7 +135,7 @@ const AddFunds = ({
                             </FormItem>
                         )}
                     />
-                    {selectedMember && (
+                    {form.watch('memberId') && (
                         <div className="space-y-4">
                             <FormField
                                 name="amount"
@@ -116,14 +146,18 @@ const AddFunds = ({
                                             Amount
                                         </FormLabel>
                                         <FormControl>
-                                            <Input onChange={updateSavings} {...Input} />
+                                            <Input
+                                                onChange={updateSavings}
+                                                {...Input}
+                                                disabled={loading}
+                                            />
                                         </FormControl>
                                     </FormItem>
                                 )}
                             />
                             <div className="grid grid-cols-2 gap-2">
                                 <FormField
-                                    name='savings'
+                                    name="loanAmount"
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
@@ -131,21 +165,29 @@ const AddFunds = ({
                                                 Loan
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} defaultValue={0} disabled />
+                                                <Input
+                                                    {...field}
+                                                    defaultValue={0}
+                                                    disabled
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
                                 />
                                 <FormField
-                                    name='welfare'
+                                    name="shortLoanAmount"
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel className="text-neutral-600">
-                                                Ngumbato
+                                                Short Loan
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} defaultValue={0} disabled />
+                                                <Input
+                                                    {...field}
+                                                    defaultValue={0}
+                                                    disabled
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -153,7 +195,7 @@ const AddFunds = ({
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                                 <FormField
-                                    name='savings'
+                                    name="savings"
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
@@ -161,13 +203,16 @@ const AddFunds = ({
                                                 Savings
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} disabled />
+                                                <Input
+                                                    {...field}
+                                                    disabled
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
                                 />
                                 <FormField
-                                    name='welfare'
+                                    name="welfare"
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
@@ -175,7 +220,31 @@ const AddFunds = ({
                                                 Welfare
                                             </FormLabel>
                                             <FormControl>
-                                                <Input {...field} defaultValue={100} disabled />
+                                                <Input
+                                                    {...field}
+                                                    defaultValue={100}
+                                                    disabled
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <FormField
+                                    name="penaltyAmount"
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-neutral-600">
+                                                Penalty Amount
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    defaultValue={100}
+                                                    disabled
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}

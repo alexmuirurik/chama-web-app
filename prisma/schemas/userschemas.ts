@@ -17,6 +17,9 @@ export const CreateChamaSchema = z.object({
     minimumSavings: z
         .transform(Number)
         .pipe(z.number().min(1, 'Please enter your price.')),
+    interestRate: z
+        .transform(Number)
+        .pipe(z.number().min(1, 'Please enter your price.')),
 })
 
 export const AddMemberSchema = z.object({

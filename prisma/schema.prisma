@@ -92,7 +92,7 @@ model Chama {
     location             String
     registrationDocument String?
     minimumSavings       Float       @default(0)
-    interestRate         Float       @default(0)
+    interestRate         Float       @default(10)
     nextMeeting          DateTime?
     registrationId       String?
     adminId              String
@@ -215,22 +215,23 @@ enum LoanType {
 }
 
 model Loan {
-    id           String            @id @default(uuid()) @map("_id")
-    memberId     String
-    principle    Float             @default(0)
-    loanAmount   Float             @default(0)
-    interest     Float             @default(0)
-    termMonths   Int               @default(0)
-    paymentDate  DateTime?
-    loanDocument String?
-    loanType     LoanType          @default(LONG_TERM)
-    guarantors   String[]
-    status       TransactionStatus @default(PENDING)
-    member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    penalties    Penalty[]
-    savings      Saving[]
-    createdAt    DateTime          @default(now())
-    updatedAt    DateTime          @updatedAt
+    id               String            @id @default(uuid()) @map("_id")
+    memberId         String
+    principle        Float             @default(0)
+    loanAmount       Float             @default(0)
+    interest         Float             @default(0)
+    termMonths       Int               @default(0)
+    monthlyRepayment Float             @default(0)
+    paymentDate      DateTime?
+    loanDocument     String?
+    loanType         LoanType          @default(LONG_TERM)
+    guarantors       String[]
+    status           TransactionStatus @default(PENDING)
+    member           Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    penalties        Penalty[]
+    savings          Saving[]
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
 }
 
 model ShortLoan {

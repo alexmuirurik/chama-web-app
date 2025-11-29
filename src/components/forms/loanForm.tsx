@@ -1,14 +1,12 @@
 'use client'
 
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { UseFormReturn } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import { Input } from '../ui/input'
-import CustomDialog from '../ui/customDialog'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import { LoadingButton } from '../ui/loadingButton'
-import z, { set } from 'zod'
-import { LoanSchema, LoanType } from '@/prisma/schemas/loanSchemas'
-import { zodResolver } from '@hookform/resolvers/zod'
+import z from 'zod'
+import { LoanSchema } from '@/prisma/schemas/loanSchemas'
 import { MultiSelect } from '../ui/multi-select'
 import {
     Select,
@@ -17,21 +15,43 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
-import { Member } from '@/src/generate/prisma/browser'
+import { Chama, Member, Role } from '@/src/generate/prisma/browser'
 import { toast } from 'sonner'
 import { requestLoan } from '@/src/actions/loanController'
+import { useRouter } from 'next/navigation'
 
 const LoanForm = ({
+    chama,
     members,
     form,
     setStep,
 }: {
+    chama: Chama
     members: Member[]
     form: UseFormReturn<z.infer<typeof LoanSchema>>
     setStep: Dispatch<SetStateAction<number>>
 }) => {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
+    const router = useRouter()
+
+    const onTermChange = (value: string) => {
+        form.setValue('termMonths', value as unknown as number)
+        const termMonths = Number(value ?? 0)
+        const loanAmount = form.getValues('loanAmount') ?? 0
+        const monthlyRepayments = Math.round(loanAmount / termMonths)
+        form.setValue('monthlyRepayment', monthlyRepayments)
+    }
+
+    const onLoanChange = (event: ChangeEvent<HTMLInputElement>) => {
+        form.setValue('principle', event.target.value as unknown as number)
+        const principle = Number(event.target.value ?? 0)
+        const loanAmount = (principle * (100 + chama.interestRate)) / 100
+        const termMonths = form.getValues('termMonths') ?? 1
+        const monthlyRepayments = Math.round(loanAmount / termMonths)
+        form.setValue('loanAmount', loanAmount)
+        form.setValue('monthlyRepayment', monthlyRepayments)
+    }
 
     const handleSubmit = async (data: z.infer<typeof LoanSchema>) => {
         setLoading(true)
@@ -39,6 +59,8 @@ const LoanForm = ({
             await requestLoan(data)
             toast.success('Loan requested successfully')
             setOpen(false)
+            form.reset()
+            router.refresh()
         } catch (error) {
             toast.error(`${error}`)
         }
@@ -79,47 +101,35 @@ const LoanForm = ({
                 />
                 <div className="grid grid-cols-2 gap-2">
                     <FormField
-                        name="loanAmount"
+                        name="principle"
                         control={form.control}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Loan Amount</FormLabel>
+                                <FormLabel>Principle Amount</FormLabel>
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        placeholder="Enter loan amount"
+                                        placeholder="Enter loan principle"
+                                        onChange={onLoanChange}
+                                        type="number"
                                     />
                                 </FormControl>
                             </FormItem>
                         )}
                     />
                     <FormField
-                        name="loanType"
+                        name="loanAmount"
                         control={form.control}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Loan Type</FormLabel>
-                                <Select
-                                    {...field}
-                                    onValueChange={field.onChange}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger
-                                            className="w-full cursor-pointer"
-                                            disabled
-                                        >
-                                            <SelectValue placeholder="Select loan type" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="LONG_TERM">
-                                            Long Term
-                                        </SelectItem>
-                                        <SelectItem value="SHORT_TERM">
-                                            Short Term
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <FormLabel>Total Repayable</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        placeholder="Enter loan principle"
+                                        disabled
+                                    />
+                                </FormControl>
                             </FormItem>
                         )}
                     />
@@ -133,10 +143,22 @@ const LoanForm = ({
                                 <FormLabel>Guarators</FormLabel>
                                 <FormControl>
                                     <MultiSelect
-                                        options={members.map((member) => ({
-                                            label: member.name,
-                                            value: member.id,
-                                        }))}
+                                        hideSelectAll
+                                        options={members
+                                            .filter((member) => {
+                                                return (
+                                                    member.role !==
+                                                        Role.ADMIN &&
+                                                    member.id !==
+                                                        form.getValues(
+                                                            'memberId'
+                                                        )
+                                                )
+                                            })
+                                            .map((member) => ({
+                                                label: member.name,
+                                                value: member.id,
+                                            }))}
                                         placeholder="Enter guarantor 1 name"
                                         onValueChange={(val) => {
                                             field.onChange(val)
@@ -148,60 +170,83 @@ const LoanForm = ({
                         )}
                     />
                 </div>
-                <div className="flex w-full gap-2">
+                <div className="grid md:grid-cols-2 items-center gap-2">
                     <FormField
-                        name="loanDocument"
+                        name="termMonths"
                         control={form.control}
                         render={({ field }) => (
                             <FormItem className="w-full">
-                                <FormLabel>Upload Document</FormLabel>
+                                <FormLabel>Loan Term</FormLabel>
+                                <Select
+                                    onValueChange={onTermChange}
+                                    defaultValue="1"
+                                    disabled={
+                                        form.watch('loanType') === 'SHORT_TERM'
+                                    }
+                                >
+                                    <FormControl>
+                                        <SelectTrigger className="w-full cursor-pointer">
+                                            <SelectValue placeholder="Select loan term" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {Array.from({ length: 12 }).map(
+                                            (_, i) => (
+                                                <SelectItem
+                                                    key={i}
+                                                    value={`${i + 1}`}
+                                                >
+                                                    {i + 1} Months
+                                                </SelectItem>
+                                            )
+                                        )}
+                                    </SelectContent>
+                                </Select>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        name="monthlyRepayment"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Monthly Repayments</FormLabel>
                                 <FormControl>
                                     <Input
-                                        type="file"
-                                        accept="image/*"
-                                        placeholder="Upload document"
                                         {...field}
+                                        placeholder="Enter loan principle"
+                                        disabled
                                     />
                                 </FormControl>
                             </FormItem>
                         )}
                     />
-                    {form.watch('loanType') === 'LONG_TERM' && (
-                        <FormField
-                            name="termMonths"
-                            control={form.control}
-                            render={({ field: { onChange, value } }) => (
-                                <FormItem className="w-full">
-                                    <FormLabel>Loan Term</FormLabel>
-                                    <Select
-                                        onValueChange={onChange}
-                                        defaultValue="1"
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger className="w-full cursor-pointer">
-                                                <SelectValue placeholder="Select loan term" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {Array.from({ length: 12 }).map(
-                                                (_, i) => (
-                                                    <SelectItem
-                                                        key={i}
-                                                        value={`${i + 1}`}
-                                                    >
-                                                        {i + 1} Months
-                                                    </SelectItem>
-                                                )
-                                            )}
-                                        </SelectContent>
-                                    </Select>
-                                </FormItem>
-                            )}
-                        />
-                    )}
                 </div>
+
+                <FormField
+                    name="loanDocument"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem className="w-full">
+                            <FormLabel>Upload Document</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="file"
+                                    accept="image/*"
+                                    placeholder="Upload document"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
                 <div className="flex justify-between items-center w-full ">
-                    <LoadingButton onClick={() => setStep(1)}>
+                    <LoadingButton
+                        onClick={() => {
+                            form.reset()
+                            setStep(1)
+                        }}
+                    >
                         Back
                     </LoadingButton>
                     <LoadingButton loading={loading}>

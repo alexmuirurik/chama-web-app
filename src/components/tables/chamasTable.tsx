@@ -7,7 +7,7 @@ const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
                 <div>Name</div>
                 <div>Location</div>
                 <div>Minimum Savings</div>
-                <div>Registration ID</div>
+                <div>Interest Rate</div>
             </div>
             {chamas.map((chama) => (
                 <div
@@ -17,7 +17,7 @@ const ChamasTable = ({ chamas }: { chamas: Chama[] }) => {
                     <div>{chama.name}</div>
                     <div>{chama.location}</div>
                     <div>{chama.minimumSavings}</div>
-                    <div>{chama.registrationId ?? 'Not Registered'}</div>
+                    <div>{chama.interestRate}%</div>
                 </div>
             ))}
         </div>

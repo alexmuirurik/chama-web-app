@@ -19,6 +19,14 @@ export type MemberwithUser = Prisma.MemberGetPayload<{
     }
 }>
 
+export type Memberloan = Prisma.MemberGetPayload<{
+    include: {
+        loans: true
+        shortLoans: true
+        penalties: true
+    }
+}>
+
 export type ChamawithMembers = Prisma.ChamaGetPayload<{
     include: {
         members: true

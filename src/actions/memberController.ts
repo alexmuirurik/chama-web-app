@@ -3,18 +3,18 @@
 import prisma from '@/prisma/prisma'
 import { CreateMemberSchema } from '@/prisma/schemas/userschemas'
 import z from 'zod'
-import { TransactionStatus } from '../generate/prisma/enums'
+import { Role, TransactionStatus } from '../generate/prisma/enums'
 
 export const createMember = async (
     data: z.infer<typeof CreateMemberSchema>
 ) => {
     try {
         const member = await prisma.member.create({
-            data: { 
+            data: {
                 ...data,
                 balanceSheet: {
-                    create: {}
-                }
+                    create: {},
+                },
             },
         })
         return member
@@ -41,6 +41,9 @@ export const getMembers = async (chamaId: string) => {
         const members = await prisma.member.findMany({
             where: {
                 chamaId: chamaId,
+                role: {
+                    not: Role.ADMIN
+                }
             },
             include: {
                 user: true,
@@ -66,6 +69,9 @@ export const getMembersWithoutActiveLoans = async (
                             status: TransactionStatus.PENDING,
                         },
                     },
+                    role: {
+                        not: Role.ADMIN
+                    }
                 },
                 include: {
                     user: true,
@@ -83,6 +89,9 @@ export const getMembersWithoutActiveLoans = async (
                         status: TransactionStatus.PENDING,
                     },
                 },
+                role: {
+                    not: Role.ADMIN
+                }
             },
             include: {
                 user: true,
@@ -90,6 +99,37 @@ export const getMembersWithoutActiveLoans = async (
         })
 
         return members
+    } catch (error) {
+        throw new Error(error as any)
+    }
+}
+
+export const getMemberLoansandShortLoans = async (memberId: string) => {
+    try {
+        const member = await prisma.member.findUnique({
+            where: {
+                id: memberId,
+            },
+            include: {
+                loans: {
+                    where: {
+                        status: TransactionStatus.PENDING,
+                    },
+                },
+                shortLoans: {
+                    where: {
+                        status: TransactionStatus.PENDING,
+                    },
+                },
+                penalties: {
+                    where: {
+                        status: TransactionStatus.PENDING,
+                    },
+                },
+            },
+        })
+        
+        return member
     } catch (error) {
         throw new Error(error as any)
     }

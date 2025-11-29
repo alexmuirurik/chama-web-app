@@ -5,12 +5,22 @@ export type LoanType = 'LONG_TERM' | 'SHORT_TERM'
 export const LoanSchema = z.object({
     loanType: z.string<LoanType>(),
     memberId: z.string(),
+    principle: z
+        .transform(Number)
+        .pipe(z.number().min(0, 'Please enter your price.')),
     loanAmount: z
         .transform(Number)
         .pipe(z.number().min(0, 'Please enter your price.')),
     termMonths: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')).optional(),
+        .pipe(z.number().min(1, 'Please enter your price.'))
+        .optional(),
+    monthlyRepayment: z
+        .transform(Number)
+        .pipe(z.number().min(0, 'Please enter your price.')).optional(),
     guarantors: z.array(z.string()).min(2, 'Please select two guarantors.'),
+    interest: z
+        .transform(Number)
+        .pipe(z.number().min(0, 'Please enter your price.')),
     loanDocument: z.string().optional(),
 })

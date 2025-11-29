@@ -21,5 +21,6 @@ export type LoanWithMember = Prisma.LoanGetPayload<{
 export type SavingWithMember = Prisma.SavingGetPayload<{
     include: {
         member: true
+        deduction: true
     }
 }>

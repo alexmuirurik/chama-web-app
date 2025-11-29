@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Loan" ADD COLUMN     "monthlyRepayment" DOUBLE PRECISION NOT NULL DEFAULT 0;
