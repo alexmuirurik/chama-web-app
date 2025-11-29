@@ -27,6 +27,8 @@ export type AggregateBalanceSheet = {
 }
 
 export type BalanceSheetAvgAggregateOutputType = {
+  loanLimit: number | null
+  shortLoanLimit: number | null
   totalSavings: number | null
   totalLongTermLoan: number | null
   totalShortTermLoan: number | null
@@ -38,6 +40,8 @@ export type BalanceSheetAvgAggregateOutputType = {
 }
 
 export type BalanceSheetSumAggregateOutputType = {
+  loanLimit: number | null
+  shortLoanLimit: number | null
   totalSavings: number | null
   totalLongTermLoan: number | null
   totalShortTermLoan: number | null
@@ -51,6 +55,8 @@ export type BalanceSheetSumAggregateOutputType = {
 export type BalanceSheetMinAggregateOutputType = {
   id: string | null
   memberId: string | null
+  loanLimit: number | null
+  shortLoanLimit: number | null
   totalSavings: number | null
   totalLongTermLoan: number | null
   totalShortTermLoan: number | null
@@ -66,6 +72,8 @@ export type BalanceSheetMinAggregateOutputType = {
 export type BalanceSheetMaxAggregateOutputType = {
   id: string | null
   memberId: string | null
+  loanLimit: number | null
+  shortLoanLimit: number | null
   totalSavings: number | null
   totalLongTermLoan: number | null
   totalShortTermLoan: number | null
@@ -81,6 +89,8 @@ export type BalanceSheetMaxAggregateOutputType = {
 export type BalanceSheetCountAggregateOutputType = {
   id: number
   memberId: number
+  loanLimit: number
+  shortLoanLimit: number
   totalSavings: number
   totalLongTermLoan: number
   totalShortTermLoan: number
@@ -96,6 +106,8 @@ export type BalanceSheetCountAggregateOutputType = {
 
 
 export type BalanceSheetAvgAggregateInputType = {
+  loanLimit?: true
+  shortLoanLimit?: true
   totalSavings?: true
   totalLongTermLoan?: true
   totalShortTermLoan?: true
@@ -107,6 +119,8 @@ export type BalanceSheetAvgAggregateInputType = {
 }
 
 export type BalanceSheetSumAggregateInputType = {
+  loanLimit?: true
+  shortLoanLimit?: true
   totalSavings?: true
   totalLongTermLoan?: true
   totalShortTermLoan?: true
@@ -120,6 +134,8 @@ export type BalanceSheetSumAggregateInputType = {
 export type BalanceSheetMinAggregateInputType = {
   id?: true
   memberId?: true
+  loanLimit?: true
+  shortLoanLimit?: true
   totalSavings?: true
   totalLongTermLoan?: true
   totalShortTermLoan?: true
@@ -135,6 +151,8 @@ export type BalanceSheetMinAggregateInputType = {
 export type BalanceSheetMaxAggregateInputType = {
   id?: true
   memberId?: true
+  loanLimit?: true
+  shortLoanLimit?: true
   totalSavings?: true
   totalLongTermLoan?: true
   totalShortTermLoan?: true
@@ -150,6 +168,8 @@ export type BalanceSheetMaxAggregateInputType = {
 export type BalanceSheetCountAggregateInputType = {
   id?: true
   memberId?: true
+  loanLimit?: true
+  shortLoanLimit?: true
   totalSavings?: true
   totalLongTermLoan?: true
   totalShortTermLoan?: true
@@ -252,6 +272,8 @@ export type BalanceSheetGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type BalanceSheetGroupByOutputType = {
   id: string
   memberId: string
+  loanLimit: number
+  shortLoanLimit: number
   totalSavings: number
   totalLongTermLoan: number
   totalShortTermLoan: number
@@ -290,6 +312,8 @@ export type BalanceSheetWhereInput = {
   NOT?: Prisma.BalanceSheetWhereInput | Prisma.BalanceSheetWhereInput[]
   id?: Prisma.StringFilter<"BalanceSheet"> | string
   memberId?: Prisma.StringFilter<"BalanceSheet"> | string
+  loanLimit?: Prisma.FloatFilter<"BalanceSheet"> | number
+  shortLoanLimit?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalSavings?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalLongTermLoan?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalShortTermLoan?: Prisma.FloatFilter<"BalanceSheet"> | number
@@ -306,6 +330,8 @@ export type BalanceSheetWhereInput = {
 export type BalanceSheetOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -325,6 +351,8 @@ export type BalanceSheetWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BalanceSheetWhereInput | Prisma.BalanceSheetWhereInput[]
   OR?: Prisma.BalanceSheetWhereInput[]
   NOT?: Prisma.BalanceSheetWhereInput | Prisma.BalanceSheetWhereInput[]
+  loanLimit?: Prisma.FloatFilter<"BalanceSheet"> | number
+  shortLoanLimit?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalSavings?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalLongTermLoan?: Prisma.FloatFilter<"BalanceSheet"> | number
   totalShortTermLoan?: Prisma.FloatFilter<"BalanceSheet"> | number
@@ -341,6 +369,8 @@ export type BalanceSheetWhereUniqueInput = Prisma.AtLeast<{
 export type BalanceSheetOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -364,6 +394,8 @@ export type BalanceSheetScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BalanceSheetScalarWhereWithAggregatesInput | Prisma.BalanceSheetScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BalanceSheet"> | string
   memberId?: Prisma.StringWithAggregatesFilter<"BalanceSheet"> | string
+  loanLimit?: Prisma.FloatWithAggregatesFilter<"BalanceSheet"> | number
+  shortLoanLimit?: Prisma.FloatWithAggregatesFilter<"BalanceSheet"> | number
   totalSavings?: Prisma.FloatWithAggregatesFilter<"BalanceSheet"> | number
   totalLongTermLoan?: Prisma.FloatWithAggregatesFilter<"BalanceSheet"> | number
   totalShortTermLoan?: Prisma.FloatWithAggregatesFilter<"BalanceSheet"> | number
@@ -378,6 +410,8 @@ export type BalanceSheetScalarWhereWithAggregatesInput = {
 
 export type BalanceSheetCreateInput = {
   id?: string
+  loanLimit?: number
+  shortLoanLimit?: number
   totalSavings?: number
   totalLongTermLoan?: number
   totalShortTermLoan?: number
@@ -394,6 +428,8 @@ export type BalanceSheetCreateInput = {
 export type BalanceSheetUncheckedCreateInput = {
   id?: string
   memberId: string
+  loanLimit?: number
+  shortLoanLimit?: number
   totalSavings?: number
   totalLongTermLoan?: number
   totalShortTermLoan?: number
@@ -408,6 +444,8 @@ export type BalanceSheetUncheckedCreateInput = {
 
 export type BalanceSheetUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -424,6 +462,8 @@ export type BalanceSheetUpdateInput = {
 export type BalanceSheetUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -439,6 +479,8 @@ export type BalanceSheetUncheckedUpdateInput = {
 export type BalanceSheetCreateManyInput = {
   id?: string
   memberId: string
+  loanLimit?: number
+  shortLoanLimit?: number
   totalSavings?: number
   totalLongTermLoan?: number
   totalShortTermLoan?: number
@@ -453,6 +495,8 @@ export type BalanceSheetCreateManyInput = {
 
 export type BalanceSheetUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -468,6 +512,8 @@ export type BalanceSheetUpdateManyMutationInput = {
 export type BalanceSheetUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -488,6 +534,8 @@ export type BalanceSheetNullableScalarRelationFilter = {
 export type BalanceSheetCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -501,6 +549,8 @@ export type BalanceSheetCountOrderByAggregateInput = {
 }
 
 export type BalanceSheetAvgOrderByAggregateInput = {
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -514,6 +564,8 @@ export type BalanceSheetAvgOrderByAggregateInput = {
 export type BalanceSheetMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -529,6 +581,8 @@ export type BalanceSheetMaxOrderByAggregateInput = {
 export type BalanceSheetMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -542,6 +596,8 @@ export type BalanceSheetMinOrderByAggregateInput = {
 }
 
 export type BalanceSheetSumOrderByAggregateInput = {
+  loanLimit?: Prisma.SortOrder
+  shortLoanLimit?: Prisma.SortOrder
   totalSavings?: Prisma.SortOrder
   totalLongTermLoan?: Prisma.SortOrder
   totalShortTermLoan?: Prisma.SortOrder
@@ -586,6 +642,8 @@ export type BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput = {
 
 export type BalanceSheetCreateWithoutMemberInput = {
   id?: string
+  loanLimit?: number
+  shortLoanLimit?: number
   totalSavings?: number
   totalLongTermLoan?: number
   totalShortTermLoan?: number
@@ -600,6 +658,8 @@ export type BalanceSheetCreateWithoutMemberInput = {
 
 export type BalanceSheetUncheckedCreateWithoutMemberInput = {
   id?: string
+  loanLimit?: number
+  shortLoanLimit?: number
   totalSavings?: number
   totalLongTermLoan?: number
   totalShortTermLoan?: number
@@ -630,6 +690,8 @@ export type BalanceSheetUpdateToOneWithWhereWithoutMemberInput = {
 
 export type BalanceSheetUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -644,6 +706,8 @@ export type BalanceSheetUpdateWithoutMemberInput = {
 
 export type BalanceSheetUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  loanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
+  shortLoanLimit?: Prisma.FloatFieldUpdateOperationsInput | number
   totalSavings?: Prisma.FloatFieldUpdateOperationsInput | number
   totalLongTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
   totalShortTermLoan?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -661,6 +725,8 @@ export type BalanceSheetUncheckedUpdateWithoutMemberInput = {
 export type BalanceSheetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  loanLimit?: boolean
+  shortLoanLimit?: boolean
   totalSavings?: boolean
   totalLongTermLoan?: boolean
   totalShortTermLoan?: boolean
@@ -677,6 +743,8 @@ export type BalanceSheetSelect<ExtArgs extends runtime.Types.Extensions.Internal
 export type BalanceSheetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  loanLimit?: boolean
+  shortLoanLimit?: boolean
   totalSavings?: boolean
   totalLongTermLoan?: boolean
   totalShortTermLoan?: boolean
@@ -693,6 +761,8 @@ export type BalanceSheetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 export type BalanceSheetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  loanLimit?: boolean
+  shortLoanLimit?: boolean
   totalSavings?: boolean
   totalLongTermLoan?: boolean
   totalShortTermLoan?: boolean
@@ -709,6 +779,8 @@ export type BalanceSheetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type BalanceSheetSelectScalar = {
   id?: boolean
   memberId?: boolean
+  loanLimit?: boolean
+  shortLoanLimit?: boolean
   totalSavings?: boolean
   totalLongTermLoan?: boolean
   totalShortTermLoan?: boolean
@@ -721,7 +793,7 @@ export type BalanceSheetSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BalanceSheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "totalSavings" | "totalLongTermLoan" | "totalShortTermLoan" | "totalDividend" | "totalPenalties" | "totalUnpaid" | "fixedSavings" | "welfare" | "createdAt" | "updatedAt", ExtArgs["result"]["balanceSheet"]>
+export type BalanceSheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "loanLimit" | "shortLoanLimit" | "totalSavings" | "totalLongTermLoan" | "totalShortTermLoan" | "totalDividend" | "totalPenalties" | "totalUnpaid" | "fixedSavings" | "welfare" | "createdAt" | "updatedAt", ExtArgs["result"]["balanceSheet"]>
 export type BalanceSheetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
 }
@@ -740,6 +812,8 @@ export type $BalanceSheetPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     memberId: string
+    loanLimit: number
+    shortLoanLimit: number
     totalSavings: number
     totalLongTermLoan: number
     totalShortTermLoan: number
@@ -1176,6 +1250,8 @@ export interface Prisma__BalanceSheetClient<T, Null = never, ExtArgs extends run
 export interface BalanceSheetFieldRefs {
   readonly id: Prisma.FieldRef<"BalanceSheet", 'String'>
   readonly memberId: Prisma.FieldRef<"BalanceSheet", 'String'>
+  readonly loanLimit: Prisma.FieldRef<"BalanceSheet", 'Float'>
+  readonly shortLoanLimit: Prisma.FieldRef<"BalanceSheet", 'Float'>
   readonly totalSavings: Prisma.FieldRef<"BalanceSheet", 'Float'>
   readonly totalLongTermLoan: Prisma.FieldRef<"BalanceSheet", 'Float'>
   readonly totalShortTermLoan: Prisma.FieldRef<"BalanceSheet", 'Float'>

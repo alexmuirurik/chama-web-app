@@ -28,19 +28,21 @@ export type AggregateChama = {
 
 export type ChamaAvgAggregateOutputType = {
   minimumSavings: number | null
+  interestRate: number | null
 }
 
 export type ChamaSumAggregateOutputType = {
   minimumSavings: number | null
+  interestRate: number | null
 }
 
 export type ChamaMinAggregateOutputType = {
   id: string | null
   name: string | null
   location: string | null
-  profilePic: string | null
   registrationDocument: string | null
   minimumSavings: number | null
+  interestRate: number | null
   nextMeeting: Date | null
   registrationId: string | null
   adminId: string | null
@@ -52,9 +54,9 @@ export type ChamaMaxAggregateOutputType = {
   id: string | null
   name: string | null
   location: string | null
-  profilePic: string | null
   registrationDocument: string | null
   minimumSavings: number | null
+  interestRate: number | null
   nextMeeting: Date | null
   registrationId: string | null
   adminId: string | null
@@ -66,9 +68,9 @@ export type ChamaCountAggregateOutputType = {
   id: number
   name: number
   location: number
-  profilePic: number
   registrationDocument: number
   minimumSavings: number
+  interestRate: number
   nextMeeting: number
   registrationId: number
   adminId: number
@@ -80,19 +82,21 @@ export type ChamaCountAggregateOutputType = {
 
 export type ChamaAvgAggregateInputType = {
   minimumSavings?: true
+  interestRate?: true
 }
 
 export type ChamaSumAggregateInputType = {
   minimumSavings?: true
+  interestRate?: true
 }
 
 export type ChamaMinAggregateInputType = {
   id?: true
   name?: true
   location?: true
-  profilePic?: true
   registrationDocument?: true
   minimumSavings?: true
+  interestRate?: true
   nextMeeting?: true
   registrationId?: true
   adminId?: true
@@ -104,9 +108,9 @@ export type ChamaMaxAggregateInputType = {
   id?: true
   name?: true
   location?: true
-  profilePic?: true
   registrationDocument?: true
   minimumSavings?: true
+  interestRate?: true
   nextMeeting?: true
   registrationId?: true
   adminId?: true
@@ -118,9 +122,9 @@ export type ChamaCountAggregateInputType = {
   id?: true
   name?: true
   location?: true
-  profilePic?: true
   registrationDocument?: true
   minimumSavings?: true
+  interestRate?: true
   nextMeeting?: true
   registrationId?: true
   adminId?: true
@@ -219,9 +223,9 @@ export type ChamaGroupByOutputType = {
   id: string
   name: string
   location: string
-  profilePic: string | null
   registrationDocument: string | null
-  minimumSavings: number | null
+  minimumSavings: number
+  interestRate: number
   nextMeeting: Date | null
   registrationId: string | null
   adminId: string
@@ -256,9 +260,9 @@ export type ChamaWhereInput = {
   id?: Prisma.StringFilter<"Chama"> | string
   name?: Prisma.StringFilter<"Chama"> | string
   location?: Prisma.StringFilter<"Chama"> | string
-  profilePic?: Prisma.StringNullableFilter<"Chama"> | string | null
   registrationDocument?: Prisma.StringNullableFilter<"Chama"> | string | null
-  minimumSavings?: Prisma.FloatNullableFilter<"Chama"> | number | null
+  minimumSavings?: Prisma.FloatFilter<"Chama"> | number
+  interestRate?: Prisma.FloatFilter<"Chama"> | number
   nextMeeting?: Prisma.DateTimeNullableFilter<"Chama"> | Date | string | null
   registrationId?: Prisma.StringNullableFilter<"Chama"> | string | null
   adminId?: Prisma.StringFilter<"Chama"> | string
@@ -274,9 +278,9 @@ export type ChamaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  profilePic?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationDocument?: Prisma.SortOrderInput | Prisma.SortOrder
-  minimumSavings?: Prisma.SortOrderInput | Prisma.SortOrder
+  minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
   nextMeeting?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationId?: Prisma.SortOrderInput | Prisma.SortOrder
   adminId?: Prisma.SortOrder
@@ -295,9 +299,9 @@ export type ChamaWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ChamaWhereInput | Prisma.ChamaWhereInput[]
   name?: Prisma.StringFilter<"Chama"> | string
   location?: Prisma.StringFilter<"Chama"> | string
-  profilePic?: Prisma.StringNullableFilter<"Chama"> | string | null
   registrationDocument?: Prisma.StringNullableFilter<"Chama"> | string | null
-  minimumSavings?: Prisma.FloatNullableFilter<"Chama"> | number | null
+  minimumSavings?: Prisma.FloatFilter<"Chama"> | number
+  interestRate?: Prisma.FloatFilter<"Chama"> | number
   nextMeeting?: Prisma.DateTimeNullableFilter<"Chama"> | Date | string | null
   registrationId?: Prisma.StringNullableFilter<"Chama"> | string | null
   adminId?: Prisma.StringFilter<"Chama"> | string
@@ -313,9 +317,9 @@ export type ChamaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  profilePic?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationDocument?: Prisma.SortOrderInput | Prisma.SortOrder
-  minimumSavings?: Prisma.SortOrderInput | Prisma.SortOrder
+  minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
   nextMeeting?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationId?: Prisma.SortOrderInput | Prisma.SortOrder
   adminId?: Prisma.SortOrder
@@ -335,9 +339,9 @@ export type ChamaScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Chama"> | string
   name?: Prisma.StringWithAggregatesFilter<"Chama"> | string
   location?: Prisma.StringWithAggregatesFilter<"Chama"> | string
-  profilePic?: Prisma.StringNullableWithAggregatesFilter<"Chama"> | string | null
   registrationDocument?: Prisma.StringNullableWithAggregatesFilter<"Chama"> | string | null
-  minimumSavings?: Prisma.FloatNullableWithAggregatesFilter<"Chama"> | number | null
+  minimumSavings?: Prisma.FloatWithAggregatesFilter<"Chama"> | number
+  interestRate?: Prisma.FloatWithAggregatesFilter<"Chama"> | number
   nextMeeting?: Prisma.DateTimeNullableWithAggregatesFilter<"Chama"> | Date | string | null
   registrationId?: Prisma.StringNullableWithAggregatesFilter<"Chama"> | string | null
   adminId?: Prisma.StringWithAggregatesFilter<"Chama"> | string
@@ -349,9 +353,9 @@ export type ChamaCreateInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -366,9 +370,9 @@ export type ChamaUncheckedCreateInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   adminId: string
@@ -383,9 +387,9 @@ export type ChamaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,9 +404,9 @@ export type ChamaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -417,9 +421,9 @@ export type ChamaCreateManyInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   adminId: string
@@ -431,9 +435,9 @@ export type ChamaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,9 +448,9 @@ export type ChamaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -468,9 +472,9 @@ export type ChamaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  profilePic?: Prisma.SortOrder
   registrationDocument?: Prisma.SortOrder
   minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
   nextMeeting?: Prisma.SortOrder
   registrationId?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
@@ -480,15 +484,16 @@ export type ChamaCountOrderByAggregateInput = {
 
 export type ChamaAvgOrderByAggregateInput = {
   minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
 }
 
 export type ChamaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  profilePic?: Prisma.SortOrder
   registrationDocument?: Prisma.SortOrder
   minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
   nextMeeting?: Prisma.SortOrder
   registrationId?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
@@ -500,9 +505,9 @@ export type ChamaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
-  profilePic?: Prisma.SortOrder
   registrationDocument?: Prisma.SortOrder
   minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
   nextMeeting?: Prisma.SortOrder
   registrationId?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
@@ -512,6 +517,7 @@ export type ChamaMinOrderByAggregateInput = {
 
 export type ChamaSumOrderByAggregateInput = {
   minimumSavings?: Prisma.SortOrder
+  interestRate?: Prisma.SortOrder
 }
 
 export type ChamaScalarRelationFilter = {
@@ -561,8 +567,8 @@ export type ChamaUncheckedUpdateManyWithoutAdminNestedInput = {
   deleteMany?: Prisma.ChamaScalarWhereInput | Prisma.ChamaScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
   increment?: number
   decrement?: number
   multiply?: number
@@ -615,9 +621,9 @@ export type ChamaCreateWithoutAdminInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -631,9 +637,9 @@ export type ChamaUncheckedCreateWithoutAdminInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -676,9 +682,9 @@ export type ChamaScalarWhereInput = {
   id?: Prisma.StringFilter<"Chama"> | string
   name?: Prisma.StringFilter<"Chama"> | string
   location?: Prisma.StringFilter<"Chama"> | string
-  profilePic?: Prisma.StringNullableFilter<"Chama"> | string | null
   registrationDocument?: Prisma.StringNullableFilter<"Chama"> | string | null
-  minimumSavings?: Prisma.FloatNullableFilter<"Chama"> | number | null
+  minimumSavings?: Prisma.FloatFilter<"Chama"> | number
+  interestRate?: Prisma.FloatFilter<"Chama"> | number
   nextMeeting?: Prisma.DateTimeNullableFilter<"Chama"> | Date | string | null
   registrationId?: Prisma.StringNullableFilter<"Chama"> | string | null
   adminId?: Prisma.StringFilter<"Chama"> | string
@@ -690,9 +696,9 @@ export type ChamaCreateWithoutLoansInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -706,9 +712,9 @@ export type ChamaUncheckedCreateWithoutLoansInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   adminId: string
@@ -738,9 +744,9 @@ export type ChamaUpdateWithoutLoansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -754,9 +760,9 @@ export type ChamaUncheckedUpdateWithoutLoansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -770,9 +776,9 @@ export type ChamaCreateWithoutProjectsInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -786,9 +792,9 @@ export type ChamaUncheckedCreateWithoutProjectsInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   adminId: string
@@ -818,9 +824,9 @@ export type ChamaUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -834,9 +840,9 @@ export type ChamaUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -850,9 +856,9 @@ export type ChamaCreateWithoutMembersInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -866,9 +872,9 @@ export type ChamaUncheckedCreateWithoutMembersInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   adminId: string
@@ -898,9 +904,9 @@ export type ChamaUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -914,9 +920,9 @@ export type ChamaUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -930,9 +936,9 @@ export type ChamaCreateManyAdminInput = {
   id?: string
   name: string
   location: string
-  profilePic?: string | null
   registrationDocument?: string | null
-  minimumSavings?: number | null
+  minimumSavings?: number
+  interestRate?: number
   nextMeeting?: Date | string | null
   registrationId?: string | null
   createdAt?: Date | string
@@ -943,9 +949,9 @@ export type ChamaUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -959,9 +965,9 @@ export type ChamaUncheckedUpdateWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -975,9 +981,9 @@ export type ChamaUncheckedUpdateManyWithoutAdminInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   registrationDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  minimumSavings?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minimumSavings?: Prisma.FloatFieldUpdateOperationsInput | number
+  interestRate?: Prisma.FloatFieldUpdateOperationsInput | number
   nextMeeting?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1037,9 +1043,9 @@ export type ChamaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   location?: boolean
-  profilePic?: boolean
   registrationDocument?: boolean
   minimumSavings?: boolean
+  interestRate?: boolean
   nextMeeting?: boolean
   registrationId?: boolean
   adminId?: boolean
@@ -1056,9 +1062,9 @@ export type ChamaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   location?: boolean
-  profilePic?: boolean
   registrationDocument?: boolean
   minimumSavings?: boolean
+  interestRate?: boolean
   nextMeeting?: boolean
   registrationId?: boolean
   adminId?: boolean
@@ -1071,9 +1077,9 @@ export type ChamaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   location?: boolean
-  profilePic?: boolean
   registrationDocument?: boolean
   minimumSavings?: boolean
+  interestRate?: boolean
   nextMeeting?: boolean
   registrationId?: boolean
   adminId?: boolean
@@ -1086,9 +1092,9 @@ export type ChamaSelectScalar = {
   id?: boolean
   name?: boolean
   location?: boolean
-  profilePic?: boolean
   registrationDocument?: boolean
   minimumSavings?: boolean
+  interestRate?: boolean
   nextMeeting?: boolean
   registrationId?: boolean
   adminId?: boolean
@@ -1096,7 +1102,7 @@ export type ChamaSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ChamaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "profilePic" | "registrationDocument" | "minimumSavings" | "nextMeeting" | "registrationId" | "adminId" | "createdAt" | "updatedAt", ExtArgs["result"]["chama"]>
+export type ChamaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "registrationDocument" | "minimumSavings" | "interestRate" | "nextMeeting" | "registrationId" | "adminId" | "createdAt" | "updatedAt", ExtArgs["result"]["chama"]>
 export type ChamaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   admin?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Chama$membersArgs<ExtArgs>
@@ -1123,9 +1129,9 @@ export type $ChamaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     name: string
     location: string
-    profilePic: string | null
     registrationDocument: string | null
-    minimumSavings: number | null
+    minimumSavings: number
+    interestRate: number
     nextMeeting: Date | null
     registrationId: string | null
     adminId: string
@@ -1561,9 +1567,9 @@ export interface ChamaFieldRefs {
   readonly id: Prisma.FieldRef<"Chama", 'String'>
   readonly name: Prisma.FieldRef<"Chama", 'String'>
   readonly location: Prisma.FieldRef<"Chama", 'String'>
-  readonly profilePic: Prisma.FieldRef<"Chama", 'String'>
   readonly registrationDocument: Prisma.FieldRef<"Chama", 'String'>
   readonly minimumSavings: Prisma.FieldRef<"Chama", 'Float'>
+  readonly interestRate: Prisma.FieldRef<"Chama", 'Float'>
   readonly nextMeeting: Prisma.FieldRef<"Chama", 'DateTime'>
   readonly registrationId: Prisma.FieldRef<"Chama", 'String'>
   readonly adminId: Prisma.FieldRef<"Chama", 'String'>

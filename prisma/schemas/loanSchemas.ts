@@ -10,7 +10,7 @@ export const LoanSchema = z.object({
         .pipe(z.number().min(0, 'Please enter your price.')),
     termMonths: z
         .transform(Number)
-        .pipe(z.number().min(1, 'Please enter your price.')),
+        .pipe(z.number().min(1, 'Please enter your price.')).optional(),
     guarantors: z.array(z.string()).min(2, 'Please select two guarantors.'),
     loanDocument: z.string().optional(),
 })

@@ -28,14 +28,10 @@ export type AggregateSaving = {
 
 export type SavingAvgAggregateOutputType = {
   amount: number | null
-  savings: number | null
-  welfare: number | null
 }
 
 export type SavingSumAggregateOutputType = {
   amount: number | null
-  savings: number | null
-  welfare: number | null
 }
 
 export type SavingMinAggregateOutputType = {
@@ -43,9 +39,10 @@ export type SavingMinAggregateOutputType = {
   amount: number | null
   mPesaRef: string | null
   authorizedBy: string | null
+  loanId: string | null
+  shortLoanId: string | null
+  penaltyId: string | null
   memberId: string | null
-  savings: number | null
-  welfare: number | null
   status: $Enums.TransactionStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,9 +53,10 @@ export type SavingMaxAggregateOutputType = {
   amount: number | null
   mPesaRef: string | null
   authorizedBy: string | null
+  loanId: string | null
+  shortLoanId: string | null
+  penaltyId: string | null
   memberId: string | null
-  savings: number | null
-  welfare: number | null
   status: $Enums.TransactionStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -69,9 +67,10 @@ export type SavingCountAggregateOutputType = {
   amount: number
   mPesaRef: number
   authorizedBy: number
+  loanId: number
+  shortLoanId: number
+  penaltyId: number
   memberId: number
-  savings: number
-  welfare: number
   status: number
   createdAt: number
   updatedAt: number
@@ -81,14 +80,10 @@ export type SavingCountAggregateOutputType = {
 
 export type SavingAvgAggregateInputType = {
   amount?: true
-  savings?: true
-  welfare?: true
 }
 
 export type SavingSumAggregateInputType = {
   amount?: true
-  savings?: true
-  welfare?: true
 }
 
 export type SavingMinAggregateInputType = {
@@ -96,9 +91,10 @@ export type SavingMinAggregateInputType = {
   amount?: true
   mPesaRef?: true
   authorizedBy?: true
+  loanId?: true
+  shortLoanId?: true
+  penaltyId?: true
   memberId?: true
-  savings?: true
-  welfare?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -109,9 +105,10 @@ export type SavingMaxAggregateInputType = {
   amount?: true
   mPesaRef?: true
   authorizedBy?: true
+  loanId?: true
+  shortLoanId?: true
+  penaltyId?: true
   memberId?: true
-  savings?: true
-  welfare?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -122,9 +119,10 @@ export type SavingCountAggregateInputType = {
   amount?: true
   mPesaRef?: true
   authorizedBy?: true
+  loanId?: true
+  shortLoanId?: true
+  penaltyId?: true
   memberId?: true
-  savings?: true
-  welfare?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -222,9 +220,10 @@ export type SavingGroupByOutputType = {
   amount: number
   mPesaRef: string | null
   authorizedBy: string | null
+  loanId: string | null
+  shortLoanId: string | null
+  penaltyId: string | null
   memberId: string
-  savings: number
-  welfare: number
   status: $Enums.TransactionStatus
   createdAt: Date
   updatedAt: Date
@@ -258,14 +257,18 @@ export type SavingWhereInput = {
   amount?: Prisma.FloatFilter<"Saving"> | number
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
+  loanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  shortLoanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  penaltyId?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  savings?: Prisma.FloatFilter<"Saving"> | number
-  welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  deductions?: Prisma.DeductionListRelationFilter
+  loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
+  shortLoan?: Prisma.XOR<Prisma.ShortLoanNullableScalarRelationFilter, Prisma.ShortLoanWhereInput> | null
+  penalty?: Prisma.XOR<Prisma.PenaltyNullableScalarRelationFilter, Prisma.PenaltyWhereInput> | null
+  deduction?: Prisma.XOR<Prisma.DeductionNullableScalarRelationFilter, Prisma.DeductionWhereInput> | null
 }
 
 export type SavingOrderByWithRelationInput = {
@@ -273,14 +276,18 @@ export type SavingOrderByWithRelationInput = {
   amount?: Prisma.SortOrder
   mPesaRef?: Prisma.SortOrderInput | Prisma.SortOrder
   authorizedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortLoanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  penaltyId?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
-  deductions?: Prisma.DeductionOrderByRelationAggregateInput
+  loan?: Prisma.LoanOrderByWithRelationInput
+  shortLoan?: Prisma.ShortLoanOrderByWithRelationInput
+  penalty?: Prisma.PenaltyOrderByWithRelationInput
+  deduction?: Prisma.DeductionOrderByWithRelationInput
 }
 
 export type SavingWhereUniqueInput = Prisma.AtLeast<{
@@ -291,14 +298,18 @@ export type SavingWhereUniqueInput = Prisma.AtLeast<{
   amount?: Prisma.FloatFilter<"Saving"> | number
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
+  loanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  shortLoanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  penaltyId?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  savings?: Prisma.FloatFilter<"Saving"> | number
-  welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
-  deductions?: Prisma.DeductionListRelationFilter
+  loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
+  shortLoan?: Prisma.XOR<Prisma.ShortLoanNullableScalarRelationFilter, Prisma.ShortLoanWhereInput> | null
+  penalty?: Prisma.XOR<Prisma.PenaltyNullableScalarRelationFilter, Prisma.PenaltyWhereInput> | null
+  deduction?: Prisma.XOR<Prisma.DeductionNullableScalarRelationFilter, Prisma.DeductionWhereInput> | null
 }, "id">
 
 export type SavingOrderByWithAggregationInput = {
@@ -306,9 +317,10 @@ export type SavingOrderByWithAggregationInput = {
   amount?: Prisma.SortOrder
   mPesaRef?: Prisma.SortOrderInput | Prisma.SortOrder
   authorizedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  shortLoanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  penaltyId?: Prisma.SortOrderInput | Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -327,9 +339,10 @@ export type SavingScalarWhereWithAggregatesInput = {
   amount?: Prisma.FloatWithAggregatesFilter<"Saving"> | number
   mPesaRef?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
+  loanId?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
+  shortLoanId?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
+  penaltyId?: Prisma.StringNullableWithAggregatesFilter<"Saving"> | string | null
   memberId?: Prisma.StringWithAggregatesFilter<"Saving"> | string
-  savings?: Prisma.FloatWithAggregatesFilter<"Saving"> | number
-  welfare?: Prisma.FloatWithAggregatesFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusWithAggregatesFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Saving"> | Date | string
@@ -340,13 +353,14 @@ export type SavingCreateInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutSavingsInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutSavingInput
+  loan?: Prisma.LoanCreateNestedOneWithoutSavingsInput
+  shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutSavingsInput
+  penalty?: Prisma.PenaltyCreateNestedOneWithoutSavingsInput
+  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingInput
 }
 
 export type SavingUncheckedCreateInput = {
@@ -354,13 +368,14 @@ export type SavingUncheckedCreateInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
+  loanId?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
   memberId: string
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutSavingInput
+  deduction?: Prisma.DeductionUncheckedCreateNestedOneWithoutSavingInput
 }
 
 export type SavingUpdateInput = {
@@ -368,13 +383,14 @@ export type SavingUpdateInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutSavingNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutSavingsNestedInput
+  shortLoan?: Prisma.ShortLoanUpdateOneWithoutSavingsNestedInput
+  penalty?: Prisma.PenaltyUpdateOneWithoutSavingsNestedInput
+  deduction?: Prisma.DeductionUpdateOneWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateInput = {
@@ -382,13 +398,14 @@ export type SavingUncheckedUpdateInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutSavingNestedInput
+  deduction?: Prisma.DeductionUncheckedUpdateOneWithoutSavingNestedInput
 }
 
 export type SavingCreateManyInput = {
@@ -396,9 +413,10 @@ export type SavingCreateManyInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
+  loanId?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
   memberId: string
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -409,8 +427,6 @@ export type SavingUpdateManyMutationInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -421,9 +437,10 @@ export type SavingUncheckedUpdateManyInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,9 +461,10 @@ export type SavingCountOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  shortLoanId?: Prisma.SortOrder
+  penaltyId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -454,8 +472,6 @@ export type SavingCountOrderByAggregateInput = {
 
 export type SavingAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
 }
 
 export type SavingMaxOrderByAggregateInput = {
@@ -463,9 +479,10 @@ export type SavingMaxOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  shortLoanId?: Prisma.SortOrder
+  penaltyId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -476,9 +493,10 @@ export type SavingMinOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   mPesaRef?: Prisma.SortOrder
   authorizedBy?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  shortLoanId?: Prisma.SortOrder
+  penaltyId?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -486,8 +504,6 @@ export type SavingMinOrderByAggregateInput = {
 
 export type SavingSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
-  savings?: Prisma.SortOrder
-  welfare?: Prisma.SortOrder
 }
 
 export type SavingScalarRelationFilter = {
@@ -541,18 +557,144 @@ export type EnumTransactionStatusFieldUpdateOperationsInput = {
   set?: $Enums.TransactionStatus
 }
 
-export type SavingCreateNestedOneWithoutDeductionsInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionsInput
+export type SavingCreateNestedOneWithoutDeductionInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput
   connect?: Prisma.SavingWhereUniqueInput
 }
 
-export type SavingUpdateOneRequiredWithoutDeductionsNestedInput = {
-  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionsInput
-  upsert?: Prisma.SavingUpsertWithoutDeductionsInput
+export type SavingUpdateOneRequiredWithoutDeductionNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutDeductionInput
+  upsert?: Prisma.SavingUpsertWithoutDeductionInput
   connect?: Prisma.SavingWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SavingUpdateToOneWithWhereWithoutDeductionsInput, Prisma.SavingUpdateWithoutDeductionsInput>, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SavingUpdateToOneWithWhereWithoutDeductionInput, Prisma.SavingUpdateWithoutDeductionInput>, Prisma.SavingUncheckedUpdateWithoutDeductionInput>
+}
+
+export type SavingCreateNestedManyWithoutLoanInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput> | Prisma.SavingCreateWithoutLoanInput[] | Prisma.SavingUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutLoanInput | Prisma.SavingCreateOrConnectWithoutLoanInput[]
+  createMany?: Prisma.SavingCreateManyLoanInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUncheckedCreateNestedManyWithoutLoanInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput> | Prisma.SavingCreateWithoutLoanInput[] | Prisma.SavingUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutLoanInput | Prisma.SavingCreateOrConnectWithoutLoanInput[]
+  createMany?: Prisma.SavingCreateManyLoanInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUpdateManyWithoutLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput> | Prisma.SavingCreateWithoutLoanInput[] | Prisma.SavingUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutLoanInput | Prisma.SavingCreateOrConnectWithoutLoanInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutLoanInput | Prisma.SavingUpsertWithWhereUniqueWithoutLoanInput[]
+  createMany?: Prisma.SavingCreateManyLoanInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutLoanInput | Prisma.SavingUpdateWithWhereUniqueWithoutLoanInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutLoanInput | Prisma.SavingUpdateManyWithWhereWithoutLoanInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+}
+
+export type SavingUncheckedUpdateManyWithoutLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput> | Prisma.SavingCreateWithoutLoanInput[] | Prisma.SavingUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutLoanInput | Prisma.SavingCreateOrConnectWithoutLoanInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutLoanInput | Prisma.SavingUpsertWithWhereUniqueWithoutLoanInput[]
+  createMany?: Prisma.SavingCreateManyLoanInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutLoanInput | Prisma.SavingUpdateWithWhereUniqueWithoutLoanInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutLoanInput | Prisma.SavingUpdateManyWithWhereWithoutLoanInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+}
+
+export type SavingCreateNestedManyWithoutShortLoanInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput> | Prisma.SavingCreateWithoutShortLoanInput[] | Prisma.SavingUncheckedCreateWithoutShortLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutShortLoanInput | Prisma.SavingCreateOrConnectWithoutShortLoanInput[]
+  createMany?: Prisma.SavingCreateManyShortLoanInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUncheckedCreateNestedManyWithoutShortLoanInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput> | Prisma.SavingCreateWithoutShortLoanInput[] | Prisma.SavingUncheckedCreateWithoutShortLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutShortLoanInput | Prisma.SavingCreateOrConnectWithoutShortLoanInput[]
+  createMany?: Prisma.SavingCreateManyShortLoanInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUpdateManyWithoutShortLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput> | Prisma.SavingCreateWithoutShortLoanInput[] | Prisma.SavingUncheckedCreateWithoutShortLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutShortLoanInput | Prisma.SavingCreateOrConnectWithoutShortLoanInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutShortLoanInput | Prisma.SavingUpsertWithWhereUniqueWithoutShortLoanInput[]
+  createMany?: Prisma.SavingCreateManyShortLoanInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutShortLoanInput | Prisma.SavingUpdateWithWhereUniqueWithoutShortLoanInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutShortLoanInput | Prisma.SavingUpdateManyWithWhereWithoutShortLoanInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+}
+
+export type SavingUncheckedUpdateManyWithoutShortLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput> | Prisma.SavingCreateWithoutShortLoanInput[] | Prisma.SavingUncheckedCreateWithoutShortLoanInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutShortLoanInput | Prisma.SavingCreateOrConnectWithoutShortLoanInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutShortLoanInput | Prisma.SavingUpsertWithWhereUniqueWithoutShortLoanInput[]
+  createMany?: Prisma.SavingCreateManyShortLoanInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutShortLoanInput | Prisma.SavingUpdateWithWhereUniqueWithoutShortLoanInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutShortLoanInput | Prisma.SavingUpdateManyWithWhereWithoutShortLoanInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+}
+
+export type SavingCreateNestedManyWithoutPenaltyInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput> | Prisma.SavingCreateWithoutPenaltyInput[] | Prisma.SavingUncheckedCreateWithoutPenaltyInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutPenaltyInput | Prisma.SavingCreateOrConnectWithoutPenaltyInput[]
+  createMany?: Prisma.SavingCreateManyPenaltyInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUncheckedCreateNestedManyWithoutPenaltyInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput> | Prisma.SavingCreateWithoutPenaltyInput[] | Prisma.SavingUncheckedCreateWithoutPenaltyInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutPenaltyInput | Prisma.SavingCreateOrConnectWithoutPenaltyInput[]
+  createMany?: Prisma.SavingCreateManyPenaltyInputEnvelope
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+}
+
+export type SavingUpdateManyWithoutPenaltyNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput> | Prisma.SavingCreateWithoutPenaltyInput[] | Prisma.SavingUncheckedCreateWithoutPenaltyInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutPenaltyInput | Prisma.SavingCreateOrConnectWithoutPenaltyInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutPenaltyInput | Prisma.SavingUpsertWithWhereUniqueWithoutPenaltyInput[]
+  createMany?: Prisma.SavingCreateManyPenaltyInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutPenaltyInput | Prisma.SavingUpdateWithWhereUniqueWithoutPenaltyInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutPenaltyInput | Prisma.SavingUpdateManyWithWhereWithoutPenaltyInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
+}
+
+export type SavingUncheckedUpdateManyWithoutPenaltyNestedInput = {
+  create?: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput> | Prisma.SavingCreateWithoutPenaltyInput[] | Prisma.SavingUncheckedCreateWithoutPenaltyInput[]
+  connectOrCreate?: Prisma.SavingCreateOrConnectWithoutPenaltyInput | Prisma.SavingCreateOrConnectWithoutPenaltyInput[]
+  upsert?: Prisma.SavingUpsertWithWhereUniqueWithoutPenaltyInput | Prisma.SavingUpsertWithWhereUniqueWithoutPenaltyInput[]
+  createMany?: Prisma.SavingCreateManyPenaltyInputEnvelope
+  set?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  disconnect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  delete?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  connect?: Prisma.SavingWhereUniqueInput | Prisma.SavingWhereUniqueInput[]
+  update?: Prisma.SavingUpdateWithWhereUniqueWithoutPenaltyInput | Prisma.SavingUpdateWithWhereUniqueWithoutPenaltyInput[]
+  updateMany?: Prisma.SavingUpdateManyWithWhereWithoutPenaltyInput | Prisma.SavingUpdateManyWithWhereWithoutPenaltyInput[]
+  deleteMany?: Prisma.SavingScalarWhereInput | Prisma.SavingScalarWhereInput[]
 }
 
 export type SavingCreateWithoutMemberInput = {
@@ -560,12 +702,13 @@ export type SavingCreateWithoutMemberInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionCreateNestedManyWithoutSavingInput
+  loan?: Prisma.LoanCreateNestedOneWithoutSavingsInput
+  shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutSavingsInput
+  penalty?: Prisma.PenaltyCreateNestedOneWithoutSavingsInput
+  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingInput
 }
 
 export type SavingUncheckedCreateWithoutMemberInput = {
@@ -573,12 +716,13 @@ export type SavingUncheckedCreateWithoutMemberInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  savings?: number
-  welfare?: number
+  loanId?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutSavingInput
+  deduction?: Prisma.DeductionUncheckedCreateNestedOneWithoutSavingInput
 }
 
 export type SavingCreateOrConnectWithoutMemberInput = {
@@ -615,80 +759,247 @@ export type SavingScalarWhereInput = {
   amount?: Prisma.FloatFilter<"Saving"> | number
   mPesaRef?: Prisma.StringNullableFilter<"Saving"> | string | null
   authorizedBy?: Prisma.StringNullableFilter<"Saving"> | string | null
+  loanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  shortLoanId?: Prisma.StringNullableFilter<"Saving"> | string | null
+  penaltyId?: Prisma.StringNullableFilter<"Saving"> | string | null
   memberId?: Prisma.StringFilter<"Saving"> | string
-  savings?: Prisma.FloatFilter<"Saving"> | number
-  welfare?: Prisma.FloatFilter<"Saving"> | number
   status?: Prisma.EnumTransactionStatusFilter<"Saving"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Saving"> | Date | string
 }
 
-export type SavingCreateWithoutDeductionsInput = {
+export type SavingCreateWithoutDeductionInput = {
   id?: string
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutSavingsInput
+  loan?: Prisma.LoanCreateNestedOneWithoutSavingsInput
+  shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutSavingsInput
+  penalty?: Prisma.PenaltyCreateNestedOneWithoutSavingsInput
 }
 
-export type SavingUncheckedCreateWithoutDeductionsInput = {
+export type SavingUncheckedCreateWithoutDeductionInput = {
   id?: string
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
+  loanId?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
   memberId: string
-  savings?: number
-  welfare?: number
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type SavingCreateOrConnectWithoutDeductionsInput = {
+export type SavingCreateOrConnectWithoutDeductionInput = {
   where: Prisma.SavingWhereUniqueInput
-  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
 }
 
-export type SavingUpsertWithoutDeductionsInput = {
-  update: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionsInput, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
-  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionsInput, Prisma.SavingUncheckedCreateWithoutDeductionsInput>
+export type SavingUpsertWithoutDeductionInput = {
+  update: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionInput, Prisma.SavingUncheckedUpdateWithoutDeductionInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutDeductionInput, Prisma.SavingUncheckedCreateWithoutDeductionInput>
   where?: Prisma.SavingWhereInput
 }
 
-export type SavingUpdateToOneWithWhereWithoutDeductionsInput = {
+export type SavingUpdateToOneWithWhereWithoutDeductionInput = {
   where?: Prisma.SavingWhereInput
-  data: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionsInput, Prisma.SavingUncheckedUpdateWithoutDeductionsInput>
+  data: Prisma.XOR<Prisma.SavingUpdateWithoutDeductionInput, Prisma.SavingUncheckedUpdateWithoutDeductionInput>
 }
 
-export type SavingUpdateWithoutDeductionsInput = {
+export type SavingUpdateWithoutDeductionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutSavingsNestedInput
+  shortLoan?: Prisma.ShortLoanUpdateOneWithoutSavingsNestedInput
+  penalty?: Prisma.PenaltyUpdateOneWithoutSavingsNestedInput
 }
 
-export type SavingUncheckedUpdateWithoutDeductionsInput = {
+export type SavingUncheckedUpdateWithoutDeductionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SavingCreateWithoutLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSavingsInput
+  shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutSavingsInput
+  penalty?: Prisma.PenaltyCreateNestedOneWithoutSavingsInput
+  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingInput
+}
+
+export type SavingUncheckedCreateWithoutLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deduction?: Prisma.DeductionUncheckedCreateNestedOneWithoutSavingInput
+}
+
+export type SavingCreateOrConnectWithoutLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  create: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput>
+}
+
+export type SavingCreateManyLoanInputEnvelope = {
+  data: Prisma.SavingCreateManyLoanInput | Prisma.SavingCreateManyLoanInput[]
+  skipDuplicates?: boolean
+}
+
+export type SavingUpsertWithWhereUniqueWithoutLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  update: Prisma.XOR<Prisma.SavingUpdateWithoutLoanInput, Prisma.SavingUncheckedUpdateWithoutLoanInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutLoanInput, Prisma.SavingUncheckedCreateWithoutLoanInput>
+}
+
+export type SavingUpdateWithWhereUniqueWithoutLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  data: Prisma.XOR<Prisma.SavingUpdateWithoutLoanInput, Prisma.SavingUncheckedUpdateWithoutLoanInput>
+}
+
+export type SavingUpdateManyWithWhereWithoutLoanInput = {
+  where: Prisma.SavingScalarWhereInput
+  data: Prisma.XOR<Prisma.SavingUpdateManyMutationInput, Prisma.SavingUncheckedUpdateManyWithoutLoanInput>
+}
+
+export type SavingCreateWithoutShortLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSavingsInput
+  loan?: Prisma.LoanCreateNestedOneWithoutSavingsInput
+  penalty?: Prisma.PenaltyCreateNestedOneWithoutSavingsInput
+  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingInput
+}
+
+export type SavingUncheckedCreateWithoutShortLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  loanId?: string | null
+  penaltyId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deduction?: Prisma.DeductionUncheckedCreateNestedOneWithoutSavingInput
+}
+
+export type SavingCreateOrConnectWithoutShortLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  create: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput>
+}
+
+export type SavingCreateManyShortLoanInputEnvelope = {
+  data: Prisma.SavingCreateManyShortLoanInput | Prisma.SavingCreateManyShortLoanInput[]
+  skipDuplicates?: boolean
+}
+
+export type SavingUpsertWithWhereUniqueWithoutShortLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  update: Prisma.XOR<Prisma.SavingUpdateWithoutShortLoanInput, Prisma.SavingUncheckedUpdateWithoutShortLoanInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutShortLoanInput, Prisma.SavingUncheckedCreateWithoutShortLoanInput>
+}
+
+export type SavingUpdateWithWhereUniqueWithoutShortLoanInput = {
+  where: Prisma.SavingWhereUniqueInput
+  data: Prisma.XOR<Prisma.SavingUpdateWithoutShortLoanInput, Prisma.SavingUncheckedUpdateWithoutShortLoanInput>
+}
+
+export type SavingUpdateManyWithWhereWithoutShortLoanInput = {
+  where: Prisma.SavingScalarWhereInput
+  data: Prisma.XOR<Prisma.SavingUpdateManyMutationInput, Prisma.SavingUncheckedUpdateManyWithoutShortLoanInput>
+}
+
+export type SavingCreateWithoutPenaltyInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSavingsInput
+  loan?: Prisma.LoanCreateNestedOneWithoutSavingsInput
+  shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutSavingsInput
+  deduction?: Prisma.DeductionCreateNestedOneWithoutSavingInput
+}
+
+export type SavingUncheckedCreateWithoutPenaltyInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  loanId?: string | null
+  shortLoanId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deduction?: Prisma.DeductionUncheckedCreateNestedOneWithoutSavingInput
+}
+
+export type SavingCreateOrConnectWithoutPenaltyInput = {
+  where: Prisma.SavingWhereUniqueInput
+  create: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput>
+}
+
+export type SavingCreateManyPenaltyInputEnvelope = {
+  data: Prisma.SavingCreateManyPenaltyInput | Prisma.SavingCreateManyPenaltyInput[]
+  skipDuplicates?: boolean
+}
+
+export type SavingUpsertWithWhereUniqueWithoutPenaltyInput = {
+  where: Prisma.SavingWhereUniqueInput
+  update: Prisma.XOR<Prisma.SavingUpdateWithoutPenaltyInput, Prisma.SavingUncheckedUpdateWithoutPenaltyInput>
+  create: Prisma.XOR<Prisma.SavingCreateWithoutPenaltyInput, Prisma.SavingUncheckedCreateWithoutPenaltyInput>
+}
+
+export type SavingUpdateWithWhereUniqueWithoutPenaltyInput = {
+  where: Prisma.SavingWhereUniqueInput
+  data: Prisma.XOR<Prisma.SavingUpdateWithoutPenaltyInput, Prisma.SavingUncheckedUpdateWithoutPenaltyInput>
+}
+
+export type SavingUpdateManyWithWhereWithoutPenaltyInput = {
+  where: Prisma.SavingScalarWhereInput
+  data: Prisma.XOR<Prisma.SavingUpdateManyMutationInput, Prisma.SavingUncheckedUpdateManyWithoutPenaltyInput>
 }
 
 export type SavingCreateManyMemberInput = {
@@ -696,8 +1007,9 @@ export type SavingCreateManyMemberInput = {
   amount: number
   mPesaRef?: string | null
   authorizedBy?: string | null
-  savings?: number
-  welfare?: number
+  loanId?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -708,12 +1020,13 @@ export type SavingUpdateWithoutMemberInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUpdateManyWithoutSavingNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutSavingsNestedInput
+  shortLoan?: Prisma.ShortLoanUpdateOneWithoutSavingsNestedInput
+  penalty?: Prisma.PenaltyUpdateOneWithoutSavingsNestedInput
+  deduction?: Prisma.DeductionUpdateOneWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateWithoutMemberInput = {
@@ -721,12 +1034,13 @@ export type SavingUncheckedUpdateWithoutMemberInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutSavingNestedInput
+  deduction?: Prisma.DeductionUncheckedUpdateOneWithoutSavingNestedInput
 }
 
 export type SavingUncheckedUpdateManyWithoutMemberInput = {
@@ -734,42 +1048,176 @@ export type SavingUncheckedUpdateManyWithoutMemberInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  savings?: Prisma.FloatFieldUpdateOperationsInput | number
-  welfare?: Prisma.FloatFieldUpdateOperationsInput | number
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type SavingCountOutputType
- */
-
-export type SavingCountOutputType = {
-  deductions: number
+export type SavingCreateManyLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  shortLoanId?: string | null
+  penaltyId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type SavingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deductions?: boolean | SavingCountOutputTypeCountDeductionsArgs
+export type SavingUpdateWithoutLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+  shortLoan?: Prisma.ShortLoanUpdateOneWithoutSavingsNestedInput
+  penalty?: Prisma.PenaltyUpdateOneWithoutSavingsNestedInput
+  deduction?: Prisma.DeductionUpdateOneWithoutSavingNestedInput
 }
 
-/**
- * SavingCountOutputType without action
- */
-export type SavingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SavingCountOutputType
-   */
-  select?: Prisma.SavingCountOutputTypeSelect<ExtArgs> | null
+export type SavingUncheckedUpdateWithoutLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deduction?: Prisma.DeductionUncheckedUpdateOneWithoutSavingNestedInput
 }
 
-/**
- * SavingCountOutputType without action
- */
-export type SavingCountOutputTypeCountDeductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeductionWhereInput
+export type SavingUncheckedUpdateManyWithoutLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
+
+export type SavingCreateManyShortLoanInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  loanId?: string | null
+  penaltyId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SavingUpdateWithoutShortLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutSavingsNestedInput
+  penalty?: Prisma.PenaltyUpdateOneWithoutSavingsNestedInput
+  deduction?: Prisma.DeductionUpdateOneWithoutSavingNestedInput
+}
+
+export type SavingUncheckedUpdateWithoutShortLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deduction?: Prisma.DeductionUncheckedUpdateOneWithoutSavingNestedInput
+}
+
+export type SavingUncheckedUpdateManyWithoutShortLoanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  penaltyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SavingCreateManyPenaltyInput = {
+  id?: string
+  amount: number
+  mPesaRef?: string | null
+  authorizedBy?: string | null
+  loanId?: string | null
+  shortLoanId?: string | null
+  memberId: string
+  status?: $Enums.TransactionStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SavingUpdateWithoutPenaltyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSavingsNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutSavingsNestedInput
+  shortLoan?: Prisma.ShortLoanUpdateOneWithoutSavingsNestedInput
+  deduction?: Prisma.DeductionUpdateOneWithoutSavingNestedInput
+}
+
+export type SavingUncheckedUpdateWithoutPenaltyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deduction?: Prisma.DeductionUncheckedUpdateOneWithoutSavingNestedInput
+}
+
+export type SavingUncheckedUpdateManyWithoutPenaltyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  mPesaRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorizedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortLoanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type SavingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -777,15 +1225,18 @@ export type SavingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   amount?: boolean
   mPesaRef?: boolean
   authorizedBy?: boolean
+  loanId?: boolean
+  shortLoanId?: boolean
+  penaltyId?: boolean
   memberId?: boolean
-  savings?: boolean
-  welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  deductions?: boolean | Prisma.Saving$deductionsArgs<ExtArgs>
-  _count?: boolean | Prisma.SavingCountOutputTypeDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
+  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
 export type SavingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -793,13 +1244,17 @@ export type SavingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   amount?: boolean
   mPesaRef?: boolean
   authorizedBy?: boolean
+  loanId?: boolean
+  shortLoanId?: boolean
+  penaltyId?: boolean
   memberId?: boolean
-  savings?: boolean
-  welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
 export type SavingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -807,13 +1262,17 @@ export type SavingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   amount?: boolean
   mPesaRef?: boolean
   authorizedBy?: boolean
+  loanId?: boolean
+  shortLoanId?: boolean
+  penaltyId?: boolean
   memberId?: boolean
-  savings?: boolean
-  welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
 }, ExtArgs["result"]["saving"]>
 
 export type SavingSelectScalar = {
@@ -821,41 +1280,54 @@ export type SavingSelectScalar = {
   amount?: boolean
   mPesaRef?: boolean
   authorizedBy?: boolean
+  loanId?: boolean
+  shortLoanId?: boolean
+  penaltyId?: boolean
   memberId?: boolean
-  savings?: boolean
-  welfare?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SavingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "mPesaRef" | "authorizedBy" | "memberId" | "savings" | "welfare" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["saving"]>
+export type SavingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "mPesaRef" | "authorizedBy" | "loanId" | "shortLoanId" | "penaltyId" | "memberId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["saving"]>
 export type SavingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
-  deductions?: boolean | Prisma.Saving$deductionsArgs<ExtArgs>
-  _count?: boolean | Prisma.SavingCountOutputTypeDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
+  deduction?: boolean | Prisma.Saving$deductionArgs<ExtArgs>
 }
 export type SavingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
 }
 export type SavingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  loan?: boolean | Prisma.Saving$loanArgs<ExtArgs>
+  shortLoan?: boolean | Prisma.Saving$shortLoanArgs<ExtArgs>
+  penalty?: boolean | Prisma.Saving$penaltyArgs<ExtArgs>
 }
 
 export type $SavingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Saving"
   objects: {
     member: Prisma.$MemberPayload<ExtArgs>
-    deductions: Prisma.$DeductionPayload<ExtArgs>[]
+    loan: Prisma.$LoanPayload<ExtArgs> | null
+    shortLoan: Prisma.$ShortLoanPayload<ExtArgs> | null
+    penalty: Prisma.$PenaltyPayload<ExtArgs> | null
+    deduction: Prisma.$DeductionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     amount: number
     mPesaRef: string | null
     authorizedBy: string | null
+    loanId: string | null
+    shortLoanId: string | null
+    penaltyId: string | null
     memberId: string
-    savings: number
-    welfare: number
     status: $Enums.TransactionStatus
     createdAt: Date
     updatedAt: Date
@@ -1254,7 +1726,10 @@ readonly fields: SavingFieldRefs;
 export interface Prisma__SavingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  deductions<T extends Prisma.Saving$deductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$deductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  loan<T extends Prisma.Saving$loanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$loanArgs<ExtArgs>>): Prisma.Prisma__LoanClient<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  shortLoan<T extends Prisma.Saving$shortLoanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$shortLoanArgs<ExtArgs>>): Prisma.Prisma__ShortLoanClient<runtime.Types.Result.GetResult<Prisma.$ShortLoanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  penalty<T extends Prisma.Saving$penaltyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$penaltyArgs<ExtArgs>>): Prisma.Prisma__PenaltyClient<runtime.Types.Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  deduction<T extends Prisma.Saving$deductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Saving$deductionArgs<ExtArgs>>): Prisma.Prisma__DeductionClient<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1288,9 +1763,10 @@ export interface SavingFieldRefs {
   readonly amount: Prisma.FieldRef<"Saving", 'Float'>
   readonly mPesaRef: Prisma.FieldRef<"Saving", 'String'>
   readonly authorizedBy: Prisma.FieldRef<"Saving", 'String'>
+  readonly loanId: Prisma.FieldRef<"Saving", 'String'>
+  readonly shortLoanId: Prisma.FieldRef<"Saving", 'String'>
+  readonly penaltyId: Prisma.FieldRef<"Saving", 'String'>
   readonly memberId: Prisma.FieldRef<"Saving", 'String'>
-  readonly savings: Prisma.FieldRef<"Saving", 'Float'>
-  readonly welfare: Prisma.FieldRef<"Saving", 'Float'>
   readonly status: Prisma.FieldRef<"Saving", 'TransactionStatus'>
   readonly createdAt: Prisma.FieldRef<"Saving", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Saving", 'DateTime'>
@@ -1690,9 +2166,66 @@ export type SavingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Saving.deductions
+ * Saving.loan
  */
-export type Saving$deductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Saving$loanArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Loan
+   */
+  select?: Prisma.LoanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Loan
+   */
+  omit?: Prisma.LoanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LoanInclude<ExtArgs> | null
+  where?: Prisma.LoanWhereInput
+}
+
+/**
+ * Saving.shortLoan
+ */
+export type Saving$shortLoanArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShortLoan
+   */
+  select?: Prisma.ShortLoanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShortLoan
+   */
+  omit?: Prisma.ShortLoanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShortLoanInclude<ExtArgs> | null
+  where?: Prisma.ShortLoanWhereInput
+}
+
+/**
+ * Saving.penalty
+ */
+export type Saving$penaltyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Penalty
+   */
+  select?: Prisma.PenaltySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Penalty
+   */
+  omit?: Prisma.PenaltyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PenaltyInclude<ExtArgs> | null
+  where?: Prisma.PenaltyWhereInput
+}
+
+/**
+ * Saving.deduction
+ */
+export type Saving$deductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Deduction
    */
@@ -1706,11 +2239,6 @@ export type Saving$deductionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.DeductionInclude<ExtArgs> | null
   where?: Prisma.DeductionWhereInput
-  orderBy?: Prisma.DeductionOrderByWithRelationInput | Prisma.DeductionOrderByWithRelationInput[]
-  cursor?: Prisma.DeductionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DeductionScalarFieldEnum | Prisma.DeductionScalarFieldEnum[]
 }
 
 /**

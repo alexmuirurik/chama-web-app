@@ -7,7 +7,6 @@ import { redirect } from 'next/navigation'
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const session = await auth()
     if (!session?.user) redirect('/login')
-    console.log(session.user)
     return (
         <SidebarProvider className="w-full">
             <AppSidebar />

@@ -525,14 +525,6 @@ export type ChamaLoanUncheckedUpdateManyWithoutChamaNestedInput = {
   deleteMany?: Prisma.ChamaLoanScalarWhereInput | Prisma.ChamaLoanScalarWhereInput[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ChamaLoanCreateWithoutChamaInput = {
   id?: string
   lender: string

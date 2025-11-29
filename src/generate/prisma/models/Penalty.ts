@@ -243,7 +243,7 @@ export type PenaltyWhereInput = {
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
   shortLoan?: Prisma.XOR<Prisma.ShortLoanNullableScalarRelationFilter, Prisma.ShortLoanWhereInput> | null
-  deductions?: Prisma.DeductionListRelationFilter
+  savings?: Prisma.SavingListRelationFilter
 }
 
 export type PenaltyOrderByWithRelationInput = {
@@ -258,7 +258,7 @@ export type PenaltyOrderByWithRelationInput = {
   member?: Prisma.MemberOrderByWithRelationInput
   loan?: Prisma.LoanOrderByWithRelationInput
   shortLoan?: Prisma.ShortLoanOrderByWithRelationInput
-  deductions?: Prisma.DeductionOrderByRelationAggregateInput
+  savings?: Prisma.SavingOrderByRelationAggregateInput
 }
 
 export type PenaltyWhereUniqueInput = Prisma.AtLeast<{
@@ -276,7 +276,7 @@ export type PenaltyWhereUniqueInput = Prisma.AtLeast<{
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
   shortLoan?: Prisma.XOR<Prisma.ShortLoanNullableScalarRelationFilter, Prisma.ShortLoanWhereInput> | null
-  deductions?: Prisma.DeductionListRelationFilter
+  savings?: Prisma.SavingListRelationFilter
 }, "id">
 
 export type PenaltyOrderByWithAggregationInput = {
@@ -318,7 +318,7 @@ export type PenaltyCreateInput = {
   member: Prisma.MemberCreateNestedOneWithoutPenaltiesInput
   loan?: Prisma.LoanCreateNestedOneWithoutPenaltiesInput
   shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutPenaltiesInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyUncheckedCreateInput = {
@@ -330,7 +330,7 @@ export type PenaltyUncheckedCreateInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyUpdateInput = {
@@ -342,7 +342,7 @@ export type PenaltyUpdateInput = {
   member?: Prisma.MemberUpdateOneRequiredWithoutPenaltiesNestedInput
   loan?: Prisma.LoanUpdateOneWithoutPenaltiesNestedInput
   shortLoan?: Prisma.ShortLoanUpdateOneWithoutPenaltiesNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateInput = {
@@ -354,7 +354,7 @@ export type PenaltyUncheckedUpdateInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyCreateManyInput = {
@@ -485,20 +485,20 @@ export type PenaltyUncheckedUpdateManyWithoutMemberNestedInput = {
   deleteMany?: Prisma.PenaltyScalarWhereInput | Prisma.PenaltyScalarWhereInput[]
 }
 
-export type PenaltyCreateNestedOneWithoutDeductionsInput = {
-  create?: Prisma.XOR<Prisma.PenaltyCreateWithoutDeductionsInput, Prisma.PenaltyUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.PenaltyCreateOrConnectWithoutDeductionsInput
+export type PenaltyCreateNestedOneWithoutSavingsInput = {
+  create?: Prisma.XOR<Prisma.PenaltyCreateWithoutSavingsInput, Prisma.PenaltyUncheckedCreateWithoutSavingsInput>
+  connectOrCreate?: Prisma.PenaltyCreateOrConnectWithoutSavingsInput
   connect?: Prisma.PenaltyWhereUniqueInput
 }
 
-export type PenaltyUpdateOneWithoutDeductionsNestedInput = {
-  create?: Prisma.XOR<Prisma.PenaltyCreateWithoutDeductionsInput, Prisma.PenaltyUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.PenaltyCreateOrConnectWithoutDeductionsInput
-  upsert?: Prisma.PenaltyUpsertWithoutDeductionsInput
+export type PenaltyUpdateOneWithoutSavingsNestedInput = {
+  create?: Prisma.XOR<Prisma.PenaltyCreateWithoutSavingsInput, Prisma.PenaltyUncheckedCreateWithoutSavingsInput>
+  connectOrCreate?: Prisma.PenaltyCreateOrConnectWithoutSavingsInput
+  upsert?: Prisma.PenaltyUpsertWithoutSavingsInput
   disconnect?: Prisma.PenaltyWhereInput | boolean
   delete?: Prisma.PenaltyWhereInput | boolean
   connect?: Prisma.PenaltyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PenaltyUpdateToOneWithWhereWithoutDeductionsInput, Prisma.PenaltyUpdateWithoutDeductionsInput>, Prisma.PenaltyUncheckedUpdateWithoutDeductionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PenaltyUpdateToOneWithWhereWithoutSavingsInput, Prisma.PenaltyUpdateWithoutSavingsInput>, Prisma.PenaltyUncheckedUpdateWithoutSavingsInput>
 }
 
 export type PenaltyCreateNestedManyWithoutLoanInput = {
@@ -593,7 +593,7 @@ export type PenaltyCreateWithoutMemberInput = {
   updatedAt?: Date | string
   loan?: Prisma.LoanCreateNestedOneWithoutPenaltiesInput
   shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutPenaltiesInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyUncheckedCreateWithoutMemberInput = {
@@ -604,7 +604,7 @@ export type PenaltyUncheckedCreateWithoutMemberInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyCreateOrConnectWithoutMemberInput = {
@@ -647,7 +647,7 @@ export type PenaltyScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Penalty"> | Date | string
 }
 
-export type PenaltyCreateWithoutDeductionsInput = {
+export type PenaltyCreateWithoutSavingsInput = {
   id?: string
   penaltyAmount?: number
   status?: $Enums.TransactionStatus
@@ -658,7 +658,7 @@ export type PenaltyCreateWithoutDeductionsInput = {
   shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutPenaltiesInput
 }
 
-export type PenaltyUncheckedCreateWithoutDeductionsInput = {
+export type PenaltyUncheckedCreateWithoutSavingsInput = {
   id?: string
   memberId: string
   loanId?: string | null
@@ -669,23 +669,23 @@ export type PenaltyUncheckedCreateWithoutDeductionsInput = {
   updatedAt?: Date | string
 }
 
-export type PenaltyCreateOrConnectWithoutDeductionsInput = {
+export type PenaltyCreateOrConnectWithoutSavingsInput = {
   where: Prisma.PenaltyWhereUniqueInput
-  create: Prisma.XOR<Prisma.PenaltyCreateWithoutDeductionsInput, Prisma.PenaltyUncheckedCreateWithoutDeductionsInput>
+  create: Prisma.XOR<Prisma.PenaltyCreateWithoutSavingsInput, Prisma.PenaltyUncheckedCreateWithoutSavingsInput>
 }
 
-export type PenaltyUpsertWithoutDeductionsInput = {
-  update: Prisma.XOR<Prisma.PenaltyUpdateWithoutDeductionsInput, Prisma.PenaltyUncheckedUpdateWithoutDeductionsInput>
-  create: Prisma.XOR<Prisma.PenaltyCreateWithoutDeductionsInput, Prisma.PenaltyUncheckedCreateWithoutDeductionsInput>
+export type PenaltyUpsertWithoutSavingsInput = {
+  update: Prisma.XOR<Prisma.PenaltyUpdateWithoutSavingsInput, Prisma.PenaltyUncheckedUpdateWithoutSavingsInput>
+  create: Prisma.XOR<Prisma.PenaltyCreateWithoutSavingsInput, Prisma.PenaltyUncheckedCreateWithoutSavingsInput>
   where?: Prisma.PenaltyWhereInput
 }
 
-export type PenaltyUpdateToOneWithWhereWithoutDeductionsInput = {
+export type PenaltyUpdateToOneWithWhereWithoutSavingsInput = {
   where?: Prisma.PenaltyWhereInput
-  data: Prisma.XOR<Prisma.PenaltyUpdateWithoutDeductionsInput, Prisma.PenaltyUncheckedUpdateWithoutDeductionsInput>
+  data: Prisma.XOR<Prisma.PenaltyUpdateWithoutSavingsInput, Prisma.PenaltyUncheckedUpdateWithoutSavingsInput>
 }
 
-export type PenaltyUpdateWithoutDeductionsInput = {
+export type PenaltyUpdateWithoutSavingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   penaltyAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
@@ -696,7 +696,7 @@ export type PenaltyUpdateWithoutDeductionsInput = {
   shortLoan?: Prisma.ShortLoanUpdateOneWithoutPenaltiesNestedInput
 }
 
-export type PenaltyUncheckedUpdateWithoutDeductionsInput = {
+export type PenaltyUncheckedUpdateWithoutSavingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   loanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -715,7 +715,7 @@ export type PenaltyCreateWithoutLoanInput = {
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutPenaltiesInput
   shortLoan?: Prisma.ShortLoanCreateNestedOneWithoutPenaltiesInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyUncheckedCreateWithoutLoanInput = {
@@ -726,7 +726,7 @@ export type PenaltyUncheckedCreateWithoutLoanInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyCreateOrConnectWithoutLoanInput = {
@@ -763,7 +763,7 @@ export type PenaltyCreateWithoutShortLoanInput = {
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutPenaltiesInput
   loan?: Prisma.LoanCreateNestedOneWithoutPenaltiesInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyUncheckedCreateWithoutShortLoanInput = {
@@ -774,7 +774,7 @@ export type PenaltyUncheckedCreateWithoutShortLoanInput = {
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutPenaltyInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutPenaltyInput
 }
 
 export type PenaltyCreateOrConnectWithoutShortLoanInput = {
@@ -821,7 +821,7 @@ export type PenaltyUpdateWithoutMemberInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   loan?: Prisma.LoanUpdateOneWithoutPenaltiesNestedInput
   shortLoan?: Prisma.ShortLoanUpdateOneWithoutPenaltiesNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateWithoutMemberInput = {
@@ -832,7 +832,7 @@ export type PenaltyUncheckedUpdateWithoutMemberInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateManyWithoutMemberInput = {
@@ -863,7 +863,7 @@ export type PenaltyUpdateWithoutLoanInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutPenaltiesNestedInput
   shortLoan?: Prisma.ShortLoanUpdateOneWithoutPenaltiesNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateWithoutLoanInput = {
@@ -874,7 +874,7 @@ export type PenaltyUncheckedUpdateWithoutLoanInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateManyWithoutLoanInput = {
@@ -905,7 +905,7 @@ export type PenaltyUpdateWithoutShortLoanInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutPenaltiesNestedInput
   loan?: Prisma.LoanUpdateOneWithoutPenaltiesNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateWithoutShortLoanInput = {
@@ -916,7 +916,7 @@ export type PenaltyUncheckedUpdateWithoutShortLoanInput = {
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutPenaltyNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutPenaltyNestedInput
 }
 
 export type PenaltyUncheckedUpdateManyWithoutShortLoanInput = {
@@ -935,11 +935,11 @@ export type PenaltyUncheckedUpdateManyWithoutShortLoanInput = {
  */
 
 export type PenaltyCountOutputType = {
-  deductions: number
+  savings: number
 }
 
 export type PenaltyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  deductions?: boolean | PenaltyCountOutputTypeCountDeductionsArgs
+  savings?: boolean | PenaltyCountOutputTypeCountSavingsArgs
 }
 
 /**
@@ -955,8 +955,8 @@ export type PenaltyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * PenaltyCountOutputType without action
  */
-export type PenaltyCountOutputTypeCountDeductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeductionWhereInput
+export type PenaltyCountOutputTypeCountSavingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavingWhereInput
 }
 
 
@@ -972,7 +972,7 @@ export type PenaltySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   loan?: boolean | Prisma.Penalty$loanArgs<ExtArgs>
   shortLoan?: boolean | Prisma.Penalty$shortLoanArgs<ExtArgs>
-  deductions?: boolean | Prisma.Penalty$deductionsArgs<ExtArgs>
+  savings?: boolean | Prisma.Penalty$savingsArgs<ExtArgs>
   _count?: boolean | Prisma.PenaltyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["penalty"]>
 
@@ -1020,7 +1020,7 @@ export type PenaltyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   loan?: boolean | Prisma.Penalty$loanArgs<ExtArgs>
   shortLoan?: boolean | Prisma.Penalty$shortLoanArgs<ExtArgs>
-  deductions?: boolean | Prisma.Penalty$deductionsArgs<ExtArgs>
+  savings?: boolean | Prisma.Penalty$savingsArgs<ExtArgs>
   _count?: boolean | Prisma.PenaltyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PenaltyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1040,7 +1040,7 @@ export type $PenaltyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     member: Prisma.$MemberPayload<ExtArgs>
     loan: Prisma.$LoanPayload<ExtArgs> | null
     shortLoan: Prisma.$ShortLoanPayload<ExtArgs> | null
-    deductions: Prisma.$DeductionPayload<ExtArgs>[]
+    savings: Prisma.$SavingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1448,7 +1448,7 @@ export interface Prisma__PenaltyClient<T, Null = never, ExtArgs extends runtime.
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   loan<T extends Prisma.Penalty$loanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Penalty$loanArgs<ExtArgs>>): Prisma.Prisma__LoanClient<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   shortLoan<T extends Prisma.Penalty$shortLoanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Penalty$shortLoanArgs<ExtArgs>>): Prisma.Prisma__ShortLoanClient<runtime.Types.Result.GetResult<Prisma.$ShortLoanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  deductions<T extends Prisma.Penalty$deductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Penalty$deductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savings<T extends Prisma.Penalty$savingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Penalty$savingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1920,27 +1920,27 @@ export type Penalty$shortLoanArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Penalty.deductions
+ * Penalty.savings
  */
-export type Penalty$deductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Penalty$savingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Deduction
+   * Select specific fields to fetch from the Saving
    */
-  select?: Prisma.DeductionSelect<ExtArgs> | null
+  select?: Prisma.SavingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Deduction
+   * Omit specific fields from the Saving
    */
-  omit?: Prisma.DeductionOmit<ExtArgs> | null
+  omit?: Prisma.SavingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DeductionInclude<ExtArgs> | null
-  where?: Prisma.DeductionWhereInput
-  orderBy?: Prisma.DeductionOrderByWithRelationInput | Prisma.DeductionOrderByWithRelationInput[]
-  cursor?: Prisma.DeductionWhereUniqueInput
+  include?: Prisma.SavingInclude<ExtArgs> | null
+  where?: Prisma.SavingWhereInput
+  orderBy?: Prisma.SavingOrderByWithRelationInput | Prisma.SavingOrderByWithRelationInput[]
+  cursor?: Prisma.SavingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.DeductionScalarFieldEnum | Prisma.DeductionScalarFieldEnum[]
+  distinct?: Prisma.SavingScalarFieldEnum | Prisma.SavingScalarFieldEnum[]
 }
 
 /**

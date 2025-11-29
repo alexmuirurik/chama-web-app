@@ -90,9 +90,9 @@ model Chama {
     id                   String      @id @default(uuid()) @map("_id")
     name                 String
     location             String
-    profilePic           String?
     registrationDocument String?
-    minimumSavings       Float?      @default(0)
+    minimumSavings       Float       @default(0)
+    interestRate         Float       @default(0)
     nextMeeting          DateTime?
     registrationId       String?
     adminId              String
@@ -180,31 +180,33 @@ model Saving {
     amount       Float
     mPesaRef     String?
     authorizedBy String?
+    loanId       String?
+    shortLoanId  String?
+    penaltyId    String?
     memberId     String
-    savings      Float             @default(0)
-    welfare      Float             @default(0)
     status       TransactionStatus @default(PENDING)
     member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    deductions   Deduction[]
+    loan         Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
+    shortLoan    ShortLoan?        @relation(fields: [shortLoanId], references: [id], onDelete: Cascade)
+    penalty      Penalty?          @relation(fields: [penaltyId], references: [id], onDelete: Cascade)
+    deduction    Deduction?
     createdAt    DateTime          @default(now())
     updatedAt    DateTime          @updatedAt
 }
 
 model Deduction {
-    id          String            @id @default(uuid()) @map("_id")
-    savingId    String
-    loanId      String?
-    shortLoanId String?
-    loanType    String?
-    penaltyId   String?
-    amount      Float             @default(0)
-    status      TransactionStatus @default(PENDING)
-    saving      Saving            @relation(fields: [savingId], references: [id], onDelete: Cascade)
-    loan        Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
-    shortLoan   ShortLoan?        @relation(fields: [shortLoanId], references: [id], onDelete: Cascade)
-    penalty     Penalty?          @relation(fields: [penaltyId], references: [id], onDelete: Cascade)
-    createdAt   DateTime          @default(now())
-    updatedAt   DateTime          @updatedAt
+    id              String            @id @default(uuid()) @map("_id")
+    savingId        String            @unique
+    amount          Float             @default(0)
+    loanAmount      Float             @default(0)
+    shortLoanAmount Float             @default(0)
+    penaltyAmount   Float             @default(0)
+    savings         Float             @default(0)
+    welfare         Float             @default(0)
+    status          TransactionStatus @default(PENDING)
+    saving          Saving            @relation(fields: [savingId], references: [id], onDelete: Cascade)
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
 }
 
 enum LoanType {
@@ -226,7 +228,7 @@ model Loan {
     status       TransactionStatus @default(PENDING)
     member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
     penalties    Penalty[]
-    deductions   Deduction[]
+    savings      Saving[]
     createdAt    DateTime          @default(now())
     updatedAt    DateTime          @updatedAt
 }
@@ -243,8 +245,8 @@ model ShortLoan {
     guarantors   String[]
     status       TransactionStatus @default(PENDING)
     member       Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    deductions   Deduction[]
     penalties    Penalty[]
+    savings      Saving[]
     createdAt    DateTime          @default(now())
     updatedAt    DateTime          @updatedAt
 }
@@ -259,7 +261,7 @@ model Penalty {
     member        Member            @relation(fields: [memberId], references: [id], onDelete: Cascade)
     loan          Loan?             @relation(fields: [loanId], references: [id], onDelete: Cascade)
     shortLoan     ShortLoan?        @relation(fields: [shortLoanId], references: [id], onDelete: Cascade)
-    deductions    Deduction[]
+    savings       Saving[]
     createdAt     DateTime          @default(now())
     updatedAt     DateTime          @updatedAt
 }

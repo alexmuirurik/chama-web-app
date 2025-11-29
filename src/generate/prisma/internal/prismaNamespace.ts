@@ -1717,9 +1717,9 @@ export const ChamaScalarFieldEnum = {
   id: 'id',
   name: 'name',
   location: 'location',
-  profilePic: 'profilePic',
   registrationDocument: 'registrationDocument',
   minimumSavings: 'minimumSavings',
+  interestRate: 'interestRate',
   nextMeeting: 'nextMeeting',
   registrationId: 'registrationId',
   adminId: 'adminId',
@@ -1779,6 +1779,8 @@ export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof 
 export const BalanceSheetScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
+  loanLimit: 'loanLimit',
+  shortLoanLimit: 'shortLoanLimit',
   totalSavings: 'totalSavings',
   totalLongTermLoan: 'totalLongTermLoan',
   totalShortTermLoan: 'totalShortTermLoan',
@@ -1799,9 +1801,10 @@ export const SavingScalarFieldEnum = {
   amount: 'amount',
   mPesaRef: 'mPesaRef',
   authorizedBy: 'authorizedBy',
+  loanId: 'loanId',
+  shortLoanId: 'shortLoanId',
+  penaltyId: 'penaltyId',
   memberId: 'memberId',
-  savings: 'savings',
-  welfare: 'welfare',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1813,11 +1816,12 @@ export type SavingScalarFieldEnum = (typeof SavingScalarFieldEnum)[keyof typeof 
 export const DeductionScalarFieldEnum = {
   id: 'id',
   savingId: 'savingId',
-  loanId: 'loanId',
-  shortLoanId: 'shortLoanId',
-  loanType: 'loanType',
-  penaltyId: 'penaltyId',
   amount: 'amount',
+  loanAmount: 'loanAmount',
+  shortLoanAmount: 'shortLoanAmount',
+  penaltyAmount: 'penaltyAmount',
+  savings: 'savings',
+  welfare: 'welfare',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1835,6 +1839,7 @@ export const LoanScalarFieldEnum = {
   termMonths: 'termMonths',
   paymentDate: 'paymentDate',
   loanDocument: 'loanDocument',
+  loanType: 'loanType',
   guarantors: 'guarantors',
   status: 'status',
   createdAt: 'createdAt',
@@ -1852,6 +1857,7 @@ export const ShortLoanScalarFieldEnum = {
   interest: 'interest',
   paymentDate: 'paymentDate',
   loanDocument: 'loanDocument',
+  loanType: 'loanType',
   guarantors: 'guarantors',
   status: 'status',
   createdAt: 'createdAt',
@@ -2007,6 +2013,20 @@ export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'TransactionStatus[]'
  */
 export type ListEnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LoanType'
+ */
+export type EnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType'>
+    
+
+
+/**
+ * Reference to a field of type 'LoanType[]'
+ */
+export type ListEnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType[]'>
     
 
 /**

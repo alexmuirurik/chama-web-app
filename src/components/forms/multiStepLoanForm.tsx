@@ -20,6 +20,9 @@ const MultiStepLoanForm = ({
     const [step, setStep] = useState(1)
     const form = useForm<z.infer<typeof LoanSchema>>({
         resolver: zodResolver(LoanSchema),
+        defaultValues: {
+            termMonths: 1,
+        }
     })
 
     return (

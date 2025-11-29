@@ -49,6 +49,7 @@ export type LoanMinAggregateOutputType = {
   termMonths: number | null
   paymentDate: Date | null
   loanDocument: string | null
+  loanType: $Enums.LoanType | null
   status: $Enums.TransactionStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -63,6 +64,7 @@ export type LoanMaxAggregateOutputType = {
   termMonths: number | null
   paymentDate: Date | null
   loanDocument: string | null
+  loanType: $Enums.LoanType | null
   status: $Enums.TransactionStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -77,6 +79,7 @@ export type LoanCountAggregateOutputType = {
   termMonths: number
   paymentDate: number
   loanDocument: number
+  loanType: number
   guarantors: number
   status: number
   createdAt: number
@@ -108,6 +111,7 @@ export type LoanMinAggregateInputType = {
   termMonths?: true
   paymentDate?: true
   loanDocument?: true
+  loanType?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -122,6 +126,7 @@ export type LoanMaxAggregateInputType = {
   termMonths?: true
   paymentDate?: true
   loanDocument?: true
+  loanType?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -136,6 +141,7 @@ export type LoanCountAggregateInputType = {
   termMonths?: true
   paymentDate?: true
   loanDocument?: true
+  loanType?: true
   guarantors?: true
   status?: true
   createdAt?: true
@@ -238,6 +244,7 @@ export type LoanGroupByOutputType = {
   termMonths: number
   paymentDate: Date | null
   loanDocument: string | null
+  loanType: $Enums.LoanType
   guarantors: string[]
   status: $Enums.TransactionStatus
   createdAt: Date
@@ -276,13 +283,14 @@ export type LoanWhereInput = {
   termMonths?: Prisma.IntFilter<"Loan"> | number
   paymentDate?: Prisma.DateTimeNullableFilter<"Loan"> | Date | string | null
   loanDocument?: Prisma.StringNullableFilter<"Loan"> | string | null
+  loanType?: Prisma.EnumLoanTypeFilter<"Loan"> | $Enums.LoanType
   guarantors?: Prisma.StringNullableListFilter<"Loan">
   status?: Prisma.EnumTransactionStatusFilter<"Loan"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   penalties?: Prisma.PenaltyListRelationFilter
-  deductions?: Prisma.DeductionListRelationFilter
+  savings?: Prisma.SavingListRelationFilter
 }
 
 export type LoanOrderByWithRelationInput = {
@@ -294,13 +302,14 @@ export type LoanOrderByWithRelationInput = {
   termMonths?: Prisma.SortOrder
   paymentDate?: Prisma.SortOrderInput | Prisma.SortOrder
   loanDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanType?: Prisma.SortOrder
   guarantors?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
   penalties?: Prisma.PenaltyOrderByRelationAggregateInput
-  deductions?: Prisma.DeductionOrderByRelationAggregateInput
+  savings?: Prisma.SavingOrderByRelationAggregateInput
 }
 
 export type LoanWhereUniqueInput = Prisma.AtLeast<{
@@ -315,13 +324,14 @@ export type LoanWhereUniqueInput = Prisma.AtLeast<{
   termMonths?: Prisma.IntFilter<"Loan"> | number
   paymentDate?: Prisma.DateTimeNullableFilter<"Loan"> | Date | string | null
   loanDocument?: Prisma.StringNullableFilter<"Loan"> | string | null
+  loanType?: Prisma.EnumLoanTypeFilter<"Loan"> | $Enums.LoanType
   guarantors?: Prisma.StringNullableListFilter<"Loan">
   status?: Prisma.EnumTransactionStatusFilter<"Loan"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
   member?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   penalties?: Prisma.PenaltyListRelationFilter
-  deductions?: Prisma.DeductionListRelationFilter
+  savings?: Prisma.SavingListRelationFilter
 }, "id">
 
 export type LoanOrderByWithAggregationInput = {
@@ -333,6 +343,7 @@ export type LoanOrderByWithAggregationInput = {
   termMonths?: Prisma.SortOrder
   paymentDate?: Prisma.SortOrderInput | Prisma.SortOrder
   loanDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanType?: Prisma.SortOrder
   guarantors?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -356,6 +367,7 @@ export type LoanScalarWhereWithAggregatesInput = {
   termMonths?: Prisma.IntWithAggregatesFilter<"Loan"> | number
   paymentDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Loan"> | Date | string | null
   loanDocument?: Prisma.StringNullableWithAggregatesFilter<"Loan"> | string | null
+  loanType?: Prisma.EnumLoanTypeWithAggregatesFilter<"Loan"> | $Enums.LoanType
   guarantors?: Prisma.StringNullableListFilter<"Loan">
   status?: Prisma.EnumTransactionStatusWithAggregatesFilter<"Loan"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Loan"> | Date | string
@@ -370,13 +382,14 @@ export type LoanCreateInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutLoansInput
   penalties?: Prisma.PenaltyCreateNestedManyWithoutLoanInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingCreateNestedManyWithoutLoanInput
 }
 
 export type LoanUncheckedCreateInput = {
@@ -388,12 +401,13 @@ export type LoanUncheckedCreateInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutLoanInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutLoanInput
 }
 
 export type LoanUpdateInput = {
@@ -404,13 +418,14 @@ export type LoanUpdateInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutLoansNestedInput
   penalties?: Prisma.PenaltyUpdateManyWithoutLoanNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanUncheckedUpdateInput = {
@@ -422,12 +437,13 @@ export type LoanUncheckedUpdateInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutLoanNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanCreateManyInput = {
@@ -439,6 +455,7 @@ export type LoanCreateManyInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
@@ -453,6 +470,7 @@ export type LoanUpdateManyMutationInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -468,6 +486,7 @@ export type LoanUncheckedUpdateManyInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,6 +525,7 @@ export type LoanCountOrderByAggregateInput = {
   termMonths?: Prisma.SortOrder
   paymentDate?: Prisma.SortOrder
   loanDocument?: Prisma.SortOrder
+  loanType?: Prisma.SortOrder
   guarantors?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -528,6 +548,7 @@ export type LoanMaxOrderByAggregateInput = {
   termMonths?: Prisma.SortOrder
   paymentDate?: Prisma.SortOrder
   loanDocument?: Prisma.SortOrder
+  loanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -542,6 +563,7 @@ export type LoanMinOrderByAggregateInput = {
   termMonths?: Prisma.SortOrder
   paymentDate?: Prisma.SortOrder
   loanDocument?: Prisma.SortOrder
+  loanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -596,24 +618,28 @@ export type LoanUncheckedUpdateManyWithoutMemberNestedInput = {
   deleteMany?: Prisma.LoanScalarWhereInput | Prisma.LoanScalarWhereInput[]
 }
 
-export type LoanCreateNestedOneWithoutDeductionsInput = {
-  create?: Prisma.XOR<Prisma.LoanCreateWithoutDeductionsInput, Prisma.LoanUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.LoanCreateOrConnectWithoutDeductionsInput
+export type LoanCreateNestedOneWithoutSavingsInput = {
+  create?: Prisma.XOR<Prisma.LoanCreateWithoutSavingsInput, Prisma.LoanUncheckedCreateWithoutSavingsInput>
+  connectOrCreate?: Prisma.LoanCreateOrConnectWithoutSavingsInput
   connect?: Prisma.LoanWhereUniqueInput
 }
 
-export type LoanUpdateOneWithoutDeductionsNestedInput = {
-  create?: Prisma.XOR<Prisma.LoanCreateWithoutDeductionsInput, Prisma.LoanUncheckedCreateWithoutDeductionsInput>
-  connectOrCreate?: Prisma.LoanCreateOrConnectWithoutDeductionsInput
-  upsert?: Prisma.LoanUpsertWithoutDeductionsInput
+export type LoanUpdateOneWithoutSavingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LoanCreateWithoutSavingsInput, Prisma.LoanUncheckedCreateWithoutSavingsInput>
+  connectOrCreate?: Prisma.LoanCreateOrConnectWithoutSavingsInput
+  upsert?: Prisma.LoanUpsertWithoutSavingsInput
   disconnect?: Prisma.LoanWhereInput | boolean
   delete?: Prisma.LoanWhereInput | boolean
   connect?: Prisma.LoanWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LoanUpdateToOneWithWhereWithoutDeductionsInput, Prisma.LoanUpdateWithoutDeductionsInput>, Prisma.LoanUncheckedUpdateWithoutDeductionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LoanUpdateToOneWithWhereWithoutSavingsInput, Prisma.LoanUpdateWithoutSavingsInput>, Prisma.LoanUncheckedUpdateWithoutSavingsInput>
 }
 
 export type LoanCreateguarantorsInput = {
   set: string[]
+}
+
+export type EnumLoanTypeFieldUpdateOperationsInput = {
+  set?: $Enums.LoanType
 }
 
 export type LoanUpdateguarantorsInput = {
@@ -645,12 +671,13 @@ export type LoanCreateWithoutMemberInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   penalties?: Prisma.PenaltyCreateNestedManyWithoutLoanInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingCreateNestedManyWithoutLoanInput
 }
 
 export type LoanUncheckedCreateWithoutMemberInput = {
@@ -661,12 +688,13 @@ export type LoanUncheckedCreateWithoutMemberInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutLoanInput
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutLoanInput
 }
 
 export type LoanCreateOrConnectWithoutMemberInput = {
@@ -707,13 +735,14 @@ export type LoanScalarWhereInput = {
   termMonths?: Prisma.IntFilter<"Loan"> | number
   paymentDate?: Prisma.DateTimeNullableFilter<"Loan"> | Date | string | null
   loanDocument?: Prisma.StringNullableFilter<"Loan"> | string | null
+  loanType?: Prisma.EnumLoanTypeFilter<"Loan"> | $Enums.LoanType
   guarantors?: Prisma.StringNullableListFilter<"Loan">
   status?: Prisma.EnumTransactionStatusFilter<"Loan"> | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Loan"> | Date | string
 }
 
-export type LoanCreateWithoutDeductionsInput = {
+export type LoanCreateWithoutSavingsInput = {
   id?: string
   principle?: number
   loanAmount?: number
@@ -721,6 +750,7 @@ export type LoanCreateWithoutDeductionsInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
@@ -729,7 +759,7 @@ export type LoanCreateWithoutDeductionsInput = {
   penalties?: Prisma.PenaltyCreateNestedManyWithoutLoanInput
 }
 
-export type LoanUncheckedCreateWithoutDeductionsInput = {
+export type LoanUncheckedCreateWithoutSavingsInput = {
   id?: string
   memberId: string
   principle?: number
@@ -738,6 +768,7 @@ export type LoanUncheckedCreateWithoutDeductionsInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
@@ -745,23 +776,23 @@ export type LoanUncheckedCreateWithoutDeductionsInput = {
   penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutLoanInput
 }
 
-export type LoanCreateOrConnectWithoutDeductionsInput = {
+export type LoanCreateOrConnectWithoutSavingsInput = {
   where: Prisma.LoanWhereUniqueInput
-  create: Prisma.XOR<Prisma.LoanCreateWithoutDeductionsInput, Prisma.LoanUncheckedCreateWithoutDeductionsInput>
+  create: Prisma.XOR<Prisma.LoanCreateWithoutSavingsInput, Prisma.LoanUncheckedCreateWithoutSavingsInput>
 }
 
-export type LoanUpsertWithoutDeductionsInput = {
-  update: Prisma.XOR<Prisma.LoanUpdateWithoutDeductionsInput, Prisma.LoanUncheckedUpdateWithoutDeductionsInput>
-  create: Prisma.XOR<Prisma.LoanCreateWithoutDeductionsInput, Prisma.LoanUncheckedCreateWithoutDeductionsInput>
+export type LoanUpsertWithoutSavingsInput = {
+  update: Prisma.XOR<Prisma.LoanUpdateWithoutSavingsInput, Prisma.LoanUncheckedUpdateWithoutSavingsInput>
+  create: Prisma.XOR<Prisma.LoanCreateWithoutSavingsInput, Prisma.LoanUncheckedCreateWithoutSavingsInput>
   where?: Prisma.LoanWhereInput
 }
 
-export type LoanUpdateToOneWithWhereWithoutDeductionsInput = {
+export type LoanUpdateToOneWithWhereWithoutSavingsInput = {
   where?: Prisma.LoanWhereInput
-  data: Prisma.XOR<Prisma.LoanUpdateWithoutDeductionsInput, Prisma.LoanUncheckedUpdateWithoutDeductionsInput>
+  data: Prisma.XOR<Prisma.LoanUpdateWithoutSavingsInput, Prisma.LoanUncheckedUpdateWithoutSavingsInput>
 }
 
-export type LoanUpdateWithoutDeductionsInput = {
+export type LoanUpdateWithoutSavingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   principle?: Prisma.FloatFieldUpdateOperationsInput | number
   loanAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -769,6 +800,7 @@ export type LoanUpdateWithoutDeductionsInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -777,7 +809,7 @@ export type LoanUpdateWithoutDeductionsInput = {
   penalties?: Prisma.PenaltyUpdateManyWithoutLoanNestedInput
 }
 
-export type LoanUncheckedUpdateWithoutDeductionsInput = {
+export type LoanUncheckedUpdateWithoutSavingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   principle?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -786,6 +818,7 @@ export type LoanUncheckedUpdateWithoutDeductionsInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -801,12 +834,13 @@ export type LoanCreateWithoutPenaltiesInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   member: Prisma.MemberCreateNestedOneWithoutLoansInput
-  deductions?: Prisma.DeductionCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingCreateNestedManyWithoutLoanInput
 }
 
 export type LoanUncheckedCreateWithoutPenaltiesInput = {
@@ -818,11 +852,12 @@ export type LoanUncheckedCreateWithoutPenaltiesInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  deductions?: Prisma.DeductionUncheckedCreateNestedManyWithoutLoanInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutLoanInput
 }
 
 export type LoanCreateOrConnectWithoutPenaltiesInput = {
@@ -849,12 +884,13 @@ export type LoanUpdateWithoutPenaltiesInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   member?: Prisma.MemberUpdateOneRequiredWithoutLoansNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanUncheckedUpdateWithoutPenaltiesInput = {
@@ -866,11 +902,12 @@ export type LoanUncheckedUpdateWithoutPenaltiesInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanCreateManyMemberInput = {
@@ -881,6 +918,7 @@ export type LoanCreateManyMemberInput = {
   termMonths?: number
   paymentDate?: Date | string | null
   loanDocument?: string | null
+  loanType?: $Enums.LoanType
   guarantors?: Prisma.LoanCreateguarantorsInput | string[]
   status?: $Enums.TransactionStatus
   createdAt?: Date | string
@@ -895,12 +933,13 @@ export type LoanUpdateWithoutMemberInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   penalties?: Prisma.PenaltyUpdateManyWithoutLoanNestedInput
-  deductions?: Prisma.DeductionUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanUncheckedUpdateWithoutMemberInput = {
@@ -911,12 +950,13 @@ export type LoanUncheckedUpdateWithoutMemberInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutLoanNestedInput
-  deductions?: Prisma.DeductionUncheckedUpdateManyWithoutLoanNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutLoanNestedInput
 }
 
 export type LoanUncheckedUpdateManyWithoutMemberInput = {
@@ -927,6 +967,7 @@ export type LoanUncheckedUpdateManyWithoutMemberInput = {
   termMonths?: Prisma.IntFieldUpdateOperationsInput | number
   paymentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   loanDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  loanType?: Prisma.EnumLoanTypeFieldUpdateOperationsInput | $Enums.LoanType
   guarantors?: Prisma.LoanUpdateguarantorsInput | string[]
   status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -940,12 +981,12 @@ export type LoanUncheckedUpdateManyWithoutMemberInput = {
 
 export type LoanCountOutputType = {
   penalties: number
-  deductions: number
+  savings: number
 }
 
 export type LoanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   penalties?: boolean | LoanCountOutputTypeCountPenaltiesArgs
-  deductions?: boolean | LoanCountOutputTypeCountDeductionsArgs
+  savings?: boolean | LoanCountOutputTypeCountSavingsArgs
 }
 
 /**
@@ -968,8 +1009,8 @@ export type LoanCountOutputTypeCountPenaltiesArgs<ExtArgs extends runtime.Types.
 /**
  * LoanCountOutputType without action
  */
-export type LoanCountOutputTypeCountDeductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeductionWhereInput
+export type LoanCountOutputTypeCountSavingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavingWhereInput
 }
 
 
@@ -982,13 +1023,14 @@ export type LoanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   termMonths?: boolean
   paymentDate?: boolean
   loanDocument?: boolean
+  loanType?: boolean
   guarantors?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   penalties?: boolean | Prisma.Loan$penaltiesArgs<ExtArgs>
-  deductions?: boolean | Prisma.Loan$deductionsArgs<ExtArgs>
+  savings?: boolean | Prisma.Loan$savingsArgs<ExtArgs>
   _count?: boolean | Prisma.LoanCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["loan"]>
 
@@ -1001,6 +1043,7 @@ export type LoanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   termMonths?: boolean
   paymentDate?: boolean
   loanDocument?: boolean
+  loanType?: boolean
   guarantors?: boolean
   status?: boolean
   createdAt?: boolean
@@ -1017,6 +1060,7 @@ export type LoanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   termMonths?: boolean
   paymentDate?: boolean
   loanDocument?: boolean
+  loanType?: boolean
   guarantors?: boolean
   status?: boolean
   createdAt?: boolean
@@ -1033,17 +1077,18 @@ export type LoanSelectScalar = {
   termMonths?: boolean
   paymentDate?: boolean
   loanDocument?: boolean
+  loanType?: boolean
   guarantors?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type LoanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "principle" | "loanAmount" | "interest" | "termMonths" | "paymentDate" | "loanDocument" | "guarantors" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["loan"]>
+export type LoanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "principle" | "loanAmount" | "interest" | "termMonths" | "paymentDate" | "loanDocument" | "loanType" | "guarantors" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["loan"]>
 export type LoanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   penalties?: boolean | Prisma.Loan$penaltiesArgs<ExtArgs>
-  deductions?: boolean | Prisma.Loan$deductionsArgs<ExtArgs>
+  savings?: boolean | Prisma.Loan$savingsArgs<ExtArgs>
   _count?: boolean | Prisma.LoanCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LoanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1058,7 +1103,7 @@ export type $LoanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     member: Prisma.$MemberPayload<ExtArgs>
     penalties: Prisma.$PenaltyPayload<ExtArgs>[]
-    deductions: Prisma.$DeductionPayload<ExtArgs>[]
+    savings: Prisma.$SavingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1069,6 +1114,7 @@ export type $LoanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     termMonths: number
     paymentDate: Date | null
     loanDocument: string | null
+    loanType: $Enums.LoanType
     guarantors: string[]
     status: $Enums.TransactionStatus
     createdAt: Date
@@ -1469,7 +1515,7 @@ export interface Prisma__LoanClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   member<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   penalties<T extends Prisma.Loan$penaltiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Loan$penaltiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deductions<T extends Prisma.Loan$deductionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Loan$deductionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savings<T extends Prisma.Loan$savingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Loan$savingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1507,6 +1553,7 @@ export interface LoanFieldRefs {
   readonly termMonths: Prisma.FieldRef<"Loan", 'Int'>
   readonly paymentDate: Prisma.FieldRef<"Loan", 'DateTime'>
   readonly loanDocument: Prisma.FieldRef<"Loan", 'String'>
+  readonly loanType: Prisma.FieldRef<"Loan", 'LoanType'>
   readonly guarantors: Prisma.FieldRef<"Loan", 'String[]'>
   readonly status: Prisma.FieldRef<"Loan", 'TransactionStatus'>
   readonly createdAt: Prisma.FieldRef<"Loan", 'DateTime'>
@@ -1931,27 +1978,27 @@ export type Loan$penaltiesArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Loan.deductions
+ * Loan.savings
  */
-export type Loan$deductionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Loan$savingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Deduction
+   * Select specific fields to fetch from the Saving
    */
-  select?: Prisma.DeductionSelect<ExtArgs> | null
+  select?: Prisma.SavingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Deduction
+   * Omit specific fields from the Saving
    */
-  omit?: Prisma.DeductionOmit<ExtArgs> | null
+  omit?: Prisma.SavingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DeductionInclude<ExtArgs> | null
-  where?: Prisma.DeductionWhereInput
-  orderBy?: Prisma.DeductionOrderByWithRelationInput | Prisma.DeductionOrderByWithRelationInput[]
-  cursor?: Prisma.DeductionWhereUniqueInput
+  include?: Prisma.SavingInclude<ExtArgs> | null
+  where?: Prisma.SavingWhereInput
+  orderBy?: Prisma.SavingOrderByWithRelationInput | Prisma.SavingOrderByWithRelationInput[]
+  cursor?: Prisma.SavingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.DeductionScalarFieldEnum | Prisma.DeductionScalarFieldEnum[]
+  distinct?: Prisma.SavingScalarFieldEnum | Prisma.SavingScalarFieldEnum[]
 }
 
 /**
