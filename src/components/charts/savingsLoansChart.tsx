@@ -45,14 +45,8 @@ const chartConfig = {
 const SavingsLoansChart = () => {
     return (
         <Card>
-            <CardHeader>
-                <CardTitle>Area Chart - Legend</CardTitle>
-                <CardDescription>
-                    Showing total visitors for the last 6 months
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
+            <CardContent className='px-0'>
+                <ChartContainer className='border-y p-4 cursor-pointer' config={chartConfig}>
                     <AreaChart
                         accessibilityLayer
                         data={chartData}
@@ -60,6 +54,7 @@ const SavingsLoansChart = () => {
                             left: 12,
                             right: 12,
                         }}
+                        className='cursor-pointer'
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
@@ -68,10 +63,11 @@ const SavingsLoansChart = () => {
                             axisLine={false}
                             tickMargin={8}
                             tickFormatter={(value) => value.slice(0, 3)}
+                            className='cursor-pointer'
                         />
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent indicator="line" />}
+                            content={<ChartTooltipContent indicator="line" className='cursor-pointer' />}
                         />
                         <Area
                             dataKey="mobile"
@@ -93,19 +89,6 @@ const SavingsLoansChart = () => {
                     </AreaChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter>
-                <div className="flex w-full items-start gap-2 text-sm">
-                    <div className="grid gap-2">
-                        <div className="flex items-center gap-2 leading-none font-medium">
-                            Trending up by 5.2% this month{' '}
-                            <TrendingUp className="h-4 w-4" />
-                        </div>
-                        <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                            January - June 2024
-                        </div>
-                    </div>
-                </div>
-            </CardFooter>
         </Card>
     )
 }

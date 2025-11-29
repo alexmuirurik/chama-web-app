@@ -66,6 +66,7 @@ export const ModelName = {
   Loan: 'Loan',
   ShortLoan: 'ShortLoan',
   Penalty: 'Penalty',
+  Meeting: 'Meeting',
   Dividend: 'Dividend'
 } as const
 
@@ -323,6 +324,19 @@ export const PenaltyScalarFieldEnum = {
 } as const
 
 export type PenaltyScalarFieldEnum = (typeof PenaltyScalarFieldEnum)[keyof typeof PenaltyScalarFieldEnum]
+
+
+export const MeetingScalarFieldEnum = {
+  id: 'id',
+  meetingTitle: 'meetingTitle',
+  meetingDate: 'meetingDate',
+  memberId: 'memberId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeetingScalarFieldEnum = (typeof MeetingScalarFieldEnum)[keyof typeof MeetingScalarFieldEnum]
 
 
 export const DividendScalarFieldEnum = {

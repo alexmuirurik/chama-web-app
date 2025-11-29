@@ -230,6 +230,7 @@ export type MemberWhereInput = {
   loans?: Prisma.LoanListRelationFilter
   shortLoans?: Prisma.ShortLoanListRelationFilter
   balanceSheet?: Prisma.XOR<Prisma.BalanceSheetNullableScalarRelationFilter, Prisma.BalanceSheetWhereInput> | null
+  meetings?: Prisma.MeetingListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
@@ -251,6 +252,7 @@ export type MemberOrderByWithRelationInput = {
   loans?: Prisma.LoanOrderByRelationAggregateInput
   shortLoans?: Prisma.ShortLoanOrderByRelationAggregateInput
   balanceSheet?: Prisma.BalanceSheetOrderByWithRelationInput
+  meetings?: Prisma.MeetingOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +277,7 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   loans?: Prisma.LoanListRelationFilter
   shortLoans?: Prisma.ShortLoanListRelationFilter
   balanceSheet?: Prisma.XOR<Prisma.BalanceSheetNullableScalarRelationFilter, Prisma.BalanceSheetWhereInput> | null
+  meetings?: Prisma.MeetingListRelationFilter
 }, "id">
 
 export type MemberOrderByWithAggregationInput = {
@@ -326,6 +329,7 @@ export type MemberCreateInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type MemberUncheckedCreateInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
@@ -364,6 +369,7 @@ export type MemberUpdateInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
@@ -383,6 +389,7 @@ export type MemberUncheckedUpdateInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
@@ -634,6 +641,20 @@ export type MemberUpdateOneRequiredWithoutPenaltiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutPenaltiesInput, Prisma.MemberUpdateWithoutPenaltiesInput>, Prisma.MemberUncheckedUpdateWithoutPenaltiesInput>
 }
 
+export type MemberCreateNestedOneWithoutMeetingsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutMeetingsInput, Prisma.MemberUncheckedCreateWithoutMeetingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutMeetingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutMeetingsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutMeetingsInput, Prisma.MemberUncheckedCreateWithoutMeetingsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutMeetingsInput
+  upsert?: Prisma.MemberUpsertWithoutMeetingsInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutMeetingsInput, Prisma.MemberUpdateWithoutMeetingsInput>, Prisma.MemberUncheckedUpdateWithoutMeetingsInput>
+}
+
 export type MemberCreateNestedOneWithoutDividendsInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutDividendsInput, Prisma.MemberUncheckedCreateWithoutDividendsInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutDividendsInput
@@ -664,6 +685,7 @@ export type MemberCreateWithoutUserInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutUserInput = {
@@ -682,6 +704,7 @@ export type MemberUncheckedCreateWithoutUserInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutUserInput = {
@@ -742,6 +765,7 @@ export type MemberCreateWithoutChamaInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutChamaInput = {
@@ -760,6 +784,7 @@ export type MemberUncheckedCreateWithoutChamaInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutChamaInput = {
@@ -804,6 +829,7 @@ export type MemberCreateWithoutBalanceSheetInput = {
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutBalanceSheetInput = {
@@ -822,6 +848,7 @@ export type MemberUncheckedCreateWithoutBalanceSheetInput = {
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutBalanceSheetInput = {
@@ -856,6 +883,7 @@ export type MemberUpdateWithoutBalanceSheetInput = {
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutBalanceSheetInput = {
@@ -874,6 +902,7 @@ export type MemberUncheckedUpdateWithoutBalanceSheetInput = {
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSavingsInput = {
@@ -892,6 +921,7 @@ export type MemberCreateWithoutSavingsInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSavingsInput = {
@@ -910,6 +940,7 @@ export type MemberUncheckedCreateWithoutSavingsInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSavingsInput = {
@@ -944,6 +975,7 @@ export type MemberUpdateWithoutSavingsInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSavingsInput = {
@@ -962,6 +994,7 @@ export type MemberUncheckedUpdateWithoutSavingsInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutLoansInput = {
@@ -980,6 +1013,7 @@ export type MemberCreateWithoutLoansInput = {
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutLoansInput = {
@@ -998,6 +1032,7 @@ export type MemberUncheckedCreateWithoutLoansInput = {
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutLoansInput = {
@@ -1032,6 +1067,7 @@ export type MemberUpdateWithoutLoansInput = {
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutLoansInput = {
@@ -1050,6 +1086,7 @@ export type MemberUncheckedUpdateWithoutLoansInput = {
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutShortLoansInput = {
@@ -1068,6 +1105,7 @@ export type MemberCreateWithoutShortLoansInput = {
   savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutShortLoansInput = {
@@ -1086,6 +1124,7 @@ export type MemberUncheckedCreateWithoutShortLoansInput = {
   savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutShortLoansInput = {
@@ -1120,6 +1159,7 @@ export type MemberUpdateWithoutShortLoansInput = {
   savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutShortLoansInput = {
@@ -1138,6 +1178,7 @@ export type MemberUncheckedUpdateWithoutShortLoansInput = {
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutPenaltiesInput = {
@@ -1156,6 +1197,7 @@ export type MemberCreateWithoutPenaltiesInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutPenaltiesInput = {
@@ -1174,6 +1216,7 @@ export type MemberUncheckedCreateWithoutPenaltiesInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutPenaltiesInput = {
@@ -1208,6 +1251,7 @@ export type MemberUpdateWithoutPenaltiesInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutPenaltiesInput = {
@@ -1222,6 +1266,99 @@ export type MemberUncheckedUpdateWithoutPenaltiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
+  savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
+  shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
+  balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutMeetingsInput = {
+  id?: string
+  name: string
+  email: string
+  phoneNumber: string
+  role?: $Enums.Role
+  lastSeen?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  chama: Prisma.ChamaCreateNestedOneWithoutMembersInput
+  dividends?: Prisma.DividendCreateNestedManyWithoutMemberInput
+  penalties?: Prisma.PenaltyCreateNestedManyWithoutMemberInput
+  savings?: Prisma.SavingCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
+  shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
+  balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutMeetingsInput = {
+  id?: string
+  chamaId: string
+  userId?: string | null
+  name: string
+  email: string
+  phoneNumber: string
+  role?: $Enums.Role
+  lastSeen?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dividends?: Prisma.DividendUncheckedCreateNestedManyWithoutMemberInput
+  penalties?: Prisma.PenaltyUncheckedCreateNestedManyWithoutMemberInput
+  savings?: Prisma.SavingUncheckedCreateNestedManyWithoutMemberInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
+  shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
+  balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutMeetingsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutMeetingsInput, Prisma.MemberUncheckedCreateWithoutMeetingsInput>
+}
+
+export type MemberUpsertWithoutMeetingsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutMeetingsInput, Prisma.MemberUncheckedUpdateWithoutMeetingsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutMeetingsInput, Prisma.MemberUncheckedCreateWithoutMeetingsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutMeetingsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutMeetingsInput, Prisma.MemberUncheckedUpdateWithoutMeetingsInput>
+}
+
+export type MemberUpdateWithoutMeetingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  chama?: Prisma.ChamaUpdateOneRequiredWithoutMembersNestedInput
+  dividends?: Prisma.DividendUpdateManyWithoutMemberNestedInput
+  penalties?: Prisma.PenaltyUpdateManyWithoutMemberNestedInput
+  savings?: Prisma.SavingUpdateManyWithoutMemberNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
+  shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
+  balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutMeetingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  chamaId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dividends?: Prisma.DividendUncheckedUpdateManyWithoutMemberNestedInput
+  penalties?: Prisma.PenaltyUncheckedUpdateManyWithoutMemberNestedInput
   savings?: Prisma.SavingUncheckedUpdateManyWithoutMemberNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
@@ -1244,6 +1381,7 @@ export type MemberCreateWithoutDividendsInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutDividendsInput = {
@@ -1262,6 +1400,7 @@ export type MemberUncheckedCreateWithoutDividendsInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutMemberInput
   shortLoans?: Prisma.ShortLoanUncheckedCreateNestedManyWithoutMemberInput
   balanceSheet?: Prisma.BalanceSheetUncheckedCreateNestedOneWithoutMemberInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutDividendsInput = {
@@ -1296,6 +1435,7 @@ export type MemberUpdateWithoutDividendsInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutDividendsInput = {
@@ -1314,6 +1454,7 @@ export type MemberUncheckedUpdateWithoutDividendsInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyUserInput = {
@@ -1344,6 +1485,7 @@ export type MemberUpdateWithoutUserInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutUserInput = {
@@ -1362,6 +1504,7 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateManyWithoutUserInput = {
@@ -1404,6 +1547,7 @@ export type MemberUpdateWithoutChamaInput = {
   loans?: Prisma.LoanUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutChamaInput = {
@@ -1422,6 +1566,7 @@ export type MemberUncheckedUpdateWithoutChamaInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutMemberNestedInput
   shortLoans?: Prisma.ShortLoanUncheckedUpdateManyWithoutMemberNestedInput
   balanceSheet?: Prisma.BalanceSheetUncheckedUpdateOneWithoutMemberNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateManyWithoutChamaInput = {
@@ -1447,6 +1592,7 @@ export type MemberCountOutputType = {
   savings: number
   loans: number
   shortLoans: number
+  meetings: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1455,6 +1601,7 @@ export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   savings?: boolean | MemberCountOutputTypeCountSavingsArgs
   loans?: boolean | MemberCountOutputTypeCountLoansArgs
   shortLoans?: boolean | MemberCountOutputTypeCountShortLoansArgs
+  meetings?: boolean | MemberCountOutputTypeCountMeetingsArgs
 }
 
 /**
@@ -1502,6 +1649,13 @@ export type MemberCountOutputTypeCountShortLoansArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ShortLoanWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountMeetingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MeetingWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1522,6 +1676,7 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   loans?: boolean | Prisma.Member$loansArgs<ExtArgs>
   shortLoans?: boolean | Prisma.Member$shortLoansArgs<ExtArgs>
   balanceSheet?: boolean | Prisma.Member$balanceSheetArgs<ExtArgs>
+  meetings?: boolean | Prisma.Member$meetingsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
@@ -1578,6 +1733,7 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   loans?: boolean | Prisma.Member$loansArgs<ExtArgs>
   shortLoans?: boolean | Prisma.Member$shortLoansArgs<ExtArgs>
   balanceSheet?: boolean | Prisma.Member$balanceSheetArgs<ExtArgs>
+  meetings?: boolean | Prisma.Member$meetingsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1600,6 +1756,7 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     loans: Prisma.$LoanPayload<ExtArgs>[]
     shortLoans: Prisma.$ShortLoanPayload<ExtArgs>[]
     balanceSheet: Prisma.$BalanceSheetPayload<ExtArgs> | null
+    meetings: Prisma.$MeetingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2014,6 +2171,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   loans<T extends Prisma.Member$loansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$loansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shortLoans<T extends Prisma.Member$shortLoansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$shortLoansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShortLoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   balanceSheet<T extends Prisma.Member$balanceSheetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$balanceSheetArgs<ExtArgs>>): Prisma.Prisma__BalanceSheetClient<runtime.Types.Result.GetResult<Prisma.$BalanceSheetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  meetings<T extends Prisma.Member$meetingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2604,6 +2762,30 @@ export type Member$balanceSheetArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.BalanceSheetInclude<ExtArgs> | null
   where?: Prisma.BalanceSheetWhereInput
+}
+
+/**
+ * Member.meetings
+ */
+export type Member$meetingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Meeting
+   */
+  select?: Prisma.MeetingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Meeting
+   */
+  omit?: Prisma.MeetingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeetingInclude<ExtArgs> | null
+  where?: Prisma.MeetingWhereInput
+  orderBy?: Prisma.MeetingOrderByWithRelationInput | Prisma.MeetingOrderByWithRelationInput[]
+  cursor?: Prisma.MeetingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MeetingScalarFieldEnum | Prisma.MeetingScalarFieldEnum[]
 }
 
 /**

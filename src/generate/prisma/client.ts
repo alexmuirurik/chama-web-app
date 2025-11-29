@@ -115,6 +115,11 @@ export type ShortLoan = Prisma.ShortLoanModel
  */
 export type Penalty = Prisma.PenaltyModel
 /**
+ * Model Meeting
+ * 
+ */
+export type Meeting = Prisma.MeetingModel
+/**
  * Model Dividend
  * 
  */
