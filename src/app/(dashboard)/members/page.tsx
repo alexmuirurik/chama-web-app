@@ -4,9 +4,11 @@ import MembersCard from '@/src/components/cards/memberCards'
 import AddMember from '@/src/components/forms/addMember'
 import SearchForm from '@/src/components/forms/searchForm'
 import PageTitle from '@/src/components/sections/pageTitle'
+import { redirect } from 'next/navigation'
 
 const MembersPage = async () => {
     const session = await auth()
+    if (!session?.user.chamaId) redirect('/chamas')
     const members = await getMembers(session?.user?.chamaId as string)
     return (
         session?.user && (

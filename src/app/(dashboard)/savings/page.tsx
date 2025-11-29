@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
 
 const SavingsPage = async () => {
     const session = await auth()
-    if (!session?.user) redirect('/login')
+    if (!session?.user.chamaId) redirect('/chamas')
     const members = await getMembers(session?.user?.chamaId as string)
     const savings = await getSavings(session.user.chamaId as string)
     return (

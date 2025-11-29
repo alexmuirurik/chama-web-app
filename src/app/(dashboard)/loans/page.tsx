@@ -9,8 +9,7 @@ import { redirect } from 'next/navigation'
 
 const LoansPage = async () => {
     const session = await auth()
-    if (!session) redirect('/login')
-    if (!session.user.chamaId) redirect('/chamas')
+    if (!session?.user?.chamaId) redirect('/chamas')
     const members = await getMembers(session.user.chamaId as string)
     const loans = await getLoans(session.user.chamaId as string)
     return (
