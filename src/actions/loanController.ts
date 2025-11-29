@@ -7,7 +7,7 @@ import z from 'zod'
 export const requestLoan = async (data: z.infer<typeof LoanSchema>) => {
     try {
         const { loanType, ...loanData } = data
-        if (data.loanType === 'longTerm') {
+        if (data.loanType === 'LONG_TERM') {
             const loan = await prisma.loan.create({
                 data: loanData,
             })

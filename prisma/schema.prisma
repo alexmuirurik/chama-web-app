@@ -154,6 +154,8 @@ model Member {
 model BalanceSheet {
     id                 String   @id @default(uuid()) @map("_id")
     memberId           String   @unique
+    loanLimit          Float    @default(0)
+    shortLoanLimit     Float    @default(0)
     totalSavings       Float    @default(0)
     totalLongTermLoan  Float    @default(0)
     totalShortTermLoan Float    @default(0)

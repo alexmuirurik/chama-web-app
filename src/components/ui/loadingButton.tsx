@@ -12,13 +12,13 @@ export type ButtonVariants =
     | undefined
 
 export const LoadingButton = ({
-    loading,
-    variant,
+    loading = false,
+    variant = 'default',
     onClick,
     children,
 }: {
-    loading: boolean
-    variant: ButtonVariants
+    loading?: boolean
+    variant?: ButtonVariants
     onClick?: () => void
     children: React.ReactNode
 }) => {

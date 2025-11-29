@@ -10,7 +10,12 @@ export const createMember = async (
 ) => {
     try {
         const member = await prisma.member.create({
-            data,
+            data: { 
+                ...data,
+                balanceSheet: {
+                    create: {}
+                }
+            },
         })
         return member
     } catch (error) {
@@ -47,25 +52,45 @@ export const getMembers = async (chamaId: string) => {
     }
 }
 
-
-export const getMembersWithoutActiveLoans = async (chamaId: string) => {
+export const getMembersWithoutActiveLoans = async (
+    chamaId: string,
+    loanType: 'LONG_TERM' | 'SHORT_TERM'
+) => {
     try {
+        if (loanType === 'LONG_TERM') {
+            const members = await prisma.member.findMany({
+                where: {
+                    chamaId: chamaId,
+                    loans: {
+                        none: {
+                            status: TransactionStatus.PENDING,
+                        },
+                    },
+                },
+                include: {
+                    user: true,
+                },
+            })
+
+            return members
+        }
+
         const members = await prisma.member.findMany({
             where: {
                 chamaId: chamaId,
-                loans:{
+                shortLoans: {
                     none: {
-                        status: TransactionStatus.PENDING
-                    }
-                }
+                        status: TransactionStatus.PENDING,
+                    },
+                },
             },
             include: {
                 user: true,
             },
         })
+
         return members
-    }
-    catch (error) {
+    } catch (error) {
         throw new Error(error as any)
     }
 }
